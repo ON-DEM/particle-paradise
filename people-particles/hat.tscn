@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://la067oajk26i"]
+
+[ext_resource type="Script" uid="uid://db1fb0ecsw8n4" path="res://hat.gd" id="1_e2cuu"]
+[ext_resource type="PackedScene" uid="uid://cjiyihvd1a3p8" path="res://assets/tophat.blend" id="2_se68o"]
+[ext_resource type="PackedScene" uid="uid://dglhc8e4xxwst" path="res://assets/cowboy.blend" id="3_d8f5s"]
+[ext_resource type="PackedScene" uid="uid://cehecyw7iqcwl" path="res://assets/fedora.blend" id="4_fqafr"]
+[ext_resource type="PackedScene" uid="uid://dxh1sdsrg4fos" path="res://assets/beanie.blend" id="5_rw5i7"]
+[ext_resource type="PackedScene" uid="uid://dmvxukyj2qhxy" path="res://assets/propellorhat.blend" id="6_d8f5s"]
+[ext_resource type="PackedScene" uid="uid://cuuy108gsrcro" path="res://assets/cap.blend" id="7_fqafr"]
+[ext_resource type="PackedScene" uid="uid://bxlwg4aucr5gr" path="res://assets/fancyhat.blend" id="8_fqafr"]
+[ext_resource type="PackedScene" uid="uid://x6tunqs5x303" path="res://assets/sunhat.blend" id="9_rw5i7"]
+[ext_resource type="PackedScene" uid="uid://cht5ywcladmk" path="res://assets/purplecap.blend" id="10_hoi0o"]
+
+[node name="Hat" type="Node3D" unique_id=37130522]
+script = ExtResource("1_e2cuu")
+
+[node name="tophat" parent="." unique_id=1056077612 instance=ExtResource("2_se68o")]
+visible = false
+
+[node name="cowboy" parent="." unique_id=1641917122 instance=ExtResource("3_d8f5s")]
+visible = false
+
+[node name="fedora" parent="." unique_id=1742489342 instance=ExtResource("4_fqafr")]
+visible = false
+
+[node name="beanie" parent="." unique_id=1633442172 instance=ExtResource("5_rw5i7")]
+visible = false
+
+[node name="propellorhat" parent="." unique_id=1055565509 instance=ExtResource("6_d8f5s")]
+visible = false
+
+[node name="cap" parent="." unique_id=1840836967 instance=ExtResource("7_fqafr")]
+visible = false
+
+[node name="fancyhat" parent="." unique_id=986613911 instance=ExtResource("8_fqafr")]
+visible = false
+
+[node name="sunhat" parent="." unique_id=1082884116 instance=ExtResource("9_rw5i7")]
+visible = false
+
+[node name="purplecap" parent="." unique_id=721960458 instance=ExtResource("10_hoi0o")]
+visible = false

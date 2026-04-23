@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bd3ytvivx0h6q"]
+
+[ext_resource type="Script" uid="uid://bd1pqathtavkx" path="res://hourglass_exhibit.gd" id="1_rk3o1"]
+[ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://icon.svg" id="2_dv24l"]
+[ext_resource type="PackedScene" uid="uid://dfdbqgme2khip" path="res://hourglass_exhibit_mesh.tscn" id="2_er7t7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
+albedo_color = Color(8.1822276e-07, 0.7428247, 0.28087848, 1)
+albedo_texture = ExtResource("2_dv24l")
+uv1_scale = Vector3(3, 2, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gic0v"]
+material = SubResource("StandardMaterial3D_x6fak")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
+radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gic0v"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0.9372549, 0.19607843, 0.019607844)
+
+[sub_resource type="SphereMesh" id="SphereMesh_x6fak"]
+material = SubResource("StandardMaterial3D_gic0v")
+radius = 5.0
+height = 10.0
+
+[node name="HourglassExhibit" type="Node3D" unique_id=40654562]
+script = ExtResource("1_rk3o1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1824960225]
+collision_layer = 5
+
+[node name="hourglass_exhibit_mesh" parent="StaticBody3D" unique_id=944150275 instance=ExtResource("2_er7t7")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1173853251]
+visible = false
+mesh = SubResource("BoxMesh_gic0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1420209624]
+shape = SubResource("BoxShape3D_x6fak")
+
+[node name="Attractor" type="Area3D" parent="." unique_id=749676100]
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attractor" unique_id=561818501]
+shape = SubResource("SphereShape3D_lvoh4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Attractor" unique_id=253322864]
+mesh = SubResource("SphereMesh_x6fak")
+
+[connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
+[connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]

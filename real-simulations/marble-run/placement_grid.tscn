@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dycv1g86ywumw"]
+
+[ext_resource type="Texture2D" uid="uid://d288h30q6vklc" path="res://marble-run/occupied.png" id="1_frwlk"]
+[ext_resource type="Script" uid="uid://i4h2kgrnnixi" path="res://marble-run/placement_grid.gd" id="1_wlr0q"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lped0"]
+texture = ExtResource("1_frwlk")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_frwlk"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_lped0")
+
+[node name="PlacementGrid" type="TileMapLayer" unique_id=133444465]
+tile_set = SubResource("TileSet_frwlk")
+script = ExtResource("1_wlr0q")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://brousxnxlqrus"
+
+[deps]
+
+files=["res://hourglass/Output. 0.translation", "res://hourglass/Output. 0.069177.translation", "res://hourglass/Output. 0.0851033.translation", "res://hourglass/Output. 0.357719.translation", "res://hourglass/Output. 0.00771853.translation"]
+
+source_file="res://hourglass/Output.csv"
+dest_files=["res://hourglass/Output. 0.translation", "res://hourglass/Output. 0.069177.translation", "res://hourglass/Output. 0.0851033.translation", "res://hourglass/Output. 0.357719.translation", "res://hourglass/Output. 0.00771853.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://hrg7ix0c5w7r"]
+
+[ext_resource type="Script" uid="uid://e5aks6jm6ku0" path="res://hourglass_scene.gd" id="1_1puqm"]
+[ext_resource type="PackedScene" uid="uid://dak2hsm816k0p" path="res://hourglass/hourglass.tscn" id="2_81vdm"]
+[ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://menu/SuperFrog-Yqy1q.ttf" id="3_sj5fi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_81vdm"]
+
+[sub_resource type="Sky" id="Sky_sj5fi"]
+sky_material = SubResource("ProceduralSkyMaterial_81vdm")
+
+[sub_resource type="Environment" id="Environment_sj5fi"]
+background_mode = 1
+background_color = Color(0.5866627, 0.76199794, 0.8966788, 1)
+sky = SubResource("Sky_sj5fi")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+glow_intensity = 0.0
+adjustment_brightness = 0.46
+adjustment_contrast = 2.1
+adjustment_saturation = 0.58
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqgaf"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 4.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2645198, 0.6993686, 0.99250346, 0.7647059)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81vdm"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 4.0
+content_margin_bottom = 8.0
+bg_color = Color(0.18359056, 0.18359041, 0.18359044, 0.7647059)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_sx21c"]
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_wqgaf")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_wqgaf")
+HSlider/styles/slider = SubResource("StyleBoxFlat_81vdm")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sx21c"]
+bg_color = Color(0, 0, 0, 0.58431375)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5yk8"]
+bg_color = Color(0.50042146, 0.55858785, 0.5635076, 0.32941177)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0oxl3"]
+bg_color = Color(0.8426531, 0.8717344, 0.87413013, 0.32941177)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wnae"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+expand_margin_left = 6.0
+expand_margin_top = 2.0
+expand_margin_right = 6.0
+expand_margin_bottom = 2.0
+
+[node name="HourglassScene" type="Node3D" unique_id=54483624]
+script = ExtResource("1_1puqm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1902631945]
+transform = Transform3D(0.73369443, -0.5265442, 0.42946962, 0, 0.6320564, 0.77492255, -0.6794799, -0.5685563, 0.46373618, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=265712836]
+environment = SubResource("Environment_sj5fi")
+
+[node name="Particles" type="Node" parent="." unique_id=987757567]
+
+[node name="Timer" type="Timer" parent="." unique_id=659831197]
+one_shot = true
+autostart = true
+
+[node name="hourglass" parent="." unique_id=1852439213 instance=ExtResource("2_81vdm")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.051, 0.295, 0.049256306)
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.051534712, 0.2940867, 0.04881218)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1069047184]
+transform = Transform3D(1, 0, 0, 0, 0.99115777, 0.1326889, 0, -0.1326889, 0.99115777, 0.011789262, 0.25926828, 1.967586)
+fov = 22.2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=912796707]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -772.0
+offset_top = -44.5
+offset_right = -141.0
+offset_bottom = 44.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Slider" type="HSlider" parent="CanvasLayer/VBoxContainer" unique_id=333274128]
+layout_mode = 2
+theme = SubResource("Theme_sx21c")
+theme_override_styles/slider = SubResource("StyleBoxFlat_81vdm")
+step = 20.0
+tick_count = 6
+ticks_on_borders = true
+
+[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1624715529]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_sj5fi")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_sx21c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_r5yk8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0oxl3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6wnae")
+text = "PLAY"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/Slider" to="." method="_on_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]

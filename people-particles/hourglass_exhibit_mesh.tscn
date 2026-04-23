@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dfdbqgme2khip"]
+
+[ext_resource type="PackedScene" uid="uid://chp8bprfplhow" path="res://hourglass_exhibit_mesh.blend" id="1_te7os"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1s7rs"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.30980393)
+roughness = 0.1
+rim_enabled = true
+rim = 0.25
+clearcoat_enabled = true
+refraction_enabled = true
+refraction_scale = 0.01
+
+[node name="hourglass_exhibit_mesh" unique_id=1989477380 instance=ExtResource("1_te7os")]
+
+[node name="Cylinder_001" parent="." index="1" unique_id=1547350410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012435913, 0.0028156042, -0.0013347268)
+surface_material_override/0 = SubResource("StandardMaterial3D_1s7rs")

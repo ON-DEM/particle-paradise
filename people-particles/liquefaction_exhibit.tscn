@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bh453scje81h2"]
+
+[ext_resource type="Script" uid="uid://d1cotsh76uh7f" path="res://liquefaction_exhibit.gd" id="1_vjxdc"]
+[ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://icon.svg" id="2_431xo"]
+[ext_resource type="PackedScene" uid="uid://qxtwpou5pdb0" path="res://liquefaction_exhibit_mesh.blend" id="3_431xo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
+albedo_color = Color(0.75387883, 0.5933501, 3.85046e-07, 1)
+albedo_texture = ExtResource("2_431xo")
+uv1_scale = Vector3(3, 2, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gic0v"]
+material = SubResource("StandardMaterial3D_x6fak")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
+radius = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gic0v"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.9019608, 0.6666667, 0, 0.047058824)
+
+[sub_resource type="SphereMesh" id="SphereMesh_x6fak"]
+material = SubResource("StandardMaterial3D_gic0v")
+radius = 5.0
+height = 10.0
+
+[node name="LiquefactionExhibit" type="Node3D" unique_id=40654562]
+script = ExtResource("1_vjxdc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1824960225]
+collision_layer = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1173853251]
+visible = false
+mesh = SubResource("BoxMesh_gic0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1420209624]
+shape = SubResource("BoxShape3D_x6fak")
+
+[node name="liquefaction_exhibit_mesh" parent="StaticBody3D" unique_id=2083089786 instance=ExtResource("3_431xo")]
+
+[node name="Attractor" type="Area3D" parent="." unique_id=749676100]
+visible = false
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attractor" unique_id=561818501]
+shape = SubResource("SphereShape3D_lvoh4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Attractor" unique_id=253322864]
+mesh = SubResource("SphereMesh_x6fak")
+
+[connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
+[connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]

@@ -1,0 +1,23 @@
+[gd_scene format=4 uid="uid://bhcnbq26wvlfa"]
+
+[ext_resource type="Script" uid="uid://ceba3mtx5e7hy" path="res://marble-run/marble_run.gd" id="1_x8rkx"]
+[ext_resource type="PackedScene" uid="uid://dycv1g86ywumw" path="res://marble-run/placement_grid.tscn" id="2_joija"]
+[ext_resource type="PackedScene" uid="uid://xoo23bgkl07j" path="res://particle/particle.tscn" id="3_joija"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_joija"]
+radius = 20.0
+height = 40.0
+
+[node name="MarbleRun" type="Node2D" unique_id=2035437141]
+script = ExtResource("1_x8rkx")
+
+[node name="PlacementGrid" parent="." unique_id=1121654737 instance=ExtResource("2_joija")]
+visible = false
+tile_map_data = PackedByteArray("AAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAACAAkAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAwAAAAAAAAAAAAGAAwAAAAAAAAAAAAHAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAJAAwAAAAAAAAAAAAKAAwAAAAAAAAAAAALAAwAAAAAAAAAAAAMAAwAAAAAAAAAAAANAAwAAAAAAAAAAAAOAAwAAAAAAAAAAAA=")
+
+[node name="Particle" parent="." unique_id=2147249313 instance=ExtResource("3_joija")]
+visible = false
+position = Vector2(74, 73)
+
+[node name="PosExample" type="MeshInstance2D" parent="." unique_id=2000212816]
+mesh = SubResource("SphereMesh_joija")
