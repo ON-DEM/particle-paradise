@@ -8,7 +8,7 @@ blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("1_241qo")
-uv1_scale = Vector3(100, 100, 1)
+uv1_scale = Vector3(10, 10, 1)
 disable_receive_shadows = true
 distance_fade_mode = 1
 distance_fade_min_distance = 100.0
@@ -16,7 +16,7 @@ distance_fade_max_distance = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_du5lk"]
 material = SubResource("StandardMaterial3D_efrim")
-size = Vector2(100, 100)
+size = Vector2(10, 10)
 
 [node name="GridSprite" type="MeshInstance3D" unique_id=848423882]
 cast_shadow = 0

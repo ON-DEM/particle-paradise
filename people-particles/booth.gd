@@ -121,3 +121,8 @@ func _on_open_close_pressed() -> void:
 func _on_item_list_item_selected(index: int) -> void:
 	$GridMap.selectedExhibit = $GridMap.exhibits[index]
 	$GridMap.update_selector($GridMap.current_selection)
+
+
+func _on_speed_slider_value_changed(value: float) -> void:
+	Engine.time_scale = value
+	mouseSensitivity = 0.25 / value

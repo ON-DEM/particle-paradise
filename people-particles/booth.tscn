@@ -11,10 +11,10 @@
 [ext_resource type="Script" uid="uid://dea7jlh0h7ris" path="res://exit_pull.gd" id="9_c0njq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsnn2"]
-sky_top_color = Color(0, 0.3647059, 0.91764706, 1)
-sky_horizon_color = Color(0, 0.3646172, 0.9173267, 1)
-ground_bottom_color = Color(0.011764706, 0.40392157, 1, 1)
-ground_horizon_color = Color(0, 0.3647059, 0.91764706, 1)
+sky_top_color = Color(5.2943824e-07, 0.22819391, 0.6056769, 1)
+sky_horizon_color = Color(0, 0.28627452, 0.7411765, 1)
+ground_bottom_color = Color(1.92523e-07, 0.2702368, 0.7037607, 1)
+ground_horizon_color = Color(0, 0.28627452, 0.7411765, 1)
 
 [sub_resource type="Sky" id="Sky_jsafk"]
 sky_material = SubResource("ProceduralSkyMaterial_vsnn2")
@@ -542,6 +542,66 @@ text = "RESIDENCE"
 label_settings = SubResource("LabelSettings_vsnn2")
 horizontal_alignment = 1
 
+[node name="SpeedSlider" type="HSlider" parent="CanvasLayer" unique_id=101253468]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -258.0
+offset_top = -202.0
+offset_right = -32.0
+offset_bottom = -186.0
+grow_horizontal = 0
+grow_vertical = 2
+min_value = 1.0
+max_value = 8.0
+value = 1.0
+exp_edit = true
+tick_count = 4
+ticks_on_borders = true
+
+[node name="1" type="Label" parent="CanvasLayer/SpeedSlider" unique_id=609031436]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 17.0
+offset_right = 38.0
+offset_bottom = 40.0
+text = "1x"
+
+[node name="2" type="Label" parent="CanvasLayer/SpeedSlider" unique_id=1968775270]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 17.0
+offset_right = 108.0
+offset_bottom = 40.0
+text = "2x"
+
+[node name="3" type="Label" parent="CanvasLayer/SpeedSlider" unique_id=155809184]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 17.0
+offset_right = 178.0
+offset_bottom = 40.0
+text = "4x"
+
+[node name="4" type="Label" parent="CanvasLayer/SpeedSlider" unique_id=620079605]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 17.0
+offset_right = 249.0
+offset_bottom = 40.0
+text = "8x"
+
+[node name="Label" type="Label" parent="CanvasLayer/SpeedSlider" unique_id=1383161639]
+layout_mode = 0
+offset_left = 74.0
+offset_top = -25.0
+offset_right = 155.0
+offset_bottom = -2.0
+text = "SIM SPEED"
+horizontal_alignment = 1
+
 [node name="GridSprite" parent="." unique_id=848423882 instance=ExtResource("6_vol78")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 
@@ -596,3 +656,4 @@ shape = SubResource("BoxShape3D_r67tw")
 [connection signal="body_entered" from="KillZone2" to="KillZone2" method="_on_body_entered"]
 [connection signal="pressed" from="CanvasLayer/OpenClose" to="." method="_on_open_close_pressed"]
 [connection signal="item_selected" from="CanvasLayer/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="value_changed" from="CanvasLayer/SpeedSlider" to="." method="_on_speed_slider_value_changed"]
