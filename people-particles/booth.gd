@@ -6,6 +6,7 @@ extends Node3D
 
 @onready var spawnArea = $SpawnArea/CollisionShape3D.shape.extents
 @onready var origin = $SpawnArea/CollisionShape3D.global_position -  spawnArea
+@onready var spawnPos = $SpawnMarker.global_position
 
 @onready var particleObj = preload("res://particle.tscn")
 
@@ -28,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	cameraPivot.rotation.x -= cameraInputDirection.y * delta
 	cameraPivot.rotation.x = clamp(cameraPivot.rotation.x, -PI / 2.0, PI / 3.0)
 	cameraPivot.rotation.y -= cameraInputDirection.x * delta
-	
+
 	cameraInputDirection = Vector2.ZERO
 
 
@@ -49,9 +50,9 @@ func _input(event: InputEvent) -> void:
 		call_deferred("restoreMouse")
 		
 	if event.is_action_pressed("scroll_in"):
-		springArm.spring_length = clamp(springArm.spring_length -0.5, 2.0, 16.0)
+		springArm.spring_length = clamp(springArm.spring_length -0.5, 2.0, 18.0)
 	if event.is_action_pressed("scroll_out"):
-		springArm.spring_length = clamp(springArm.spring_length +0.5, 2.0, 16.0)
+		springArm.spring_length = clamp(springArm.spring_length +0.5, 2.0, 18.0)
 
 
 func restoreMouse():
@@ -61,6 +62,7 @@ func restoreMouse():
 
 func gen_random_pos():
 	var x = randf_range(origin.x, spawnArea.x)
+	print(x)
 	var y = randf_range(origin.z - 0.5, origin.z)
 	
 	return Vector2(x, y)
@@ -68,7 +70,7 @@ func gen_random_pos():
 
 func _on_spawn_timer_timeout() -> void:
 	var newParticle = particleObj.instantiate()
-	var pos = Vector3(gen_random_pos().x, 0.5 ,gen_random_pos().y)
+	var pos = Vector3(spawnPos.x -0.5 + randf(), 0.55 , spawnPos.z -0.5 + randf())
 	var flip = randf()
 	if flip < 0.5:
 		newParticle.scale = newParticle.scale * 0.75

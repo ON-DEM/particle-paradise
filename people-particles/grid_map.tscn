@@ -30,7 +30,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gc0wv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex0vt"]
 render_priority = 1
 transparency = 1
 shading_mode = 0
@@ -43,7 +43,7 @@ stencil_compare = 5
 metadata/_stencil_owned = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxjfa"]
-next_pass = SubResource("StandardMaterial3D_gc0wv")
+next_pass = SubResource("StandardMaterial3D_ex0vt")
 transparency = 1
 albedo_color = Color(0.42187226, 0.92169535, 0.56414694, 0.2509804)
 stencil_mode = 1
@@ -53,6 +53,7 @@ stencil_outline_thickness = 0.032
 
 [sub_resource type="BoxMesh" id="BoxMesh_ex0vt"]
 material = SubResource("StandardMaterial3D_sxjfa")
+size = Vector3(1.01, 1.01, 1.01)
 
 [node name="GridMap" type="GridMap" unique_id=851886611]
 mesh_library = SubResource("MeshLibrary_sxjfa")

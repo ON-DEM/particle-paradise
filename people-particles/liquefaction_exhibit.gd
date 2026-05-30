@@ -22,11 +22,14 @@ func _on_attractor_body_entered(body: Node3D) -> void:
 func _physics_process(delta: float) -> void:
 	counter += delta
 	if counter > 3:
+		$Attractor.visible = true
 		for particle in attracting.keys():
-			$Attractor.visible = true
-			attracting[particle] = clamp(attracting[particle] - 1.0 * delta, 0, 10.0)
+			#attracting[particle] = clamp(attracting[particle] - 0.1 * delta, 0, 1.5)
 			var direction = particle.global_position.direction_to(global_position)
-			particle.apply_central_force(direction.normalized() * attracting[particle])
+			particle.apply_central_force(direction.normalized() * (clampf(10.0-particle.boredom, 0, 10)) * clampf(2.5/particle.global_position.distance_to(global_position), 0.0, 1.0))
+			particle.boredom += 0.2 * delta
+			if !particle.engaged.has(self):
+				particle.engaged.append(self)
 		subCounter += delta
 		if subCounter > 3:
 			subCounter = 0
@@ -39,4 +42,6 @@ func _on_attractor_body_exited(body: Node3D) -> void:
 		if body in attracting.keys():
 			left[body] = attracting[body]
 			attracting.erase(body)
+			if body.engaged.has(self):
+				body.engaged.erase(self)
 			

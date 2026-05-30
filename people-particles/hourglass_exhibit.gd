@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	for particle in attracting.keys():
 		#attracting[particle] = clamp(attracting[particle] - 0.1 * delta, 0, 1.5)
 		var direction = particle.global_position.direction_to(global_position)
-		particle.apply_central_force(direction.normalized() * (clampf(1.5-particle.boredom, 0, 10)))
+		particle.apply_central_force(direction.normalized() * (clampf(3.0-particle.boredom, 0, 10)) * clampf(2.5/particle.global_position.distance_to(global_position), 0.0, 1.0))
 		particle.boredom += 0.2 * delta
 
 func _on_attractor_body_exited(body: Node3D) -> void:

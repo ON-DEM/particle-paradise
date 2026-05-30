@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjgwcm0mkurso"
-path.s3tc="res://.godot/imported/face.png-c2e83791cf355677f5e6427409bb0b34.s3tc.ctex"
+uid="uid://b8mrtej5h6ook"
+path.s3tc="res://.godot/imported/hourglassradius.png-7bae0cba2f22a41ac7a5e4b962015ee4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/face.png"
-dest_files=["res://.godot/imported/face.png-c2e83791cf355677f5e6427409bb0b34.s3tc.ctex"]
+source_file="res://assets/hourglassradius.png"
+dest_files=["res://.godot/imported/hourglassradius.png-7bae0cba2f22a41ac7a5e4b962015ee4.s3tc.ctex"]
 
 [params]
 
@@ -24,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d1cotsh76uh7f" path="res://liquefaction_exhibit.gd" id="1_vjxdc"]
 [ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://icon.svg" id="2_431xo"]
 [ext_resource type="PackedScene" uid="uid://qxtwpou5pdb0" path="res://liquefaction_exhibit_mesh.blend" id="3_431xo"]
+[ext_resource type="Texture2D" uid="uid://b6octyjiktv7b" path="res://assets/liquefactionradius.png" id="4_f5qfg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
 albedo_color = Color(0.75387883, 0.5933501, 3.85046e-07, 1)
@@ -54,7 +55,13 @@ gravity = 1.0
 shape = SubResource("SphereShape3D_lvoh4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Attractor" unique_id=253322864]
+visible = false
 mesh = SubResource("SphereMesh_x6fak")
+
+[node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=1762032168]
+axis = 1
+billboard = 2
+texture = ExtResource("4_f5qfg")
 
 [connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
 [connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]

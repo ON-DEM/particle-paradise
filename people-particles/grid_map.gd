@@ -23,6 +23,15 @@ var selectorVisible = true
 
 var availableExhibits = {"Hourglass": 4, "Game": 4, "Liquefaction": 2}
 
+
+var grid = [[]]
+
+func _ready():
+	for i in range(0,40):
+		grid.append([])
+		for j in range(0,40):
+			grid[i].append([0])
+
 func _process(delta):
 	# Update the selector periodically
 	time_since_last_check += delta
@@ -62,8 +71,18 @@ func get_mouse_hit():
 	
 	return get_world_3d().direct_space_state.intersect_ray(query)
 
+func prettyPrintGrid():
+	var string = ""
+	for i in range(0,40):
+		string = string + "\n"
+		for j in range(0,40):
+			string = string + str(grid[i][j][0])
+	print(string)
+
+
 # 🔹 Box + top-to-bottom ray check
 func is_cell_occupied(cell_pos: Vector3i) -> bool:
+	
 	var space_state = get_world_3d().direct_space_state
 	
 	# ----- BOX CHECK (slightly smaller for adjacency) -----
@@ -72,6 +91,9 @@ func is_cell_occupied(cell_pos: Vector3i) -> bool:
 	
 	var world_pos = map_to_local(cell_pos)
 	world_pos.y = 0.5
+	
+	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+		return true
 	
 	var box_query = PhysicsShapeQueryParameters3D.new()
 	box_query.shape = shape
@@ -114,6 +136,11 @@ func update_selector(selection: Vector3i):
 	
 	$Selector.global_position = world_pos
 	
+	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+		$Selector.get_active_material(0).stencil_color = Color("1485ffff")
+		$Selector.get_active_material(0).albedo_color = Color("9bd4ff40")
+		return
+	
 	if is_cell_occupied(selection):
 		$Selector.get_active_material(0).stencil_color = Color("red")
 		$Selector.get_active_material(0).albedo_color = Color("fabab640")
@@ -127,20 +154,26 @@ func make_new_exhibit(pos: Vector3i):
 	if hit.size() == 0:
 		return
 	
+	var world_pos = map_to_local(pos)
+	world_pos.y = 0.5
+	
+	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+		return
+	
 	var new_exhibit = selectedExhibit.instantiate()
 	
 	if availableExhibits[exhibitToString(new_exhibit)] == 0:
 		new_exhibit.queue_free()
 		return
 	
-	var world_pos = map_to_local(pos)
-	world_pos.y = 0.5
+
 	
 	if is_cell_occupied(pos):
 		new_exhibit.queue_free()
 		return
 
 	availableExhibits[exhibitToString(new_exhibit)] -= 1
+	grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] = 1
 	
 	add_child(new_exhibit)
 	new_exhibit.global_position = world_pos
@@ -155,6 +188,11 @@ func clear_exhibit(pos: Vector3):
 	if !is_cell_occupied(pos):
 		return
 	
+	var world_pos = map_to_local(pos)
+	
+	if !grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+		return
+	
 	for i in get_children():
 		if i.global_position == Vector3(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5):
 			if i.has_method("exhibitID"):
@@ -162,6 +200,7 @@ func clear_exhibit(pos: Vector3):
 					continue
 				availableExhibits[exhibitToString(i)] += 1
 				i.queue_free()
+				grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] = 0
 
 # 🔹 Debug visualisation
 func debug_draw_box(cell_pos: Vector3i):

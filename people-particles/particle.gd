@@ -4,6 +4,7 @@ var residenceTime = 0
 var engaged = []
 
 var boredom = 0.0
+var canExit = false
 
 func particleID():
 	pass
@@ -23,4 +24,6 @@ func _process(delta):
 		else:
 			$MeshInstance3D.get_active_material(0).albedo_color = Color("Green").lerp(Color("496cff"), boredom/10)
 	else:
-		$MeshInstance3D.get_active_material(0).albedo_color = Color("496cff")
+		$MeshInstance3D.get_active_material(0).albedo_color = $MeshInstance3D.get_active_material(0).albedo_color.lerp(Color("496cff"),delta)
+	if boredom >= 10.0:
+		canExit = true

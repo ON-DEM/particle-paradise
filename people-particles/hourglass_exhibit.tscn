@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bd1pqathtavkx" path="res://hourglass_exhibit.gd" id="1_rk3o1"]
 [ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://icon.svg" id="2_dv24l"]
 [ext_resource type="PackedScene" uid="uid://dfdbqgme2khip" path="res://hourglass_exhibit_mesh.tscn" id="2_er7t7"]
+[ext_resource type="Texture2D" uid="uid://b8mrtej5h6ook" path="res://assets/hourglassradius.png" id="4_er7t7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
 albedo_color = Color(8.1822276e-07, 0.7428247, 0.28087848, 1)
@@ -17,16 +18,46 @@ material = SubResource("StandardMaterial3D_x6fak")
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 5.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gic0v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv24l"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 0.9372549, 0.19607843, 0.019607844)
+albedo_color = Color(0, 0.7764706, 0.047058824, 0.039215688)
 
 [sub_resource type="SphereMesh" id="SphereMesh_x6fak"]
-material = SubResource("StandardMaterial3D_gic0v")
+material = SubResource("StandardMaterial3D_dv24l")
 radius = 5.0
 height = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_dv24l"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 4.5
+height = 9.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_er7t7"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 4.0
+height = 8.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_gpb0f"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 3.5
+height = 7.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_lfvw5"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 3.0
+height = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_i2uun"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 2.5
+height = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_aqvoj"]
+material = SubResource("StandardMaterial3D_dv24l")
+radius = 2.0
+height = 4.0
 
 [node name="HourglassExhibit" type="Node3D" unique_id=40654562]
 script = ExtResource("1_rk3o1")
@@ -53,7 +84,44 @@ gravity = 1.0
 shape = SubResource("SphereShape3D_lvoh4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Attractor" unique_id=253322864]
+visible = false
+cast_shadow = 0
 mesh = SubResource("SphereMesh_x6fak")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Attractor" unique_id=301687363]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_dv24l")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Attractor" unique_id=1688104276]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_er7t7")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Attractor" unique_id=1821854619]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_gpb0f")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Attractor" unique_id=1258909979]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_lfvw5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Attractor" unique_id=467963893]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_i2uun")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Attractor" unique_id=1850751718]
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_aqvoj")
+
+[node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=1739751419]
+axis = 1
+billboard = 2
+texture = ExtResource("4_er7t7")
 
 [connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
 [connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]

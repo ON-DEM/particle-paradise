@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bhmjxofk35ull"]
+
+[ext_resource type="PackedScene" uid="uid://qxtwpou5pdb0" path="res://liquefaction_exhibit_mesh.blend" id="1_hg3pq"]
+[ext_resource type="Shader" uid="uid://cfmc16bl7jqv7" path="res://particle.gdshader" id="2_qo0ti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4j2bb"]
+render_priority = 0
+shader = ExtResource("2_qo0ti")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/thickness = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xusvt"]
+next_pass = SubResource("ShaderMaterial_4j2bb")
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwhby"]
+render_priority = 0
+shader = ExtResource("2_qo0ti")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/thickness = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyo0j"]
+next_pass = SubResource("ShaderMaterial_gwhby")
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="liquefaction_exhibit_mesh" unique_id=1111960064 instance=ExtResource("1_hg3pq")]
+
+[node name="Cube" parent="." index="0" unique_id=838558681]
+surface_material_override/0 = SubResource("StandardMaterial3D_xusvt")
+
+[node name="Cube_002" parent="." index="1" unique_id=1243499021]
+surface_material_override/0 = SubResource("StandardMaterial3D_wyo0j")
+
+[node name="Cube_003" parent="." index="2" unique_id=1613711556]
+surface_material_override/0 = SubResource("StandardMaterial3D_wyo0j")
+surface_material_override/1 = SubResource("StandardMaterial3D_wyo0j")

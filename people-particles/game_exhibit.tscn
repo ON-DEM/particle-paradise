@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cug8sulqmoo26" path="res://game_exhibit.gd" id="1_egdpf"]
 [ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://icon.svg" id="2_4qbfd"]
 [ext_resource type="PackedScene" uid="uid://b2svtsmoykxdd" path="res://game_exhibit_mesh.blend" id="2_6cfff"]
+[ext_resource type="Texture2D" uid="uid://d1nrarxfk16c6" path="res://assets/gameradius.png" id="4_6cfff"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
 albedo_color = Color(0.997503, 0.00064572215, 0.96669406, 1)
@@ -17,16 +18,28 @@ material = SubResource("StandardMaterial3D_x6fak")
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 1.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gic0v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qbfd"]
 transparency = 1
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.81960785, 0.050980393, 1, 0.101960786)
+disable_ambient_light = true
+albedo_color = Color(0.9529412, 0.09411765, 1, 0.07058824)
 
-[sub_resource type="SphereMesh" id="SphereMesh_x6fak"]
-material = SubResource("StandardMaterial3D_gic0v")
+[sub_resource type="SphereMesh" id="SphereMesh_6cfff"]
+material = SubResource("StandardMaterial3D_4qbfd")
 radius = 1.5
 height = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4qbfd"]
+material = SubResource("StandardMaterial3D_4qbfd")
+radius = 1.2
+height = 2.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_67fom"]
+material = SubResource("StandardMaterial3D_4qbfd")
+radius = 0.9
+height = 1.8
 
 [node name="GameExhibit" type="Node3D" unique_id=40654562]
 script = ExtResource("1_egdpf")
@@ -34,7 +47,7 @@ script = ExtResource("1_egdpf")
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1824960225]
 collision_layer = 5
 
-[node name="game_exhibit_mesh" parent="StaticBody3D" unique_id=1009251510 instance=ExtResource("2_6cfff")]
+[node name="game_exhibit_mesh" parent="StaticBody3D" unique_id=692512743 instance=ExtResource("2_6cfff")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1173853251]
 visible = false
@@ -53,7 +66,22 @@ gravity = 1.0
 shape = SubResource("SphereShape3D_lvoh4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Attractor" unique_id=253322864]
-mesh = SubResource("SphereMesh_x6fak")
+visible = false
+mesh = SubResource("SphereMesh_6cfff")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Attractor" unique_id=353764410]
+visible = false
+mesh = SubResource("SphereMesh_4qbfd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Attractor" unique_id=198692714]
+visible = false
+mesh = SubResource("SphereMesh_67fom")
+
+[node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=433455228]
+pixel_size = 0.005
+axis = 1
+billboard = 2
+texture = ExtResource("4_6cfff")
 
 [connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
 [connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]
