@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b32sso5xpb0ce"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rsiho"]
-albedo_color = Color(1, 0.68733335, 0.32999998, 1)
+disable_fog = true
 emission_energy_multiplier = 6.22
 rim_enabled = true
 rim = 0.02

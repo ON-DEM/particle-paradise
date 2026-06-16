@@ -4,15 +4,16 @@ importer="2d_array_texture"
 type="CompressedTexture2DArray"
 uid="uid://rr8us78yvo0p"
 path.bptc="res://.godot/imported/hourglass_scene.exr-c48c6c76ee9ec9eb32b35a90f13d3b83.bptc.ctexarray"
+path.astc="res://.godot/imported/hourglass_scene.exr-c48c6c76ee9ec9eb32b35a90f13d3b83.astc.ctexarray"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://hourglass/hourglass_scene.exr"
-dest_files=["res://.godot/imported/hourglass_scene.exr-c48c6c76ee9ec9eb32b35a90f13d3b83.bptc.ctexarray"]
+dest_files=["res://.godot/imported/hourglass_scene.exr-c48c6c76ee9ec9eb32b35a90f13d3b83.bptc.ctexarray", "res://.godot/imported/hourglass_scene.exr-c48c6c76ee9ec9eb32b35a90f13d3b83.astc.ctexarray"]
 
 [params]
 

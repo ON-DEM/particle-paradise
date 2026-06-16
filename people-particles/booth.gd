@@ -16,6 +16,7 @@ var mouseSensitivity = 0.25
 var cameraInputDirection = Vector2.ZERO
 var lastMovementDirection = Vector3.BACK
 var lastMousePos
+var ignoreFirstInput = true
 
 var residence = 0
 
@@ -36,6 +37,11 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	var isCameraMotion = (event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
 	if isCameraMotion:
+		
+		if ignoreFirstInput:
+			ignoreFirstInput = false
+			return
+			
 		cameraInputDirection = event.screen_relative * mouseSensitivity
 
 func _input(event: InputEvent) -> void:
@@ -44,6 +50,7 @@ func _input(event: InputEvent) -> void:
 		call_deferred("restoreMouse")
 	if event.is_action_pressed("middle_click"):
 		lastMousePos = get_viewport().get_mouse_position()
+		ignoreFirstInput = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_released("middle_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
