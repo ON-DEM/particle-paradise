@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c4rjbedyx6hkl"]
+
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://ball.tscn" id="1_hbghi"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://goal.tscn" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://cue.tscn" id="2_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://boundary_horizontal.tscn" id="4_rka8t"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://boundary_vertical.tscn" id="5_5hph3"]
+
+[node name="Level1" type="Node2D" unique_id=1643673815]
+
+[node name="Background" type="Polygon2D" parent="." unique_id=356226248]
+color = Color(0.009408967, 0.26192588, 0, 1)
+polygon = PackedVector2Array(215, 0, 1720, 0, 1720, 800, 220, 800)
+
+[node name="Goal" parent="." unique_id=1489381621 instance=ExtResource("2_hn12h")]
+position = Vector2(1500, 400)
+
+[node name="CueBall" type="Node" parent="." unique_id=303841185]
+
+[node name="Ball" parent="CueBall" unique_id=64094305 groups=["balls"] instance=ExtResource("1_hbghi")]
+position = Vector2(580, 400)
+mass = 0.001
+
+[node name="Balls" type="Node" parent="." unique_id=1068746779]
+
+[node name="Cue" parent="." unique_id=76996580 instance=ExtResource("2_ihfcg")]
+position = Vector2(580, 400)
+
+[node name="BoundaryHorizontal" parent="." unique_id=2060034322 instance=ExtResource("4_rka8t")]
+position = Vector2(970, 17)
+
+[node name="BoundaryHorizontal2" parent="." unique_id=2074033235 instance=ExtResource("4_rka8t")]
+position = Vector2(970, 780)
+
+[node name="BoundaryVertical" parent="." unique_id=331332573 instance=ExtResource("5_5hph3")]
+position = Vector2(230, 400)
+
+[node name="BoundaryVertical2" parent="." unique_id=1386050651 instance=ExtResource("5_5hph3")]
+position = Vector2(1700, 400)
+
+[node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
+process_mode = 2
+oversampling_override = 1.0
+title = "Congratulations!"
+position = Vector2i(960, 600)
+size = Vector2i(114, 100)
+unresizable = true
+ok_button_text = "Continue with level 2"
+dialog_text = "Congratulations! You succesfully managed a central collision. 
+
+In a central collision, the force is transfered in the direction of the contact and everything stays in a straight line."
+
+[node name="NextTryPopup" type="AcceptDialog" parent="." unique_id=1886169227]
+process_mode = 2
+oversampling_override = 1.0
+title = "Fail!"
+position = Vector2i(960, 600)
+size = Vector2i(114, 100)
+ok_button_text = "Try Again"
+dialog_text = "This did not work out! Try again!"
+
+[connection signal="confirmed" from="WinPopup" to="Goal" method="_on_win_popup_confirmed"]
