@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bqtdb08c10vgr"]
+
+[ext_resource type="Script" uid="uid://cxgg6kuep6yys" path="res://Simulations/scene_manager.gd" id="1_jo5df"]
+[ext_resource type="PackedScene" uid="uid://de8ae14kpthv4" path="res://Simulations/menu/main_menu.tscn" id="2_a4gjy"]
+
+[node name="SceneManager" type="Node" unique_id=407046137]
+script = ExtResource("1_jo5df")
+
+[node name="MainMenu" parent="." unique_id=1627887069 instance=ExtResource("2_a4gjy")]

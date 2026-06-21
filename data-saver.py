@@ -3,11 +3,13 @@ import struct
 from collections import defaultdict
 from pathlib import Path
 
-INPUT_DIR = Path("./simulation_data")
-OUTPUT_DIR = Path("./real-simulations/data/avalanche")
+INPUT_DIR = Path("./simulation-data")
+OUTPUT_DIR = Path("./particle-paradise-monolith/simulations/data/railway")
 
-INPUT_FPS = 10
-TARGET_FPS = 10
+WHEEL_INPUT_DIR = Path("./wheel-data")
+
+INPUT_FPS = 20
+TARGET_FPS = 20
 
 STEP = max(1, round(INPUT_FPS / TARGET_FPS))
 
@@ -96,6 +98,49 @@ def convert_csv_to_bin(input_file: Path, output_file: Path):
 
     print(f"Wrote: {output_file.name}")
 
+def convert_wheel_csv_to_bin(input_file: Path, output_file: Path):
+
+    frames = {}
+
+    print(f"\nReading wheel data: {input_file.name}")
+
+    with open(input_file, newline="") as f:
+        reader = csv.reader(f)
+
+        for row in reader:
+
+            if len(row) < 2:
+                continue
+
+            try:
+                time = float(row[0])
+                x = float(row[1])
+
+            except ValueError:
+                continue
+
+            frame = int(round(time * INPUT_FPS))
+
+            # downsample
+            if frame % STEP != 0:
+                continue
+
+            frames[frame] = x
+
+    frame_keys = sorted(frames.keys())
+
+    print(f"Frames: {len(frame_keys)}")
+
+    with open(output_file, "wb") as f:
+
+        # header
+        f.write(struct.pack("<I", len(frame_keys)))
+
+        # frame data
+        for frame in frame_keys:
+            f.write(struct.pack("<f", frames[frame]))
+
+    print(f"Wrote: {output_file.name}")
 
 def main():
 
@@ -116,6 +161,27 @@ def main():
 
         except Exception as e:
             print(f"FAILED: {csv_file.name}")
+            print(e)
+
+    print("\nDone.")
+
+    wheel_files = sorted(WHEEL_INPUT_DIR.glob("*.csv"))
+
+    if not wheel_files:
+        print(f"No CSV files found in {WHEEL_INPUT_DIR}")
+        return
+
+    print(f"Found {len(wheel_files)} CSV files")
+
+    for wheel_file in wheel_files:
+
+        output_file = OUTPUT_DIR / f"{wheel_file.stem}.bin"
+
+        try:
+            convert_wheel_csv_to_bin(wheel_file, output_file)
+
+        except Exception as e:
+            print(f"FAILED: {wheel_file.name}")
             print(e)
 
     print("\nDone.")

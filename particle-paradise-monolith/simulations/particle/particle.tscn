@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://xoo23bgkl07j"]
+
+[ext_resource type="Script" uid="uid://dvf28niai674l" path="res://simulations/particle/particle.gd" id="1_y5o8t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jbcuu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_y5o8t"]
+lightmap_size_hint = Vector2i(1, 1)
+radius = 20.0
+height = 40.0
+radial_segments = 128
+rings = 64
+
+[sub_resource type="Gradient" id="Gradient_jkpas"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sc5hs"]
+gradient = SubResource("Gradient_jkpas")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ny0gl"]
+radius = 20.0
+
+[node name="Particle" type="RigidBody2D" unique_id=1513881973]
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_jbcuu")
+script = ExtResource("1_y5o8t")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1071641431]
+mesh = SubResource("SphereMesh_y5o8t")
+texture = SubResource("GradientTexture1D_sc5hs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=826485449]
+shape = SubResource("CircleShape2D_ny0gl")

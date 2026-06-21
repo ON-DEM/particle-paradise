@@ -1,0 +1,275 @@
+[gd_scene format=3 uid="uid://de8ae14kpthv4"]
+
+[ext_resource type="Script" uid="uid://ljp0cef6ku31" path="res://simulations/menu/main_menu.gd" id="1_chmv6"]
+[ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="2_f5okj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwfi3"]
+bg_color = Color(0.72156864, 0.76862746, 0.77254903, 0.32941177)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chmv6"]
+bg_color = Color(0.50042146, 0.55858785, 0.5635076, 0.32941177)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5okj"]
+bg_color = Color(0.8426531, 0.8717344, 0.87413013, 0.32941177)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5w3e"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+expand_margin_left = 6.0
+expand_margin_top = 2.0
+expand_margin_right = 6.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Environment" id="Environment_f5okj"]
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_chmv6"]
+font = ExtResource("2_f5okj")
+font_size = 128
+
+[node name="MainMenu" type="Control" unique_id=667626125]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_chmv6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=930563384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5882353, 0.7607843, 0.8980392, 1)
+
+[node name="Start" type="Button" parent="." unique_id=1238910372]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57600003
+anchor_right = 0.5
+anchor_bottom = 0.57600003
+offset_left = -69.0
+offset_top = 14.919983
+offset_right = 69.0
+offset_bottom = 58.919983
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(69, 22)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_f5okj")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwfi3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chmv6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5okj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o5w3e")
+text = "START"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=551148458]
+environment = SubResource("Environment_f5okj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1331865354]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = -57.5
+offset_right = 79.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PLACEHOLDER" type="Label" parent="HBoxContainer" unique_id=175976]
+visible = false
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
+layout_mode = 2
+text = "T"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P" type="Label" parent="HBoxContainer" unique_id=1176594943]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "P"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="A" type="Label" parent="HBoxContainer" unique_id=1155214670]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "A"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R" type="Label" parent="HBoxContainer" unique_id=553166737]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "R"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="T" type="Label" parent="HBoxContainer" unique_id=414215758]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "T"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="I" type="Label" parent="HBoxContainer" unique_id=1916400872]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "I"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="C" type="Label" parent="HBoxContainer" unique_id=1067675581]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "C"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="L" type="Label" parent="HBoxContainer" unique_id=164919360]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "L"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E" type="Label" parent="HBoxContainer" unique_id=42598887]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPACE" type="Label" parent="HBoxContainer" unique_id=1491935509]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = " "
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2" type="Label" parent="HBoxContainer" unique_id=1627289056]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "P"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="A2" type="Label" parent="HBoxContainer" unique_id=1599115373]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "A"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R2" type="Label" parent="HBoxContainer" unique_id=1532396016]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "R"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="A3" type="Label" parent="HBoxContainer" unique_id=1409962476]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "A"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="D" type="Label" parent="HBoxContainer" unique_id=2011414100]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "D"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="I2" type="Label" parent="HBoxContainer" unique_id=2140363017]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "I"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="S" type="Label" parent="HBoxContainer" unique_id=1492188373]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "S"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E2" type="Label" parent="HBoxContainer" unique_id=803002625]
+modulate = Color(2.454227, 2.454227, 2.454227, 0)
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_chmv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="focus_entered" from="Start" to="." method="_on_start_focus_entered"]
+[connection signal="focus_exited" from="Start" to="." method="_on_start_focus_exited"]
+[connection signal="mouse_entered" from="Start" to="." method="_on_start_mouse_entered"]
+[connection signal="mouse_exited" from="Start" to="." method="_on_start_mouse_exited"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

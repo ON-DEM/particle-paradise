@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b8pkbrw37e2kn"]
+
+[ext_resource type="Script" uid="uid://crli38onb2fl0" path="res://campaign/goal.gd" id="1_6k3qi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7sh37"]
+radius = 40.0
+height = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6k3qi"]
+radius = 40.0
+
+[node name="Goal" type="Area2D" unique_id=1489381621]
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+linear_damp_space_override = 1
+linear_damp = 1.0
+script = ExtResource("1_6k3qi")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=48142124]
+modulate = Color(0, 0, 0, 1)
+mesh = SubResource("SphereMesh_7sh37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232520447]
+shape = SubResource("CircleShape2D_6k3qi")
+
+[node name="Timer" type="Timer" parent="." unique_id=1561323993]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,333 @@
+[gd_scene format=3 uid="uid://bhu1o5mn6aqfh"]
+
+[ext_resource type="Script" uid="uid://dd8axqbad1i7y" path="res://campaign/game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://c4rjbedyx6hkl" path="res://campaign/Levels/level_1.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://bb6bu3ag6u1i4" path="res://campaign/gradient_texture.tres" id="3_feb5d"]
+
+[sub_resource type="GDScript" id="GDScript_feb5d"]
+script/source = "extends LineEdit
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+func _on_line_edit_text_changed(new_text):
+	var filtered := \"\"
+
+	for c in new_text:
+		if c.is_valid_int():  # keeps only digits
+			filtered += c
+
+	# Avoid recursion loop
+	if filtered != new_text:
+		$LineEdit.text = filtered
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Game" type="Node2D" unique_id=883612700]
+script = ExtResource("1_feb5d")
+
+[node name="Level1" parent="." unique_id=1643673815 instance=ExtResource("2_e2o6t")]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1310538229]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=685822092]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=2075191021]
+layout_direction = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -724.0
+offset_top = -263.0
+offset_right = -14.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Force" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1816968338]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Force" unique_id=132124003]
+custom_minimum_size = Vector2(151, 0)
+layout_mode = 2
+text = "force"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/Force" unique_id=1287106145]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = 5.0
+value = 5.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/Force" unique_id=1250628744]
+layout_mode = 2
+placeholder_text = "Input"
+alignment = 1
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/Force" unique_id=950699359]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="NormalForce" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=767822419]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/NormalForce" unique_id=359135704]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "normal force"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/NormalForce" unique_id=1646075755]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/NormalForce" unique_id=1509423950]
+layout_mode = 2
+alignment = 1
+editable = false
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/NormalForce" unique_id=285175264]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="TangentialForce" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=730622574]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/TangentialForce" unique_id=784362911]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "tangential force"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/TangentialForce" unique_id=255248558]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/TangentialForce" unique_id=1923305358]
+layout_mode = 2
+alignment = 1
+editable = false
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/TangentialForce" unique_id=118056889]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="Velocity" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=413853556]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Velocity" unique_id=1525846903]
+custom_minimum_size = Vector2(151, 0)
+layout_mode = 2
+text = "velocity"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/Velocity" unique_id=608734773]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/Velocity" unique_id=269289383]
+layout_mode = 2
+alignment = 1
+editable = false
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/Velocity" unique_id=1545689952]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="VelocityBall2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1305959807]
+visible = false
+layout_direction = 2
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/VelocityBall2" unique_id=555309198]
+custom_minimum_size = Vector2(151, 0)
+layout_mode = 2
+text = "velocity second ball"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/VelocityBall2" unique_id=333359699]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/VelocityBall2" unique_id=637768210]
+layout_mode = 2
+alignment = 1
+editable = false
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/VelocityBall2" unique_id=1847230204]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="AngularVelocity" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1479530564]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/AngularVelocity" unique_id=500440284]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "angular velocity"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/AngularVelocity" unique_id=981519499]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_feb5d")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/VBoxContainer/AngularVelocity" unique_id=221568201]
+layout_mode = 2
+alignment = 1
+editable = false
+virtual_keyboard_type = 2
+script = SubResource("GDScript_feb5d")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/AngularVelocity" unique_id=1738759115]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Hit!"
+
+[node name="ResetButton" type="Button" parent="CanvasLayer" unique_id=888132298]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 983.0
+offset_top = 845.0
+offset_right = 1083.0
+offset_bottom = 945.0
+text = "Reset Level"
+
+[node name="CueControl" type="VBoxContainer" parent="CanvasLayer" unique_id=990903786]
+visible = false
+offset_left = 1200.0
+offset_top = 817.0
+offset_right = 1400.0
+offset_bottom = 1017.0
+
+[node name="CollisionControl" type="HBoxContainer" parent="CanvasLayer/CueControl" unique_id=643519591]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CueControl/CollisionControl" unique_id=525382552]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "cue position"
+horizontal_alignment = 1
+
+[node name="PositionSlider" type="HSlider" parent="CanvasLayer/CueControl/CollisionControl" unique_id=1291810396]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+min_value = -20.0
+max_value = 20.0
+step = 0.1
+
+[node name="RadialControl" type="HBoxContainer" parent="CanvasLayer/CueControl" unique_id=597343408]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/CueControl/RadialControl" unique_id=531795142]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "radial position"
+horizontal_alignment = 1
+
+[node name="RadialSlider" type="HSlider" parent="CanvasLayer/CueControl/RadialControl" unique_id=248781665]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+max_value = 360.0
+
+[node name="MassControl" type="HBoxContainer" parent="CanvasLayer" unique_id=191252893]
+visible = false
+offset_left = 1200.0
+offset_top = 817.0
+offset_right = 1554.0
+offset_bottom = 840.0
+
+[node name="Label" type="Label" parent="CanvasLayer/MassControl" unique_id=1126681984]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "mass"
+horizontal_alignment = 1
+
+[node name="MassSlider" type="HSlider" parent="CanvasLayer/MassControl" unique_id=2051744476]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+min_value = 0.001
+max_value = 0.1
+step = 0.001
+value = 0.001
+
+[node name="IntroPopup" type="AcceptDialog" parent="CanvasLayer" unique_id=69941467]
+process_mode = 2
+oversampling_override = 1.0
+title = "Welcome!"
+initial_position = 2
+size = Vector2i(487, 210)
+ok_button_text = "Start Level 1"
+dialog_text = "Welcome to the educational campaign!
+
+In the following levels, you will be learning about
+particle mechanics on the example of a pool game."
+
+[node name="Back" type="Button" parent="CanvasLayer" unique_id=1934950744]
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 40.0
+text = "Back to game select"
+
+[node name="ShotFinishedTimer" type="Timer" parent="." unique_id=36498327]
+one_shot = true
+
+[node name="NextTryPopup" type="AcceptDialog" parent="." unique_id=10259603]
+process_mode = 2
+oversampling_override = 1.0
+title = "Fail!"
+position = Vector2i(960, 600)
+size = Vector2i(114, 100)
+ok_button_text = "Try Again"
+dialog_text = "This did not work out! Try again!"
+
+[connection signal="text_changed" from="CanvasLayer/VBoxContainer/Force/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Force/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="value_changed" from="CanvasLayer/CueControl/CollisionControl/PositionSlider" to="." method="_on_position_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/CueControl/RadialControl/RadialSlider" to="." method="_on_radial_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MassControl/MassSlider" to="." method="_on_mass_slider_value_changed"]
+[connection signal="confirmed" from="CanvasLayer/IntroPopup" to="." method="_on_intro_popup_confirmed"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
+[connection signal="timeout" from="ShotFinishedTimer" to="." method="_on_shot_finished_timer_timeout"]
+[connection signal="confirmed" from="NextTryPopup" to="." method="_on_next_try_popup_confirmed"]
