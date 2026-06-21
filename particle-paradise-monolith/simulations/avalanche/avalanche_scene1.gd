@@ -759,3 +759,8 @@ var flat_plane = true
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	flat_plane = toggled_on
 	update_cur_sim()
+
+
+func _on_okay_pressed() -> void:
+	$Welcome.visible = false
+	$CanvasLayer.visible = true

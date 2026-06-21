@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://hrg7ix0c5w7r"]
 
 [ext_resource type="Script" uid="uid://l2hhhscfr8fo" path="res://simulations/avalanche/avalanche_scene1.gd" id="1_yq2li"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="2_15qsj"]
 [ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="3_c666n"]
 [ext_resource type="Texture2D" uid="uid://b3ehu3xrcm35k" path="res://simulations/menu/Untitled design.png" id="3_q4x6r"]
 
@@ -22,6 +23,26 @@ fog_depth_end = 12.0
 adjustment_brightness = 0.46
 adjustment_contrast = 2.1
 adjustment_saturation = 0.58
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p45mw"]
+shader = ExtResource("2_15qsj")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_15qsj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hfp8"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_wqgaf"]
 font = ExtResource("3_c666n")
@@ -343,6 +364,30 @@ expand_margin_left = 6.0
 expand_margin_top = 2.0
 expand_margin_right = 6.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy0i1"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qi6m7"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvgrc"]
 content_margin_left = 4.0
@@ -671,7 +716,68 @@ environment = SubResource("Environment_sj5fi")
 one_shot = true
 autostart = true
 
+[node name="Welcome" type="CanvasLayer" parent="." unique_id=1716753966]
+
+[node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1493771949]
+material = SubResource("ShaderMaterial_p45mw")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("CameraTexture_15qsj")
+
+[node name="Correct" type="PanelContainer" parent="Welcome" unique_id=1286733861]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -29.0
+offset_right = 67.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_0hfp8")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Welcome/Correct" unique_id=1841444949]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=187799905]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_c666n")
+theme_override_font_sizes/font_size = 64
+text = "WELCOME TO THE AVALANCHE SIMULATION!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=1470005959]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_c666n")
+theme_override_font_sizes/font_size = 36
+text = "YOUR GOAL IS TO STOP AS MUCH OF THE AVALANCHE AS POSSIBLE FROM REACHING THE HOUSE.
+
+TRY DIFFERENT DEFENCES AND SIZES TO SEE WHICH ONES ARE THE MOST EFFECTIVE."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Welcome/Correct/CenterContainer" unique_id=1556286810]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Okay" type="Button" parent="Welcome/Correct/CenterContainer/HBoxContainer" unique_id=1550602340]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_c666n")
+theme_override_font_sizes/font_size = 48
+text = "OKAY"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
+visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
 offset_right = 1920.0
@@ -811,6 +917,7 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_0hfp8")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/Correct" unique_id=1596210575]
 layout_mode = 2
@@ -821,7 +928,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_c666n")
 theme_override_font_sizes/font_size = 48
-text = "CORRECT!"
+text = "CORRECT! GOOD JOB"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -830,19 +937,12 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Next Level" type="Button" parent="CanvasLayer/Correct/CenterContainer/HBoxContainer" unique_id=663225614]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("3_c666n")
-theme_override_font_sizes/font_size = 48
-text = "NEXT LEVEL"
-
 [node name="Stay" type="Button" parent="CanvasLayer/Correct/CenterContainer/HBoxContainer" unique_id=1796280241]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_c666n")
-theme_override_font_sizes/font_size = 48
-text = "STAY"
+theme_override_font_sizes/font_size = 36
+text = "OKAY"
 
 [node name="You win" type="PanelContainer" parent="CanvasLayer" unique_id=612584526]
 visible = false
@@ -858,6 +958,7 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_wy0i1")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/You win" unique_id=865711989]
 layout_mode = 2
@@ -904,6 +1005,7 @@ offset_right = 67.5
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qi6m7")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/Try again" unique_id=823151361]
 layout_mode = 2
@@ -922,8 +1024,8 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_c666n")
-theme_override_font_sizes/font_size = 48
-text = "OKAY!"
+theme_override_font_sizes/font_size = 36
+text = "OKAY"
 
 [node name="Back" type="Button" parent="CanvasLayer" unique_id=443852787]
 custom_minimum_size = Vector2(618.75, 606.25)
@@ -1317,13 +1419,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0oxl3")
 multimesh = SubResource("MultiMesh_2wdq2")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="gui_input" from="CanvasLayer/Container" to="." method="_on_container_gui_input"]
 [connection signal="item_selected" from="CanvasLayer/VBoxContainer2/HBoxContainer/ConcreteOptions" to="." method="_on_concrete_options_item_selected"]
 [connection signal="item_activated" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_item_activated"]
 [connection signal="item_selected" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_item_selected"]
 [connection signal="toggled" from="CanvasLayer/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/Correct/CenterContainer/HBoxContainer/Next Level" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="CanvasLayer/Correct/CenterContainer/HBoxContainer/Stay" to="." method="_on_stay_pressed"]
 [connection signal="pressed" from="CanvasLayer/You win/CenterContainer/HBoxContainer/Main menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/You win/CenterContainer/HBoxContainer/Stay" to="." method="_on_stay_pressed"]
