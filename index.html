@@ -141,8 +141,6 @@ body {
 		<script src="index.js"></script>
 
 		<script>
-		/* -------------------- FULLSCREEN LOGIC -------------------- */
-
 		function goFullscreen() {
 			const elem = document.documentElement;
 
@@ -165,44 +163,59 @@ body {
 			}
 		}
 
+		// Get button
 		const fsButton = document.getElementById("fsButton");
 
-		// Toggle fullscreen on click
+		// Toggle fullscreen
 		fsButton.addEventListener("click", () => {
-			if (document.fullscreenElement) {
+			if (
+				document.fullscreenElement ||
+				document.webkitFullscreenElement ||
+				document.msFullscreenElement
+			) {
 				exitFullscreen();
 			} else {
 				goFullscreen();
 			}
 		});
 
-		// Show/hide button depending on fullscreen state
+		// IMPORTANT FIX:
+		// We check *any fullscreen element*, not just standard API
+		function isFullscreen() {
+			return (
+				document.fullscreenElement ||
+				document.webkitFullscreenElement ||
+				document.msFullscreenElement
+			);
+		}
+
+		// Update button visibility
 		function updateFsButton() {
-			if (document.fullscreenElement) {
+			if (isFullscreen()) {
 				fsButton.style.display = "none";
 			} else {
 				fsButton.style.display = "block";
 			}
 		}
 
-		// Listen for fullscreen changes (important!)
+		// Listen for ALL possible changes
 		document.addEventListener("fullscreenchange", updateFsButton);
 		document.addEventListener("webkitfullscreenchange", updateFsButton);
 		document.addEventListener("msfullscreenchange", updateFsButton);
 
-		// Initialize correct state on load
+		// Some mobile browsers DON'T fire reliably → fallback polling
+		setInterval(updateFsButton, 500);
+
+		// Init
 		updateFsButton();
 
-		/* -------------------- MOBILE AUTO FULLSCREEN -------------------- */
-
-		// First touch triggers fullscreen once (keeps your original behavior)
+		/* mobile auto fullscreen (your original behavior) */
 		let firstTap = true;
 		document.addEventListener("touchstart", () => {
 			if (!firstTap) return;
 			firstTap = false;
 			goFullscreen();
 		}, { once: true });
-
 		</script>
 	</body>
 </html>
