@@ -163,53 +163,38 @@ body {
 			}
 		}
 
-		// Get button
 		const fsButton = document.getElementById("fsButton");
 
-		// Toggle fullscreen
+		// Toggle fullscreen safely
 		fsButton.addEventListener("click", () => {
-			if (
-				document.fullscreenElement ||
-				document.webkitFullscreenElement ||
-				document.msFullscreenElement
-			) {
+			if (document.fullscreenElement) {
 				exitFullscreen();
 			} else {
 				goFullscreen();
 			}
 		});
 
-		// IMPORTANT FIX:
-		// We check *any fullscreen element*, not just standard API
-		function isFullscreen() {
-			return (
-				document.fullscreenElement ||
-				document.webkitFullscreenElement ||
-				document.msFullscreenElement
-			);
-		}
-
-		// Update button visibility
+		// ONLY rely on real events (no polling!)
 		function updateFsButton() {
-			if (isFullscreen()) {
+			// If fullscreen is active → hide button
+			const isFs = document.fullscreenElement;
+
+			if (isFs) {
 				fsButton.style.display = "none";
 			} else {
 				fsButton.style.display = "block";
 			}
 		}
 
-		// Listen for ALL possible changes
+		// Standard + vendor events
 		document.addEventListener("fullscreenchange", updateFsButton);
 		document.addEventListener("webkitfullscreenchange", updateFsButton);
 		document.addEventListener("msfullscreenchange", updateFsButton);
 
-		// Some mobile browsers DON'T fire reliably → fallback polling
-		setInterval(updateFsButton, 500);
-
-		// Init
+		// Init (safe)
 		updateFsButton();
 
-		/* mobile auto fullscreen (your original behavior) */
+		/* Mobile auto fullscreen (your original behavior, unchanged but safe) */
 		let firstTap = true;
 		document.addEventListener("touchstart", () => {
 			if (!firstTap) return;
