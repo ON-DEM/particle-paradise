@@ -313,7 +313,6 @@ func _ready():
 	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
-		$DirectionalLight3D.shadow_enabled = false
 
 var particle_count = 0
 # ----------------------------
@@ -469,25 +468,28 @@ func end_reached():
 	var cur_sim = data_path
 	
 	#Update to check for correct
-	match level:
-		0:
-			if cur_sim == "CYLINDER_G0_DZ05":
-				$CanvasLayer/Correct.visible = true
-		1:
-			if cur_sim == "CYLINDER_G0_DZ10":
-				$CanvasLayer/Correct.visible = true
-		2:
-			if cur_sim == "CYLINDER_G0_DZ15":
-				$CanvasLayer/Correct.visible = true
-		3:
-			if cur_sim == "TET_G30_DZ05":
-				$CanvasLayer/Correct.visible = true
-		4:
-			if cur_sim == "WALL_G30_A45_DZ10":
-				$CanvasLayer/Correct.visible = true
-		5:
-			if cur_sim == "WALL_G30_A0_DZ15":
-				$"CanvasLayer/You win".visible = true
+	if flat_plane:
+		match level:
+			0:
+				if cur_sim == "CYLINDER_G0_DZ05":
+					$CanvasLayer/Correct.visible = true
+			1:
+				if cur_sim == "CYLINDER_G0_DZ10":
+					$CanvasLayer/Correct.visible = true
+			2:
+				if cur_sim == "CYLINDER_G0_DZ15":
+					$CanvasLayer/Correct.visible = true
+	else:
+		match level:
+			0:
+				if cur_sim == "TET_G30_DZ05":
+					$CanvasLayer/Correct.visible = true
+			1:
+				if cur_sim == "WALL_G30_A45_DZ10":
+					$CanvasLayer/Correct.visible = true
+			2:
+				if cur_sim == "WALL_G30_A0_DZ15":
+					$CanvasLayer/Correct.visible = true
 
 	if $CanvasLayer/Correct.visible == false and $"CanvasLayer/You win".visible == false:
 		$"CanvasLayer/Try again".visible = true
@@ -519,6 +521,19 @@ func update_interpolated(alpha: float):
 
 	var frame_a = frames[current_frame]
 	var frame_b = frames[current_frame + 1]
+
+	for pid in pid_to_instance.keys():
+		
+		if not frame_a.has(pid):
+
+			var id = pid_to_instance[pid]
+
+			var hidden := Transform3D()
+			hidden.origin = Vector3(999999, 999999, 999999)
+
+			multimesh.set_instance_transform(id, hidden)
+
+			continue
 
 	for pid in pid_to_instance.keys():
 
@@ -572,6 +587,10 @@ func reset_simulation():
 func _on_play_pressed() -> void:
 	reset_simulation()
 	playing = true
+	if $CanvasLayer/Correct.visible == true or $"CanvasLayer/Try again".visible == true or $"CanvasLayer/You win".visible == true:
+		$CanvasLayer/Correct.visible = false
+		$"CanvasLayer/Try again".visible = false
+		$"CanvasLayer/You win".visible = false
 
 var selected = 0
 
@@ -633,7 +652,7 @@ func _on_container_gui_input(event: InputEvent) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_parent().simulationSelect()
+	get_parent().levelSelect()
 
 
 func _on_concrete_options_item_selected(index: int) -> void:

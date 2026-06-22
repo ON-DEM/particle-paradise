@@ -21,7 +21,7 @@ func update_cue_central(centralPosition):
 	update_cue_transform()
 
 func update_cue_radial(radialPosition):
-	cueRotation = radialPosition * PI / 180
+	cueRotation = radialPosition * PI / 180 * -1
 	update_cue_transform()
 	
 func update_cue_drag(force):

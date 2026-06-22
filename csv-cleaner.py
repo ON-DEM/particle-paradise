@@ -1,10 +1,10 @@
 import csv
 from collections import defaultdict
+from pathlib import Path
+
 
 INPUT = "Run_Baseline.csv"
 OUTPUT = "cleaned_baseline.csv"
-
-EXCLUDE_MAX_PID = 799
 
 print("Reading CSV...")
 
@@ -26,8 +26,8 @@ with open(INPUT, newline="") as f:
             continue
 
         # Remove static object particles
-        if 0 <= pid <= EXCLUDE_MAX_PID:
-            continue
+        # if 0 <= pid <= EXCLUDE_MAX_PID:
+        #     continue
 
         rows.append(row)
 

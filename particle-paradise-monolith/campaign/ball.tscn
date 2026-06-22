@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bwc4tht0ggm4m" path="res://campaign/ball.gd" id="1_x8fbi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x8fbi"]
-friction = 0.0
 bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cbx31"]
@@ -15,6 +14,7 @@ height = 40.0
 
 [node name="Ball" type="RigidBody2D" unique_id=64094305]
 physics_material_override = SubResource("PhysicsMaterial_x8fbi")
+linear_damp = 0.1
 script = ExtResource("1_x8fbi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=917878094]

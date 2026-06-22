@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://1xhitx6te4c4"]
 
-[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://goal.tscn" id="1_bcgyv"]
-[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://ball.tscn" id="2_fbld2"]
-[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://cue.tscn" id="3_s275v"]
-[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://boundary_horizontal.tscn" id="4_pml6m"]
-[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://boundary_vertical.tscn" id="5_vltsr"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://campaign/goal.tscn" id="1_bcgyv"]
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://campaign/ball.tscn" id="2_fbld2"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_s275v"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_pml6m"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_vltsr"]
 
 [node name="Level2" type="Node2D" unique_id=1643673815]
 
@@ -45,7 +45,7 @@ title = "Congratulations!"
 position = Vector2i(960, 600)
 size = Vector2i(114, 100)
 ok_button_text = "Next Level"
-dialog_text = "Congratulations! You succesfully managed to rotate the cue!"
+dialog_text = "Congratulations! You successfully managed to rotate the club!"
 
 [node name="NextTryPopup" type="AcceptDialog" parent="." unique_id=730715817]
 process_mode = 2

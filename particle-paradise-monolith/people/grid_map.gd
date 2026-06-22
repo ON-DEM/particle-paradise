@@ -21,7 +21,7 @@ var time_since_last_check: float = 0.0
 
 var selectorVisible = true
 
-var availableExhibits = {"Hourglass": 4, "Game": 4, "Liquefaction": 2}
+var availableExhibits = {"HOURGLASS": 4, "GAME": 4, "LIQUEFACTION": 2}
 
 
 var grid = [[]]
@@ -231,8 +231,8 @@ func revealSelector():
 
 func exhibitToString(exhibit):
 	if exhibit.has_method("hourglassID"):
-		return "Hourglass"
+		return "HOURGLASS"
 	elif exhibit.has_method("gameID"):
-		return "Game"
+		return "GAME"
 	elif exhibit.has_method("liqID"):
-		return "Liquefaction"
+		return "LIQUEFACTION"

@@ -175,7 +175,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_cwfi3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_chmv6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f5okj")
 theme_override_styles/focus = SubResource("StyleBoxFlat_o5w3e")
-text = "EDUCATIONAL CAMPAIGN"
+text = "MINI GOLF"
 
 [node name="Peo" type="Button" parent="." unique_id=598422050]
 layout_mode = 1
@@ -229,7 +229,61 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_cwfi3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_chmv6")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f5okj")
 theme_override_styles/focus = SubResource("StyleBoxFlat_o5w3e")
-text = "REAL SIMULATIONS"
+text = "AVALANCHE"
+
+[node name="Sta" type="Button" parent="." unique_id=152899379]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82000005
+anchor_top = 0.56700003
+anchor_right = 0.82000005
+anchor_bottom = 0.56700003
+offset_left = -1055.4001
+offset_top = 154.63995
+offset_right = -634.40015
+offset_bottom = 198.63995
+pivot_offset = Vector2(211, 22)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_xbi3n")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwfi3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chmv6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5okj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o5w3e")
+text = "STAY ON TRACK"
+
+[node name="Hou" type="Button" parent="." unique_id=1311170917]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82000005
+anchor_top = 0.56700003
+anchor_right = 0.82000005
+anchor_bottom = 0.56700003
+offset_left = -469.40015
+offset_top = 154.63995
+offset_right = -48.400146
+offset_bottom = 198.63995
+pivot_offset = Vector2(211, 22)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_xbi3n")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_cwfi3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chmv6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5okj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_o5w3e")
+text = "HOURGLASS"
 
 [node name="Back" type="Button" parent="." unique_id=1852965093]
 layout_mode = 0
@@ -254,4 +308,10 @@ icon_alignment = 1
 [connection signal="mouse_entered" from="Rea" to="." method="_on_rea_mouse_entered"]
 [connection signal="mouse_exited" from="Rea" to="." method="_on_rea_mouse_exited"]
 [connection signal="pressed" from="Rea" to="." method="_on_rea_pressed"]
+[connection signal="mouse_entered" from="Sta" to="." method="_on_sta_mouse_entered"]
+[connection signal="mouse_exited" from="Sta" to="." method="_on_sta_mouse_exited"]
+[connection signal="pressed" from="Sta" to="." method="_on_sta_pressed"]
+[connection signal="mouse_entered" from="Hou" to="." method="_on_hou_mouse_entered"]
+[connection signal="mouse_exited" from="Hou" to="." method="_on_hou_mouse_exited"]
+[connection signal="pressed" from="Hou" to="." method="_on_hou_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

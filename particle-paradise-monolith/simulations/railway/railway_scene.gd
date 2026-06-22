@@ -126,7 +126,6 @@ func _ready():
 	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
-		$DirectionalLight3D.shadow_enabled = false
 #
 #func update_wheel(alpha: float):
 #
@@ -516,6 +515,10 @@ func end_reached():
 func _on_play_pressed() -> void:
 	reset_simulation()
 	playing = true
+	if $CanvasLayer/Correct.visible == true or $"CanvasLayer/Try again".visible == true or $"CanvasLayer/You win".visible == true:
+		$CanvasLayer/Correct.visible = false
+		$"CanvasLayer/Try again".visible = false
+		$"CanvasLayer/You win".visible = false
 
 
 func _on_options_item_selected(index: int) -> void:
@@ -642,4 +645,4 @@ func _on_container_gui_input(event: InputEvent) -> void:
 
 
 func _on_back_pressed() -> void:
-	get_parent().simulationSelect()
+	get_parent().levelSelect()

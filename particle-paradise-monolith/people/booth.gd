@@ -98,8 +98,8 @@ func _process(delta: float) -> void:
 	$CanvasLayer/HBoxContainer/HSlider2.value = residence
 	$CanvasLayer/HBoxContainer/HSlider.value = float($GridMap.get_children().size() - 3) / 10.0 * 100.0
 	$SpawnTimer.wait_time = 0.5 - ($GridMap.get_children().size() * 0.01)
-	for i in $CanvasLayer/ItemList.item_count:
-		$CanvasLayer/ItemList.set_item_text(i, str($GridMap.availableExhibits[$GridMap.availableExhibits.keys()[i]]) + " x " + $GridMap.availableExhibits.keys()[i])
+	for i in $CanvasLayer/VBoxContainer/ItemList.item_count:
+		$CanvasLayer/VBoxContainer/ItemList.set_item_text(i, str($GridMap.availableExhibits[$GridMap.availableExhibits.keys()[i]]) + " x " + $GridMap.availableExhibits.keys()[i])
 
 func _on_open_close_pressed() -> void:
 	if boothOpen == false:
@@ -107,7 +107,7 @@ func _on_open_close_pressed() -> void:
 			$SpawnTimer.paused = false
 		$SpawnTimer.start()
 		boothOpen = true
-		$CanvasLayer/OpenClose.text = "CLOSE BOOTH"
+		$CanvasLayer/VBoxContainer/OpenClose.text = "CLOSE BOOTH"
 		$GridMap.selectorVisible = false
 		$GridMap/Selector.visible = false
 		for i in $GridMap.get_children():
@@ -136,4 +136,5 @@ func _on_speed_slider_value_changed(value: float) -> void:
 
 
 func _on_back_pressed() -> void:
+	Engine.time_scale = 1
 	get_parent().levelSelect()

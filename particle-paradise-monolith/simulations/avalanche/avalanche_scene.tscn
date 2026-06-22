@@ -694,6 +694,8 @@ rim = 0.02
 material = SubResource("StandardMaterial3D_yq2li")
 radius = 1.0
 height = 2.0
+radial_segments = 8
+rings = 4
 
 [sub_resource type="MultiMesh" id="MultiMesh_2wdq2"]
 transform_format = 1

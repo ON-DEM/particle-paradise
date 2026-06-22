@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var sleep_speed := 5.0      # pixels/s
+@export var sleep_speed := 2.0      # pixels/s
 @export var sleep_time := 1.0       # seconds
 
 var below_threshold_time := 0.0

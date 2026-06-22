@@ -26,6 +26,7 @@ mesh = SubResource("SphereMesh_7sh37")
 shape = SubResource("CircleShape2D_6k3qi")
 
 [node name="Timer" type="Timer" parent="." unique_id=1561323993]
+wait_time = 1.5
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

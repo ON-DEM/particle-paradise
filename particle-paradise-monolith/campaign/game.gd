@@ -51,20 +51,20 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 
 	## Avoid recursion loop
 	if filtered != new_text:
-		$CanvasLayer/VBoxContainer/Force/LineEdit.text = filtered
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = filtered
 		
 	if filtered == "":
-		$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
 		return
 		
 	force = int(filtered)
-#
+
 	if int(filtered) > upperLimit || int(filtered) < lowerLimit:
 		force = clamp(int(filtered), lowerLimit, upperLimit)
-		$CanvasLayer/VBoxContainer/Force/LineEdit.text = str(force)
-		$CanvasLayer/VBoxContainer/Force/LineEdit.caret_column = 3
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.caret_column = 3
 		
-	$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = force
+	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
 	
 	var cue = current_level.get_node("Cue")
 	cue.update_cue_drag(force)
@@ -76,10 +76,10 @@ func _on_button_pressed() -> void:
 	print('force when hit button pressed: ', force)
 	if force < 6:
 		force = 6
-		$CanvasLayer/VBoxContainer/Force/LineEdit.text = str(force)
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
 	
 	apply_shot(force)
-	$CanvasLayer/VBoxContainer/Force/Button.disabled = true
+	$CanvasLayer/GUI/Buttons/Button.disabled = true
 	
 func apply_shot(force):
 	print('force in apply_shot: ', force)
@@ -92,7 +92,7 @@ func apply_shot(force):
 	var forcePercentage = force / 100.0
 	var max_force := 1.0
 	
-	force = min(forcePercentage, max_force)
+	var effective_force = min(forcePercentage, max_force)
 	
 	var direction = Vector2(1.0, 0.0).normalized()
 	var offset = Vector2.ZERO
@@ -112,7 +112,7 @@ func apply_shot(force):
 		#print("tip_pos: ", tip_pos)
 	#var direction = drag_vector.normalized()
 #
-	var impulse = direction * force
+	var impulse = direction * effective_force
 #
 	shot_in_progress = true
 	cue.update_cue_drag(0)
@@ -131,29 +131,35 @@ func _on_reset_button_pressed() -> void:
 	current_level.queue_free()
 	current_level = newLevel
 	
-	$CanvasLayer/VBoxContainer/Force/Button.disabled = false
-	$CanvasLayer/CueControl/CollisionControl/PositionSlider.value = 0.0
-	$CanvasLayer/CueControl/RadialControl/RadialSlider.value = 0.0
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
+	$CanvasLayer/GUI/Buttons/Button.disabled = false
+	if force != 0:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+	else:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
 
 	# levelCounter dependent on where the level sits in the order of levels
 	# find a solution that is independent of this
 	if levelCounter == 4:
 		load_level_five()
 	
+	var cue = current_level.get_node("Cue")
+	cue.update_cue_drag(force)
+	cue.update_cue_central($CanvasLayer/GUI/Sliders/PositionSlider.value)
+	cue.update_cue_radial($CanvasLayer/GUI/Sliders/RadialSlider.value)
+	
 #func prepare_next_try():
 	#print('next try is called')
-	#$CanvasLayer/VBoxContainer/Force/Button.disabled = false
-	#$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
+	#$CanvasLayer/GUI/Buttons/Button.disabled = false
+	#$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
 	#
 	## levelCounter dependent on where the level sits in the order of levels
 	## find a solution that is independent of this
 	#if levelCounter == 1:
 		##var force_level5 := 100
 		#force = force_level5
-		#$CanvasLayer/VBoxContainer/Force/LineEdit.editable = false
-		#$CanvasLayer/VBoxContainer/Force/LineEdit.text = str(force)
-		#$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = force
+		#$CanvasLayer/GUI/Numbers/Force/LineEdit.editable = false
+		#$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+		#$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
 	#get_tree().paused = false
 
 
@@ -167,8 +173,8 @@ func _physics_process(delta):
 	angularSpeed = cue_ball.angular_velocity
 
 	# display values to velocity bar
-	$CanvasLayer/VBoxContainer/Velocity/TextureProgressBar.value = speed
-	$CanvasLayer/VBoxContainer/Velocity/LineEdit.text = str(int(speed))
+	$CanvasLayer/GUI/Numbers/Velocity/TextureProgressBar.value = speed
+	$CanvasLayer/GUI/Numbers/Velocity/LineEdit.text = str(int(speed))
 	
 	
 	var balls = get_tree().get_nodes_in_group("balls")
@@ -177,12 +183,12 @@ func _physics_process(delta):
 		var second_ball = current_level.get_node("CueBall/Ball2")
 		var speed_second_ball = second_ball.linear_velocity.length() / 10.0
 		
-		$CanvasLayer/VBoxContainer/VelocityBall2/TextureProgressBar.value = speed_second_ball
-		$CanvasLayer/VBoxContainer/VelocityBall2/LineEdit.text = str(int(speed_second_ball))
+		$CanvasLayer/GUI/Numbers/VelocityBall2/TextureProgressBar.value = speed_second_ball
+		$CanvasLayer/GUI/Numbers/VelocityBall2/LineEdit.text = str(int(speed_second_ball))
 	
 	# display values on angular velocity bar
-	$CanvasLayer/VBoxContainer/AngularVelocity/TextureProgressBar.value = angularSpeed
-	$CanvasLayer/VBoxContainer/AngularVelocity/LineEdit.text = str(int(angularSpeed))
+	$CanvasLayer/GUI/Numbers/AngularVelocity/TextureProgressBar.value = angularSpeed
+	$CanvasLayer/GUI/Numbers/AngularVelocity/LineEdit.text = str(int(angularSpeed))
 
 	# display values on normal force bar
 	#$CanvasLayer/VBoxContainer/NormalForce/TextureProgressBar.value = 
@@ -207,6 +213,8 @@ func _physics_process(delta):
 	else:
 		$ShotFinishedTimer.stop()
 
+func stopTimer():
+	$ShotFinishedTimer.stop()
 
 func all_balls_stopped() -> bool:
 	var balls = current_level.get_tree().get_nodes_in_group("balls")
@@ -220,12 +228,14 @@ func all_balls_stopped() -> bool:
 	
 
 
-func load_next_level():
+func load_next_level(force = 0):
 	shot_in_progress = false
 	for nodes in get_tree().get_nodes_in_group("balls"):
 		nodes.remove_from_group("balls")
 	
 	levelCounter = levelCounter + 1
+	if levelCounter == 5:
+		levelCounter = 4
 	
 	var newLevel = levels[levelCounter].instantiate()
 	#print(newLevel)
@@ -252,40 +262,46 @@ func load_next_level():
 		levelCounter = levelCounter - 1
 		
 	
-	$CanvasLayer/VBoxContainer/Force/Button.disabled = false
-	$CanvasLayer/VBoxContainer/Velocity/TextureProgressBar.value = 0
-	#$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
-	#$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = 0
-	$CanvasLayer/CueControl/RadialControl/RadialSlider.value = 0
-	$CanvasLayer/CueControl/CollisionControl/PositionSlider.value = 0
+	$CanvasLayer/GUI/Buttons/Button.disabled = false
+	$CanvasLayer/GUI/Numbers/Velocity/TextureProgressBar.value = force
+	#$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+	#$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Sliders/RadialSlider.value = 0
+	$CanvasLayer/GUI/Sliders/PositionSlider.value = 0
 	
 	#var cue_ball = current_level.get_node("CueBall/Ball")
 	#initial_position = cue_ball.global_position
 	
 func load_level_two():
-	$CanvasLayer/CueControl.visible = true
-	$CanvasLayer/CueControl/CollisionControl.visible = false
-	$CanvasLayer/CueControl/RadialControl.visible = true
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
-	$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Sliders/PositionSlider.visible = false
+	$CanvasLayer/GUI/SliderLabels/PosLabel.visible = false
+	$CanvasLayer/GUI/Sliders/RadialSlider.visible = true
+	$CanvasLayer/GUI/SliderLabels/RadialLabel.visible = true
+	
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
 	
 func load_level_three():
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
-	$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
 	
 func load_level_four():
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
-	$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
 	
-	$CanvasLayer/VBoxContainer/VelocityBall2.visible = true
-	$CanvasLayer/CueControl/RadialControl.visible = false
+	$CanvasLayer/GUI/Numbers/VelocityBall2/TextureProgressBar.visible = true
+	$CanvasLayer/GUI/Numbers/VelocityBall2/LineEdit.visible = true
+	$CanvasLayer/GUI/Labels/VelocityLabel2.visible = true
+	$CanvasLayer/GUI/SliderLabels/RadialLabel.visible = false
+	$CanvasLayer/GUI/Sliders/RadialSlider.visible = false
 	
 func load_level_five():
 	force = force_level5
-	$CanvasLayer/VBoxContainer/Force/LineEdit.editable = false
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = str(force)
-	$CanvasLayer/VBoxContainer/Force/TextureProgressBar.value = force
-	$CanvasLayer/MassControl.visible = true
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.editable = false
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
+	$CanvasLayer/GUI/SliderLabels/MassLabel.visible = true
+	$CanvasLayer/GUI/Sliders/MassSlider.visible = true
 	print('force: ', force)
 	
 	var cue = current_level.get_node("Cue")
@@ -311,7 +327,7 @@ func _on_mass_slider_value_changed(value: float) -> void:
 	var collision = second_ball.get_node("CollisionShape2D")
 	var mesh = second_ball.get_node("MeshInstance2D")
 	second_ball.mass = value
-	var mass_slider = get_node("CanvasLayer/MassControl/MassSlider")
+	var mass_slider = get_node("CanvasLayer/GUI/Sliders/MassSlider")
 	var min_scale = 1.0
 	var max_scale = 4.0
 	var scaleValue = remap(value, mass_slider.min_value, mass_slider.max_value, min_scale, max_scale)
@@ -331,11 +347,11 @@ func _on_intro_popup_confirmed() -> void:
 
 func _on_shot_finished_timer_timeout() -> void:
 
-	for ball in get_tree().get_nodes_in_group("balls"):
-		#ball.linear_velocity = Vector2.ZERO
-		#ball.angular_velocity = 0.0
-		#ball.reset_state = true
-		ball.request_reset()
+	#for ball in get_tree().get_nodes_in_group("balls"):
+		##ball.linear_velocity = Vector2.ZERO
+		##ball.angular_velocity = 0.0
+		##ball.reset_state = true
+		#ball.request_reset()
 
 	#ball_stopped()
 	stop_timer_running = false
@@ -350,21 +366,33 @@ func _on_shot_finished_timer_timeout() -> void:
 
 
 func _on_next_try_popup_confirmed() -> void:
-	print('popup confirmed')
-	#reset_state = true
-	#has_moved = false
-	#prepare_next_try()
-	#for ball in get_tree().get_nodes_in_group("balls"):
-		#ball.remove_from_group("balls")
+	for nodes in get_tree().get_nodes_in_group("balls"):
+		nodes.remove_from_group("balls")
+	stop_timer_running = false
+	shot_in_progress = false
+	var newLevel = levels[levelCounter].instantiate()
+	add_child(newLevel)
+	current_level.queue_free()
+	current_level = newLevel
 	
-	$CanvasLayer/VBoxContainer/Force/Button.disabled = false
-	$CanvasLayer/VBoxContainer/Force/LineEdit.text = ""
+	$CanvasLayer/GUI/Buttons/Button.disabled = false
+	
+	if force != 0:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+	else:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+
 	# levelCounter dependent on where the level sits in the order of levels
 	# find a solution that is independent of this
 	if levelCounter == 4:
 		load_level_five()
-	get_tree().paused = false
 	
+	var cue = current_level.get_node("Cue")
+	cue.update_cue_drag(force)
+	cue.update_cue_central($CanvasLayer/GUI/Sliders/PositionSlider.value)
+	cue.update_cue_radial($CanvasLayer/GUI/Sliders/RadialSlider.value)
+	get_tree().paused = false
+
 
 
 func _on_back_pressed() -> void:

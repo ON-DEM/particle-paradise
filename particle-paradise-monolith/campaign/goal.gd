@@ -34,6 +34,7 @@ func _on_timer_timeout() -> void:
 func _on_win_popup_confirmed() -> void:
 	#print("confirmation")
 	get_tree().paused = false
+	get_parent().get_parent().stopTimer()
 	get_parent().get_parent().load_next_level()
 	
 

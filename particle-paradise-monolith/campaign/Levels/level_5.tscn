@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://hrmaxjybauw2"]
 
-[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://goal.tscn" id="1_ki7po"]
-[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://ball.tscn" id="2_321yd"]
-[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://cue.tscn" id="3_1xify"]
-[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://boundary_horizontal.tscn" id="4_kgnlk"]
-[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://boundary_vertical.tscn" id="5_xagau"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://campaign/goal.tscn" id="1_ki7po"]
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://campaign/ball.tscn" id="2_321yd"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_1xify"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_kgnlk"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_xagau"]
 
 [node name="Level5" type="Node2D" unique_id=1643673815]
 
@@ -13,7 +13,7 @@ color = Color(0.009408967, 0.26192588, 0, 1)
 polygon = PackedVector2Array(220, 0, 1720, 0, 1720, 800, 220, 800)
 
 [node name="Goal" parent="." unique_id=1489381621 instance=ExtResource("1_ki7po")]
-position = Vector2(1391, 515)
+position = Vector2(1236, 411)
 
 [node name="CueBall" type="Node" parent="." unique_id=303841185]
 
@@ -53,6 +53,7 @@ rotation = 4.0142574
 scale = Vector2(1, 0.4)
 
 [node name="BoundaryVertical5" parent="." unique_id=1164767093 instance=ExtResource("5_xagau")]
+visible = false
 position = Vector2(1390, 272.99994)
 rotation = 2.268928
 

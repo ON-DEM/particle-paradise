@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c4rjbedyx6hkl"]
 
-[ext_resource type="PackedScene" path="res://campaign/ball.tscn" id="1_hbghi"]
-[ext_resource type="PackedScene" path="res://campaign/goal.tscn" id="2_hn12h"]
-[ext_resource type="PackedScene" path="res://campaign/cue.tscn" id="2_ihfcg"]
-[ext_resource type="PackedScene" path="res://campaign/boundary_horizontal.tscn" id="4_rka8t"]
-[ext_resource type="PackedScene" path="res://campaign/boundary_vertical.tscn" id="5_5hph3"]
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://campaign/ball.tscn" id="1_hbghi"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://campaign/goal.tscn" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="2_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_rka8t"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_5hph3"]
 
 [node name="Level1" type="Node2D" unique_id=1643673815]
 

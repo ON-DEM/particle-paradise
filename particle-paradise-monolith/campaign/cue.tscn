@@ -9,12 +9,43 @@ size = Vector2(200, 10)
 script = ExtResource("1_nykms")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1673684964]
-color = Color(0.67347836, 0.3928902, 0.034521587, 1)
-offset = Vector2(-140, 0)
-polygon = PackedVector2Array(-100, -5, 100, -5, 100, 5, -100, 5)
+color = Color(0.5952582, 0.58370435, 0.5660677, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(1, -10, 5, -10, 7, 15, 3, 17)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=1122624702]
+color = Color(0.37839788, 0.36970085, 0.3523053, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(-5, -10, 1, -10, 3, 17, -6, 15)
+
+[node name="Polygon2D4" type="Polygon2D" parent="." unique_id=1612004218]
+color = Color(0.31705672, 0.3100895, 0.29615527, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(-5, -10, -4, -10, -4.9885902, 14.714809, 3, 17, -6, 15)
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1236501464]
+color = Color(0.16706249, 0.1616413, 0.1507994, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(-13, -25, -13, -26, -13, -27, -13, -28, -12, -29, -10, -30, -9, -30, -7, -29, 0, -10, 0, -9, 0, -8, -1, -7, -4, -7, -5, -8)
+
+[node name="Polygon2D6" type="Polygon2D" parent="." unique_id=2047476965]
+color = Color(0.29651904, 0.2827522, 0.26621297, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(-13, -25, -13, -26, -13, -27, -13, -28, -12, -29, -10, -30, -9, -30, -7, -29, -7, -27, -8, -25, -9, -24, -10, -24, -11, -24)
+
+[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=1327584791]
+color = Color(0.10880666, 0.10301661, 0.09433111, 1)
+offset = Vector2(-30, 0)
+antialiased = true
+polygon = PackedVector2Array(-13, -25, -11, -24, -10, -24, -9, -24, -6, -17, -2, -7, -4, -7, -5, -8, -6, -10)
 
 [node name="Tip" type="Marker2D" parent="." unique_id=242777590]
-position = Vector2(-40, 0)
+position = Vector2(-24, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=579012009]
 visible = false

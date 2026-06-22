@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cjggd8wy7h7bc"]
 
-[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://goal.tscn" id="1_ujo87"]
-[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://ball.tscn" id="2_hvgxt"]
-[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://cue.tscn" id="3_waaef"]
-[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://boundary_horizontal.tscn" id="4_fqog2"]
-[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://boundary_vertical.tscn" id="5_ben3k"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://campaign/goal.tscn" id="1_ujo87"]
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://campaign/ball.tscn" id="2_hvgxt"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_waaef"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_fqog2"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_ben3k"]
 
 [node name="Level4" type="Node2D" unique_id=1643673815]
 
@@ -57,8 +57,8 @@ rotation = 0.5602507
 scale = Vector2(1, 0.48)
 
 [node name="BoundaryVertical6" parent="." unique_id=1181403133 instance=ExtResource("5_ben3k")]
-position = Vector2(1542.0001, 117.000015)
-rotation = 2.131047
+position = Vector2(1541.9999, 103.999985)
+rotation = 2.0385447
 scale = Vector2(1, 0.48)
 
 [node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
