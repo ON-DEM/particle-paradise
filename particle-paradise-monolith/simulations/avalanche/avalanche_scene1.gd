@@ -523,19 +523,6 @@ func update_interpolated(alpha: float):
 	var frame_b = frames[current_frame + 1]
 
 	for pid in pid_to_instance.keys():
-		
-		if not frame_a.has(pid):
-
-			var id = pid_to_instance[pid]
-
-			var hidden := Transform3D()
-			hidden.origin = Vector3(999999, 999999, 999999)
-
-			multimesh.set_instance_transform(id, hidden)
-
-			continue
-
-	for pid in pid_to_instance.keys():
 
 		if not frame_a.has(pid):
 			continue
@@ -553,6 +540,19 @@ func update_interpolated(alpha: float):
 		t.basis = Basis().scaled(Vector3.ONE * size)
 
 		multimesh.set_instance_transform(id, t)
+	
+	for pid in pid_to_instance.keys():
+		
+		if not frame_b.has(pid):
+
+			var id = pid_to_instance[pid]
+
+			var hidden := Transform3D()
+			hidden.origin = Vector3(999999, 999999, 999999)
+
+			multimesh.set_instance_transform(id, hidden)
+
+			continue
 
 
 # ----------------------------
@@ -669,6 +669,10 @@ func _on_concrete_options_item_selected(index: int) -> void:
 	update_cur_sim()
 
 func update_cur_sim():
+	if $CanvasLayer/Correct.visible == true or $"CanvasLayer/Try again".visible == true or $"CanvasLayer/You win".visible == true:
+		$CanvasLayer/Correct.visible = false
+		$"CanvasLayer/Try again".visible = false
+		$"CanvasLayer/You win".visible = false
 	if flat_plane:
 		match level:
 			0:

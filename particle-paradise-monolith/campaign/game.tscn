@@ -347,6 +347,7 @@ theme_override_font_sizes/font_size = 36
 text = "RESET LEVEL"
 
 [node name="SliderLabels" type="VBoxContainer" parent="CanvasLayer/GUI" unique_id=1576906716]
+custom_minimum_size = Vector2(290, 0)
 layout_mode = 2
 
 [node name="PosLabel" type="Label" parent="CanvasLayer/GUI/SliderLabels" unique_id=525382552]
@@ -373,6 +374,7 @@ theme_override_font_sizes/font_size = 36
 text = "MASS"
 
 [node name="Sliders" type="VBoxContainer" parent="CanvasLayer/GUI" unique_id=1110954142]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_constants/separation = 21
 

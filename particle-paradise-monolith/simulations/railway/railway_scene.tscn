@@ -1,8 +1,11 @@
 [gd_scene format=4 uid="uid://ypuslfaveu28"]
 
 [ext_resource type="Script" uid="uid://h7pmmq1ege66" path="res://simulations/railway/railway_scene.gd" id="1_6cwmw"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="2_ibiv2"]
+[ext_resource type="Environment" uid="uid://bdmutsh6pr2bm" path="res://simulations/railway/default.tres" id="2_nodmk"]
 [ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="2_w6vnj"]
 [ext_resource type="Texture2D" uid="uid://b3ehu3xrcm35k" path="res://simulations/menu/Untitled design.png" id="3_bvx25"]
+[ext_resource type="Texture2D" uid="uid://b8mrtej5h6ook" path="res://people/assets/hourglassradius.png" id="5_37voy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yq2li"]
 disable_fog = true
@@ -19,24 +22,25 @@ height = 2.0
 transform_format = 1
 mesh = SubResource("SphereMesh_2wdq2")
 
-[sub_resource type="Environment" id="Environment_sj5fi"]
-background_mode = 1
-background_color = Color(0.6218859, 0.7481632, 0.84465784, 1)
-sky_rotation = Vector3(0, 1.548107, 0)
-ambient_light_source = 3
-ambient_light_energy = 2.05
-reflected_light_source = 2
-glow_intensity = 0.0
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0.20784314, 0.28235295, 0.039215688, 1)
-fog_density = 1.0
-fog_sky_affect = 0.0
-fog_depth_begin = 0.0
-fog_depth_end = 12.0
-adjustment_brightness = 0.46
-adjustment_contrast = 2.1
-adjustment_saturation = 0.58
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37voy"]
+shader = ExtResource("2_ibiv2")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_nodmk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei526"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_wqgaf"]
 font = ExtResource("2_w6vnj")
@@ -383,6 +387,12 @@ albedo_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
 metallic = 0.65
 roughness = 0.35
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nodmk"]
+disable_fog = true
+albedo_color = Color(2.0214916e-06, 0.8377199, 0.23296317, 1)
+metallic = 0.65
+roughness = 0.35
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpu28"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_gcq6w"]
@@ -416,7 +426,50 @@ shadow_mesh = SubResource("ArrayMesh_gcq6w")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37voy"]
 disable_fog = true
-albedo_color = Color(0.859898, 0.6319627, 1.540184e-06, 1)
+albedo_color = Color(0.93894035, 0.2536482, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nodmk"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 3, 5)
+gravity = Vector3(0, -3, 0)
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nk27"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+disable_fog = true
+albedo_color = Color(0.67058825, 0.72156864, 0.7647059, 0.19607843)
+billboard_mode = 2
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_wosye"]
+material = SubResource("StandardMaterial3D_5nk27")
+shape = 0
+size = 0.005
+section_length = 0.02
+
+[sub_resource type="Curve" id="Curve_0vih0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.50246304, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aow3o"]
+curve = SubResource("Curve_0vih0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_atyfm"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 0, 5)
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_aow3o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m86hf"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0, 0, 0.3372549)
+albedo_texture = ExtResource("5_37voy")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ypkw2"]
+material = SubResource("StandardMaterial3D_m86hf")
+size = Vector2(0.2, 0.2)
 
 [node name="RailwayScene" type="Node3D" unique_id=54483624]
 script = ExtResource("1_6cwmw")
@@ -425,12 +478,12 @@ script = ExtResource("1_6cwmw")
 multimesh = SubResource("MultiMesh_2wdq2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1493575597]
-transform = Transform3D(0.85059094, -0.3751435, 0.3684595, 0, 0.7007226, 0.71343386, -0.52582794, -0.6068405, 0.59602827, 0, 0, 0)
+transform = Transform3D(0.905139, 0.30329219, -0.29788837, 0.041336387, 0.63461167, 0.77172506, 0.42310154, -0.7108321, 0.56187475, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=265712836]
-environment = SubResource("Environment_sj5fi")
+environment = ExtResource("2_nodmk")
 
 [node name="Particles" type="Node" parent="." unique_id=987757567]
 
@@ -438,7 +491,69 @@ environment = SubResource("Environment_sj5fi")
 one_shot = true
 autostart = true
 
+[node name="Welcome" type="CanvasLayer" parent="." unique_id=1546053344]
+
+[node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1378492856]
+material = SubResource("ShaderMaterial_37voy")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("CameraTexture_nodmk")
+
+[node name="Correct" type="PanelContainer" parent="Welcome" unique_id=1084539831]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -29.0
+offset_right = 67.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_ei526")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Welcome/Correct" unique_id=515671500]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=1082212504]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_w6vnj")
+theme_override_font_sizes/font_size = 64
+text = "WELCOME TO STAY ON TRACK!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=2133772393]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_w6vnj")
+theme_override_font_sizes/font_size = 36
+text = "YOUR GOAL IS TO GET THE WHEEL TO STOP JUST BEFORE THE END OF THE TRACK.
+
+PICK ONE OF THREE SANDS AND SEE HOW THEY APPLY DIFFERENT LEVELS OF FRICTION TO THE WHEEL.
+YOU MAY FIND YOU NEED A DIFFERENT AMOUNT OF FRICTION FOR EACH ENVIRONMENT."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Welcome/Correct/CenterContainer" unique_id=218857757]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Okay" type="Button" parent="Welcome/Correct/CenterContainer/HBoxContainer" unique_id=1627113834]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_w6vnj")
+theme_override_font_sizes/font_size = 48
+text = "OKAY"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
+visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
 offset_right = 1920.0
@@ -646,11 +761,11 @@ icon = ExtResource("3_bvx25")
 icon_alignment = 1
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9762025, 0.8844882, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.499, 0.884, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1948988531]
 shape = SubResource("SphereShape3D_wqgaf")
-spring_length = 4.0
+spring_length = 4.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1069047184]
 transform = Transform3D(1, 0, 0, 0, 0.99115777, 0.1326889, 0, -0.1326889, 0.99115777, 0, 0, 0)
@@ -682,19 +797,47 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2f22d")
 [node name="RAIL_01" type="Node3D" parent="." unique_id=1726822986]
 
 [node name="Rail" type="MeshInstance3D" parent="RAIL_01" unique_id=44069319]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51877606, -0.009, 0)
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 1, -0.25631803, -0.009, 0)
 mesh = SubResource("ArrayMesh_2f22d")
 surface_material_override/0 = SubResource("StandardMaterial3D_bvx25")
+
+[node name="Rail2" type="MeshInstance3D" parent="RAIL_01" unique_id=1401692729]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 1, 1.963466, -0.009, 0)
+mesh = SubResource("ArrayMesh_2f22d")
+surface_material_override/0 = SubResource("StandardMaterial3D_nodmk")
 
 [node name="BUFFER_01" type="Node3D" parent="." unique_id=902147342]
 
 [node name="BufferStop" type="MeshInstance3D" parent="BUFFER_01" unique_id=847075096]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.009, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011, -0.009, 0)
 mesh = SubResource("ArrayMesh_ibiv2")
 surface_material_override/0 = SubResource("StandardMaterial3D_37voy")
 
+[node name="RAIL_02" type="Node3D" parent="." unique_id=1061060993]
+visible = false
+
+[node name="Rain" type="GPUParticles3D" parent="RAIL_02" unique_id=107948532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.0529323, 0)
+cast_shadow = 0
+amount = 2000
+lifetime = 2.0
+preprocess = 2.0
+visibility_aabb = AABB(-8, -10, -8, 16, 16, 16)
+process_material = SubResource("ParticleProcessMaterial_nodmk")
+draw_pass_1 = SubResource("RibbonTrailMesh_wosye")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="RAIL_02" unique_id=1076916748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006344676, 0.5690937)
+amount = 800
+lifetime = 3.0
+preprocess = 2.0
+process_material = SubResource("ParticleProcessMaterial_atyfm")
+draw_pass_1 = SubResource("PlaneMesh_ypkw2")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="gui_input" from="CanvasLayer/Container" to="." method="_on_container_gui_input"]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/Options" to="." method="_on_options_item_selected"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/Correct/CenterContainer/HBoxContainer/Next Level" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="CanvasLayer/Correct/CenterContainer/HBoxContainer/Stay" to="." method="_on_stay_pressed"]

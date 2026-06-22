@@ -2,11 +2,53 @@ extends Node3D
 
 @export var particle_scene: PackedScene
 
-const clean_pit_mfr_10_rs_0 = "res://simulations/data/railway/RailwayTrack_clean_pit_mfr_10_rs_0.bin"
+const clean_pit_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_pit_mfr_15_rs_80.bin"
+const clean_river_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_river_mfr_15_rs_80.bin"
+const clean_sea_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_sea_mfr_15_rs_80.bin"
+
+const wet_pit_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_pit_mfr_25_rs_40.bin"
+const wet_river_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_river_mfr_25_rs_40.bin"
+const wet_sea_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_sea_mfr_25_rs_40.bin"
+
+const leaves_pit_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_pit_mfr_100_rs_70.bin"
+const leaves_river_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_river_mfr_100_rs_70.bin"
+const leaves_sea_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_sea_mfr_100_rs_70.bin"
 
 const SIM_CONFIGS = {
-	"clean_pit_mfr_10_rs_0": {
-		"file": clean_pit_mfr_10_rs_0,
+	"clean_pit_mfr_15_rs_80": {
+		"file": clean_pit_mfr_15_rs_80,
+		"geometry": []
+	},
+	"clean_river_mfr_15_rs_80": {
+		"file": clean_river_mfr_15_rs_80,
+		"geometry": []
+	},
+	"clean_sea_mfr_15_rs_80": {
+		"file": clean_sea_mfr_15_rs_80,
+		"geometry": []
+	},
+	"wet_pit_mfr_25_rs_40": {
+		"file": wet_pit_mfr_25_rs_40,
+		"geometry": []
+	},
+	"wet_river_mfr_25_rs_40": {
+		"file": wet_river_mfr_25_rs_40,
+		"geometry": []
+	},
+	"wet_sea_mfr_25_rs_40": {
+		"file": wet_sea_mfr_25_rs_40,
+		"geometry": []
+	},
+	"leaves_pit_mfr_100_rs_70": {
+		"file": leaves_pit_mfr_100_rs_70,
+		"geometry": []
+	},
+	"leaves_river_mfr_100_rs_70": {
+		"file": leaves_river_mfr_100_rs_70,
+		"geometry": []
+	},
+	"leaves_sea_mfr_100_rs_70": {
+		"file": leaves_sea_mfr_100_rs_70,
 		"geometry": []
 	},
 }
@@ -57,7 +99,7 @@ func load_simulation(sim_name: String):
 	load_wheel_binary(wheel_path)
 	smooth_wheel_frames()
 
-@onready var data_path = "clean_pit_mfr_10_rs_0"
+@onready var data_path = "clean_pit_mfr_15_rs_80"
 
 const FPS := 10.0
 
@@ -217,7 +259,9 @@ func smooth_wheel_frames():
 	var smoothed: Array[float]
 
 	for i in range(wheel_frames.size()):
-
+		if i > wheel_frames.size() - 3:
+			smoothed.append(wheel_frames[i])
+			continue
 		var prev = wheel_frames[max(i - 1, 0)]
 		var curr = wheel_frames[i]
 		var next = wheel_frames[min(i + 1, wheel_frames.size() - 1)]
@@ -483,28 +527,20 @@ func reset_simulation():
 		#wheel_rotation = 0.0
 
 func end_reached():
+	print(wheel.position.x)
 	var cur_sim = data_path
 	
 	#Update to check for correct
 	match level:
 		0:
-			if cur_sim == "CYLINDER_G0_DZ05":
+			if cur_sim == "clean_pit_mfr_15_rs_80":
 				$CanvasLayer/Correct.visible = true
 		1:
-			if cur_sim == "CYLINDER_G0_DZ10":
+			if cur_sim == "wet_sea_mfr_25_rs_40":
 				$CanvasLayer/Correct.visible = true
 		2:
 			if cur_sim == "CYLINDER_G0_DZ15":
 				$CanvasLayer/Correct.visible = true
-		3:
-			if cur_sim == "TET_G30_DZ05":
-				$CanvasLayer/Correct.visible = true
-		4:
-			if cur_sim == "WALL_G30_A45_DZ10":
-				$CanvasLayer/Correct.visible = true
-		5:
-			if cur_sim == "WALL_G30_A0_DZ15":
-				$"CanvasLayer/You win".visible = true
 
 	if $CanvasLayer/Correct.visible == false and $"CanvasLayer/You win".visible == false:
 		$"CanvasLayer/Try again".visible = true
@@ -523,40 +559,44 @@ func _on_play_pressed() -> void:
 
 func _on_options_item_selected(index: int) -> void:
 	playing = false
+	if $CanvasLayer/Correct.visible == true or $"CanvasLayer/Try again".visible == true or $"CanvasLayer/You win".visible == true:
+		$CanvasLayer/Correct.visible = false
+		$"CanvasLayer/Try again".visible = false
+		$"CanvasLayer/You win".visible = false
 
 	match level:
 		0:
 			match index:
 				0:
-					data_path = "clean_pit_mfr_10_rs_0"
+					data_path = "clean_pit_mfr_15_rs_80"
 
 				1: # Cylinders
-					data_path = "CYLINDER_G0_DZ05"
+					data_path = "clean_river_mfr_15_rs_80"
 
 				2: # Tetrahedron
-					data_path = "TET_G0_DZ05"
+					data_path = "clean_sea_mfr_15_rs_80"
 
 		1:
 			match index:
 				0:
-					data_path = "BASELINE_G0"
+					data_path = "wet_pit_mfr_25_rs_40"
 
 				1: # Cylinders
-					data_path = "CYLINDER_G0_DZ10"
+					data_path = "wet_river_mfr_25_rs_40"
 
 				2: # Tetrahedron
-					data_path = "TET_G0_DZ10"
+					data_path = "wet_sea_mfr_25_rs_40"
 
 		2:
 			match index:
 				0:
-					data_path = "BASELINE_G0"
+					data_path = "leaves_pit_mfr_100_rs_70"
 
 				1: # Cylinders
-					data_path = "CYLINDER_G0_DZ15"
+					data_path = "leaves_river_mfr_100_rs_70"
 
 				2: # Tetrahedron
-					data_path = "TET_G0_DZ15"
+					data_path = "leaves_sea_mfr_100_rs_70"
 
 		3:
 			match index:
@@ -601,16 +641,22 @@ func _on_next_level_pressed() -> void:
 	reset_simulation()
 	level += 1
 	match level:
+		0:
+			load_simulation(data_path)
 		1:
-			load_simulation("BASELINE_G0")
+			load_simulation("wet_pit_mfr_25_rs_40")
+			$WorldEnvironment.environment = load("res://simulations/railway/rain.tres")
+			var tween = get_tree().create_tween()
+			tween.tween_property($DirectionalLight3D, "light_energy", 0.5, 0.5).set_trans(Tween.TRANS_SINE)
+			await tween.finished
+			$RAIL_02.visible = true
 		2:
-			load_simulation("BASELINE_G0")
-		3:
-			load_simulation("BASELINE_G30")
-		4:
-			load_simulation("BASELINE_G30")
-		5:
-			load_simulation("BASELINE_G30")
+			load_simulation("leaves_pit_mfr_100_rs_70")
+			$WorldEnvironment.environment = load("res://simulations/railway/default.tres")
+			var tween = get_tree().create_tween()
+			tween.tween_property($DirectionalLight3D, "light_energy", 1.0, 0.5).set_trans(Tween.TRANS_SINE)
+			await tween.finished
+			$RAIL_02.visible = false
 	$CanvasLayer/VBoxContainer/Options.select(0)
 
 func _on_stay_pressed() -> void:
@@ -646,3 +692,8 @@ func _on_container_gui_input(event: InputEvent) -> void:
 
 func _on_back_pressed() -> void:
 	get_parent().levelSelect()
+
+
+func _on_okay_pressed() -> void:
+	$Welcome.visible = false
+	$CanvasLayer.visible = true
