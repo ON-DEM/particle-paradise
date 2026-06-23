@@ -2,17 +2,17 @@ extends Node3D
 
 @export var particle_scene: PackedScene
 
-const clean_pit_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_pit_mfr_15_rs_80.bin"
-const clean_river_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_river_mfr_15_rs_80.bin"
-const clean_sea_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_sea_mfr_15_rs_80.bin"
+const clean_pit_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_pit_mfr_20_rs_70_size_10mm.bin"
+const clean_river_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_river_mfr_20_rs_70_size_10mm.bin"
+const clean_sea_mfr_15_rs_80 = "res://simulations/data/railway/RailwayTrack_clean_sea_mfr_20_rs_70_size_10mm.bin"
 
-const wet_pit_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_pit_mfr_25_rs_40.bin"
-const wet_river_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_river_mfr_25_rs_40.bin"
-const wet_sea_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_sea_mfr_25_rs_40.bin"
+const wet_pit_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_pit_mfr_30_rs_35_size_10mm.bin"
+const wet_river_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_river_mfr_30_rs_35_size_10mm.bin"
+const wet_sea_mfr_25_rs_40 = "res://simulations/data/railway/RailwayTrack_wet_sea_mfr_30_rs_35_size_10mm.bin"
 
-const leaves_pit_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_pit_mfr_100_rs_70.bin"
-const leaves_river_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_river_mfr_100_rs_70.bin"
-const leaves_sea_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_sea_mfr_100_rs_70.bin"
+const leaves_pit_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_pit_mfr_95_rs_70_size_10mm.bin"
+const leaves_river_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_river_mfr_95_rs_70_size_10mm.bin"
+const leaves_sea_mfr_100_rs_70 = "res://simulations/data/railway/RailwayTrack_leaves_sea_mfr_95_rs_70_size_10mm.bin"
 
 const SIM_CONFIGS = {
 	"clean_pit_mfr_15_rs_80": {
@@ -116,7 +116,7 @@ var cameraInputDirection = Vector2.ZERO
 var mouseSensitivity = 0.4
 
 #var wheel_frames = []
-var WHEEL_RADIUS = 0.36
+var WHEEL_RADIUS = 0.18
 var wheel_rotation := 0.0
 var last_wheel_pos := Vector3.ZERO
 
@@ -154,9 +154,9 @@ func _input(event: InputEvent) -> void:
 
 	
 	if event.is_action_pressed("scroll_in"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 4.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 6.0)
 	if event.is_action_pressed("scroll_out"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 4.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 6.0)
 
 
 # ----------------------------
@@ -489,7 +489,19 @@ func update_interpolated(alpha: float):
 	wheel.rotation.z = wheel_rotation
 
 	last_wheel_pos = wheel.position
-	#update_wheel(alpha)
+	
+	for pid in pid_to_instance.keys():
+		
+		if not frame_b.has(pid):
+
+			var id = pid_to_instance[pid]
+
+			var hidden := Transform3D()
+			hidden.origin = Vector3(999999, 999999, 999999)
+
+			multimesh.set_instance_transform(id, hidden)
+
+			continue
 
 
 # ----------------------------
@@ -501,7 +513,7 @@ func debug_particle(pid):
 			print(f, " -> ", frames[f][pid]["pos"])
 
 func reset_simulation():
-
+	$Crash_Notif.visible = false
 	playing = false
 	current_frame = 0
 	accumulator = 0.0
@@ -527,7 +539,6 @@ func reset_simulation():
 		#wheel_rotation = 0.0
 
 func end_reached():
-	print(wheel.position.x)
 	var cur_sim = data_path
 	
 	#Update to check for correct
@@ -535,12 +546,14 @@ func end_reached():
 		0:
 			if cur_sim == "clean_pit_mfr_15_rs_80":
 				$CanvasLayer/Correct.visible = true
+			#else: $Crash_Notif.visible = true
 		1:
 			if cur_sim == "wet_sea_mfr_25_rs_40":
 				$CanvasLayer/Correct.visible = true
 		2:
-			if cur_sim == "CYLINDER_G0_DZ15":
-				$CanvasLayer/Correct.visible = true
+			if cur_sim == "leaves_river_mfr_100_rs_70":
+				$"CanvasLayer/You win".visible = true
+			#else: $Crash_Notif.visible = true
 
 	if $CanvasLayer/Correct.visible == false and $"CanvasLayer/You win".visible == false:
 		$"CanvasLayer/Try again".visible = true
@@ -569,67 +582,43 @@ func _on_options_item_selected(index: int) -> void:
 			match index:
 				0:
 					data_path = "clean_pit_mfr_15_rs_80"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 
 				1: # Cylinders
 					data_path = "clean_river_mfr_15_rs_80"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("9b8565ff")
 
 				2: # Tetrahedron
 					data_path = "clean_sea_mfr_15_rs_80"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("efc189ff")
 
 		1:
 			match index:
 				0:
 					data_path = "wet_pit_mfr_25_rs_40"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 
 				1: # Cylinders
 					data_path = "wet_river_mfr_25_rs_40"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("9b8565ff")
 
 				2: # Tetrahedron
 					data_path = "wet_sea_mfr_25_rs_40"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("efc189ff")
 
 		2:
 			match index:
 				0:
 					data_path = "leaves_pit_mfr_100_rs_70"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 
 				1: # Cylinders
 					data_path = "leaves_river_mfr_100_rs_70"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("9b8565ff")
 
 				2: # Tetrahedron
 					data_path = "leaves_sea_mfr_100_rs_70"
-
-		3:
-			match index:
-				0:
-					data_path = "BASELINE_G30"
-
-				1: # Cylinders
-					data_path = "CYLINDER_G30_DZ05"
-
-				2: # Tetrahedron
-					data_path = "TET_G30_DZ05"
-
-		4:
-			match index:
-				0:
-					data_path = "BASELINE_G30"
-
-				1: # Cylinders
-					data_path = "CYLINDER_G30_DZ10"
-
-				2: # Tetrahedron
-					data_path = "TET_G30_DZ10"
-
-		5:
-			match index:
-				0:
-					data_path = "BASELINE_G30"
-
-				1: # Cylinders
-					data_path = "CYLINDER_G30_DZ15"
-
-				2: # Tetrahedron
-					data_path = "TET_G30_DZ15"
+					$Particles1.multimesh.mesh.material.albedo_color = Color("efc189ff")
 
 	reset_simulation()
 	load_simulation(data_path)
@@ -643,8 +632,10 @@ func _on_next_level_pressed() -> void:
 	match level:
 		0:
 			load_simulation(data_path)
+			$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 		1:
 			load_simulation("wet_pit_mfr_25_rs_40")
+			$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 			$WorldEnvironment.environment = load("res://simulations/railway/rain.tres")
 			var tween = get_tree().create_tween()
 			tween.tween_property($DirectionalLight3D, "light_energy", 0.5, 0.5).set_trans(Tween.TRANS_SINE)
@@ -652,6 +643,7 @@ func _on_next_level_pressed() -> void:
 			$RAIL_02.visible = true
 		2:
 			load_simulation("leaves_pit_mfr_100_rs_70")
+			$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
 			$WorldEnvironment.environment = load("res://simulations/railway/default.tres")
 			var tween = get_tree().create_tween()
 			tween.tween_property($DirectionalLight3D, "light_energy", 1.0, 0.5).set_trans(Tween.TRANS_SINE)
@@ -697,3 +689,7 @@ func _on_back_pressed() -> void:
 func _on_okay_pressed() -> void:
 	$Welcome.visible = false
 	$CanvasLayer.visible = true
+
+
+func _on_buffer_area_area_entered(area: Area3D) -> void:
+	$Crash_Notif.visible = true

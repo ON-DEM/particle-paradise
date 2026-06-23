@@ -846,7 +846,6 @@ one_shot = true
 autostart = true
 
 [node name="Welcome" type="CanvasLayer" parent="." unique_id=1716753966]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1493771949]
 material = SubResource("ShaderMaterial_p45mw")
@@ -909,6 +908,7 @@ theme_override_font_sizes/font_size = 48
 text = "OKAY"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
+visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
 offset_right = 1920.0
