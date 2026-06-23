@@ -8,6 +8,7 @@ extends Node
 
 @onready var avalanche_scene = preload("res://simulations/avalanche/avalanche_scene.tscn")
 @onready var railway_scene = preload("res://simulations/railway/railway_scene.tscn")
+@onready var hourglass_scene = preload("res://simulations/hourglass/hourglass.tscn")
 
 @onready var booth_scene = preload("res://people/booth.tscn")
 
@@ -40,6 +41,12 @@ func avalancheScene():
 
 func railwayScene():
 	var newScene = railway_scene.instantiate()
+	add_child(newScene)
+	curScene.queue_free()
+	curScene = newScene
+
+func hourglassScene():
+	var newScene = hourglass_scene.instantiate()
 	add_child(newScene)
 	curScene.queue_free()
 	curScene = newScene

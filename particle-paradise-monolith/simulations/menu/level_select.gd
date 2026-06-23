@@ -15,7 +15,7 @@ func _on_sta_pressed() -> void:
 	get_parent().railwayScene()
 
 func _on_hou_pressed() -> void:
-	get_parent().avalancheScene()
+	get_parent().hourglassScene()
 
 
 
