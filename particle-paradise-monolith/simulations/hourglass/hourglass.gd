@@ -318,7 +318,7 @@ func _process(delta):
 		if time > 3.0 and time < 4.0:
 			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Green")
 		if time > 4.0 or time < 3.0:
-			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Red")
+			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("White")
 		if str(time).length() < 4:
 			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = str(time) + "0"
 		else:
@@ -454,7 +454,7 @@ func debug_particle(pid):
 
 func reset_simulation():
 	update_time = false
-	$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Red")
+	$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("White")
 	$CanvasLayer/VBoxContainer3/PanelContainer/HourglassTimer.stop()
 	$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = "0.00"
 	playing = false
