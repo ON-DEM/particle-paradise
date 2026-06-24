@@ -1026,6 +1026,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1715943, 0.008847356, 0)
 visible = false
 mesh = SubResource("PlaneMesh_atyfm")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Leaves" unique_id=983240728]
+transform = Transform3D(0.905139, 0.30329219, -0.29788837, 0.041336387, 0.63461167, 0.77172506, 0.42310154, -0.7108321, 0.56187475, 0, 0, 0)
+light_color = Color(0.99999994, 0.85495794, 0.6239461, 1)
+light_energy = 1.237
+shadow_enabled = true
+directional_shadow_max_distance = 30.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="gui_input" from="CanvasLayer/Container" to="." method="_on_container_gui_input"]

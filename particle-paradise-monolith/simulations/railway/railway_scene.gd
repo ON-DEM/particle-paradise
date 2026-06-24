@@ -664,11 +664,12 @@ func _on_next_level_pressed() -> void:
 		2:
 			load_simulation("leaves_pit_mfr_100_rs_70")
 			$Particles1.multimesh.mesh.material.albedo_color = Color("d59947")
-			$WorldEnvironment.environment = load("res://simulations/railway/default.tres")
+			$WorldEnvironment.environment = load("res://simulations/railway/leaves.tres")
 			var tween = get_tree().create_tween()
 			tween.tween_property($DirectionalLight3D, "light_energy", 1.0, 0.5).set_trans(Tween.TRANS_SINE)
 			await tween.finished
 			$RAIL_02.visible = false
+			$DirectionalLight3D.visible = false
 			$Leaves.visible = true
 	$CanvasLayer/VBoxContainer/Options.select(0)
 
