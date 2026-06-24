@@ -168,6 +168,26 @@ func _ready():
 	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
+	$Leaves/MultiMeshInstance3D3.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D3.multimesh)
+	$Leaves/MultiMeshInstance3D2.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D2.multimesh)
+	$Leaves/MultiMeshInstance3D.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D.multimesh)
+	
+func enable_colors_on_existing_multimesh(multimesh):
+	var old_mm = multimesh
+
+	var new_mm = MultiMesh.new()
+	new_mm.mesh = old_mm.mesh
+	new_mm.transform_format = old_mm.transform_format
+	new_mm.use_colors = true
+	new_mm.instance_count = old_mm.instance_count
+
+	for i in range(old_mm.instance_count):
+		new_mm.set_instance_transform(i, old_mm.get_instance_transform(i))
+
+		var hue = fmod(randf_range(0.0, 0.3) + 0.8, 1.0)
+		new_mm.set_instance_color(i,Color.from_hsv(hue, 0.624, 1.898, 1.0))
+
+	return new_mm
 #
 #func update_wheel(alpha: float):
 #
@@ -649,6 +669,7 @@ func _on_next_level_pressed() -> void:
 			tween.tween_property($DirectionalLight3D, "light_energy", 1.0, 0.5).set_trans(Tween.TRANS_SINE)
 			await tween.finished
 			$RAIL_02.visible = false
+			$Leaves.visible = true
 	$CanvasLayer/VBoxContainer/Options.select(0)
 
 func _on_stay_pressed() -> void:
@@ -659,7 +680,7 @@ func _on_stay_pressed() -> void:
 
 
 func _on_main_menu_pressed() -> void:
-	get_parent().mainMenu()
+	get_parent().levelSelect()
 
 
 func _on_container_gui_input(event: InputEvent) -> void:
