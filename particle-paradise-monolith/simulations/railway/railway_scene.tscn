@@ -17,6 +17,8 @@ rim = 0.02
 material = SubResource("StandardMaterial3D_yq2li")
 radius = 1.0
 height = 2.0
+radial_segments = 8
+rings = 4
 
 [sub_resource type="MultiMesh" id="MultiMesh_2wdq2"]
 transform_format = 1
@@ -239,6 +241,42 @@ expand_margin_left = 6.0
 expand_margin_top = 2.0
 expand_margin_right = 6.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5rpv"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lljgi"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnstv"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibiv2"]
 content_margin_left = 4.0
@@ -639,6 +677,7 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_a5rpv")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/Correct" unique_id=1596210575]
 layout_mode = 2
@@ -686,6 +725,7 @@ offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_lljgi")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/You win" unique_id=865711989]
 layout_mode = 2
@@ -732,6 +772,7 @@ offset_right = 67.5
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fnstv")
 
 [node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/Try again" unique_id=823151361]
 layout_mode = 2
@@ -857,6 +898,7 @@ draw_pass_1 = SubResource("PlaneMesh_ypkw2")
 
 [node name="Crash_Notif" type="Node3D" parent="." unique_id=650305732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.113363, 0.505942, 0)
+visible = false
 
 [node name="Label3D" type="Label3D" parent="Crash_Notif" unique_id=303788228]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0094201565, -0.00904572, 0)

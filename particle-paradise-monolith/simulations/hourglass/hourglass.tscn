@@ -711,7 +711,7 @@ tracks/4/path = NodePath("HourGlass_pit_007:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.01, 1.44),
+"times": PackedFloat32Array(0, 1.01, 1.46),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -723,10 +723,24 @@ tracks/5/path = NodePath("HourGlassCaps:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.01, 1.44),
+"times": PackedFloat32Array(0, 1.01, 1.46),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.01),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"timer_start"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_sf5hq"]
@@ -752,7 +766,7 @@ tracks/1/path = NodePath("HourGlass_pit_004:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.850035, 1.245),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -764,7 +778,7 @@ tracks/2/path = NodePath("HourGlass_pit_005:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.850035, 1.245),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -776,7 +790,7 @@ tracks/3/path = NodePath("HourGlass_pit_006:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.850035, 1.245),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -788,7 +802,7 @@ tracks/4/path = NodePath("HourGlass_pit_007:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.850035, 1.245),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -800,10 +814,115 @@ tracks/5/path = NodePath("HourGlassCaps:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.0030502528, 0.8530853, 1.2512311),
+"times": PackedFloat32Array(0.0030502528, 0.8530853, 1.245),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.85),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"timer_start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wr22k"]
+resource_name = "HourglassFlip_3"
+length = 2.0
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HourGlass_pit_003:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HourGlass_pit_004:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.850035, 1.23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HourGlass_pit_005:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.850035, 1.23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HourGlass_pit_006:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.850035, 1.23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HourGlass_pit_007:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.850035, 1.23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HourGlassCaps:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0030502528, 0.8530853, 1.23),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.85),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"timer_start"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_jx2df"]
@@ -825,6 +944,7 @@ tracks/0/keys = {
 _data = {
 &"HourglassFlip": SubResource("Animation_cfhwu"),
 &"HourglassFlip_2": SubResource("Animation_sf5hq"),
+&"HourglassFlip_3": SubResource("Animation_wr22k"),
 &"RESET": SubResource("Animation_jx2df")
 }
 
@@ -846,6 +966,7 @@ one_shot = true
 autostart = true
 
 [node name="Welcome" type="CanvasLayer" parent="." unique_id=1716753966]
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1493771949]
 material = SubResource("ShaderMaterial_p45mw")
@@ -888,7 +1009,7 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_nmree")
 theme_override_font_sizes/font_size = 36
 text = "YOUR GOAL IS FOR THE SAND TO MAKE IT THROUGH TO THE OTHER SIDE OF THE GLASS
-BETWEEN 0.3 AND 0.5 SECONDS.
+BETWEEN 2.5 AND 4.0 SECONDS WITHOUT IT JAMMING.
 
 THERE ARE THREE DIFFERENT KINDS OF SAND, TRY CHANGING THE HOURGLASS SIZE
 TO SEE HOW IT FLOWS AND JAMS."
@@ -908,7 +1029,6 @@ theme_override_font_sizes/font_size = 48
 text = "OKAY"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
-visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
 offset_right = 1920.0
@@ -1181,6 +1301,47 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_0nsgf")
 icon = ExtResource("4_y5dl2")
 icon_alignment = 1
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer" unique_id=1380748530]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 71.0
+offset_top = -118.0
+offset_right = 554.0
+offset_bottom = 118.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer3" unique_id=1565040038]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nmree")
+theme_override_font_sizes/font_size = 48
+text = "TIMER"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer3" unique_id=1066164934]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4x6r")
+
+[node name="HourglassTimer" type="Timer" parent="CanvasLayer/VBoxContainer3/PanelContainer" unique_id=196855022]
+wait_time = 10.0
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/VBoxContainer3/PanelContainer" unique_id=1965853609]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nmree")
+theme_override_font_sizes/font_size = 48
+text = "0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer3" unique_id=1261062724]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nmree")
+theme_override_font_sizes/font_size = 48
+text = "GOAL TIME: 3.00-4.00"
+horizontal_alignment = 1
+
 [node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05219692, 0.5991478, 0.048556536)
 
@@ -1252,6 +1413,7 @@ mesh = SubResource("BoxMesh_cfhwu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1019953735]
 libraries/ = SubResource("AnimationLibrary_jx2df")
+speed_scale = 0.5
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]

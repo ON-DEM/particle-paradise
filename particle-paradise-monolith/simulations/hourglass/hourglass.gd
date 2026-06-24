@@ -6,7 +6,7 @@ const AVALANCHE_INITIAL_PARTICLES = "res://simulations/data/avalanche/avalancheI
 
 const HourGlass_pit_03 = "res://simulations/data/hourglass/HourGlass_pit_0.03.bin"
 const HourGlass_pit_04 = "res://simulations/data/hourglass/HourGlass_pit_0.04.bin"
-const HourGlass_pit_05 = "res://simulations/data/hourglass/HourGlass_pit_0.05.bin"
+const HourGlass_pit_05 = "res://simulations/data/hourglass/HourGlass_pit_0.05_extended.bin"
 const HourGlass_pit_06 = "res://simulations/data/hourglass/HourGlass_pit_0.06.bin"
 const HourGlass_pit_07 = "res://simulations/data/hourglass/HourGlass_pit_0.07.bin"
 
@@ -139,7 +139,7 @@ func load_simulation(sim_name: String):
 
 @export var data_path = "HourGlass_pit_03"
 
-const FPS := 25.0
+const FPS := 12.5
 
 var frames := []                  # frames[frame][pid] = {pos, size}
 var particle_nodes := {}         # pid -> Node3D
@@ -307,11 +307,22 @@ func process_spawn_queue(frame_data: Dictionary):
 
 
 var playing := false
-
+var update_time := false
+var time = 0.00
 # ----------------------------
 # MAIN LOOP
 # ----------------------------
 func _process(delta):
+	if update_time:
+		time = snappedf(10.0 - $CanvasLayer/VBoxContainer3/PanelContainer/HourglassTimer.time_left, 0.01)
+		if time > 3.0 and time < 4.0:
+			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Green")
+		if time > 4.0 or time < 3.0:
+			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Red")
+		if str(time).length() < 4:
+			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = str(time) + "0"
+		else:
+			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = str(time)
 
 	cameraPivot.rotation.x -= cameraInputDirection.y * delta
 	cameraPivot.rotation.x = clamp(cameraPivot.rotation.x, -PI / 3.0, PI / 3.0)
@@ -350,19 +361,23 @@ func _process(delta):
 	update_interpolated(accumulator / frame_time)
 
 func end_reached():
+	for pid in pid_to_instance.keys():
+		if frames[current_frame][pid]["pos"].y > 0.2:
+			print(pid)
+	update_time = false
 	var cur_sim = data_path
 	
 	#Update to check for correct
 	if flat_plane:
 		match level:
 			0:
-				if cur_sim == "HourGlass_pit_07":
+				if cur_sim == "HourGlass_pit_06":
 					$CanvasLayer/Correct.visible = true
 			1:
-				if cur_sim == "HourGlass_river_06":
+				if cur_sim == "HourGlass_river_04" or cur_sim == "HourGlass_river_05":
 					$CanvasLayer/Correct.visible = true
 			2:
-				if cur_sim == "HourGlass_sea_06":
+				if cur_sim == "HourGlass_sea_04" or cur_sim == "HourGlass_sea_05":
 					$"CanvasLayer/You win".visible = true
 
 	if $CanvasLayer/Correct.visible == false and $"CanvasLayer/You win".visible == false:
@@ -438,7 +453,10 @@ func debug_particle(pid):
 			print(f, " -> ", frames[f][pid]["pos"])
 
 func reset_simulation():
-
+	update_time = false
+	$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Red")
+	$CanvasLayer/VBoxContainer3/PanelContainer/HourglassTimer.stop()
+	$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = "0.00"
 	playing = false
 	current_frame = 0
 	accumulator = 0.0
@@ -462,8 +480,10 @@ func _on_play_pressed() -> void:
 	reset_simulation()
 	if level == 0:
 		$AnimationPlayer.play("HourglassFlip")
-	else:
+	elif level == 1:
 		$AnimationPlayer.play("HourglassFlip_2")
+	elif level == 2:
+		$AnimationPlayer.play("HourglassFlip_3")
 	playing = true
 	if $CanvasLayer/Correct.visible == true or $"CanvasLayer/Try again".visible == true or $"CanvasLayer/You win".visible == true:
 		$CanvasLayer/Correct.visible = false
@@ -613,3 +633,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 func _on_okay_pressed() -> void:
 	$Welcome.visible = false
 	$CanvasLayer.visible = true
+
+func timer_start():
+	$CanvasLayer/VBoxContainer3/PanelContainer/HourglassTimer.start()
+	update_time = true
