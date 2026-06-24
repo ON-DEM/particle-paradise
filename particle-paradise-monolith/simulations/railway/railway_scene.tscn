@@ -934,7 +934,6 @@ shape = SubResource("BoxShape3D_nodmk")
 
 [node name="RAIL_02" type="Node3D" parent="." unique_id=1061060993]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009444311, 0)
-visible = false
 
 [node name="Rain" type="GPUParticles3D" parent="RAIL_02" unique_id=107948532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.0529323, 0)
@@ -942,6 +941,7 @@ cast_shadow = 0
 amount = 2000
 lifetime = 2.0
 interpolate = false
+fract_delta = false
 visibility_aabb = AABB(-8, -10, -8, 16, 16, 16)
 process_material = SubResource("ParticleProcessMaterial_nodmk")
 draw_pass_1 = SubResource("RibbonTrailMesh_wosye")
@@ -951,6 +951,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.006344676, 0.5690937)
 amount = 800
 lifetime = 3.0
 interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_atyfm")
 draw_pass_1 = SubResource("PlaneMesh_ypkw2")
 
@@ -985,11 +986,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80718684, 0.15623826, 0)
 multimesh = SubResource("MultiMesh_0vih0")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Leaves" unique_id=1139865999]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93445814, 2.6808915, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93445814, 2.0236802, 0)
 sorting_offset = 10.0
 cast_shadow = 0
-amount = 400
-lifetime = 20.0
+amount = 50
+lifetime = 10.0
+interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_aow3o")
 draw_pass_1 = ExtResource("7_5nk27")
 
