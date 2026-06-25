@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://7pt4mr5qnhfs"]
-
-[ext_resource type="PackedScene" uid="uid://b2svtsmoykxdd" path="res://game_exhibit_mesh.blend" id="1_4u1lu"]
-
-[node name="game_exhibit_mesh" unique_id=692512743 instance=ExtResource("1_4u1lu")]

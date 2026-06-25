@@ -670,7 +670,18 @@ func _on_next_level_pressed() -> void:
 			await tween.finished
 			$RAIL_02.visible = false
 			$DirectionalLight3D.visible = false
+			#$Leaves/MultiMeshInstance3D.material_override = load("res://simulations/railway/fade_in.tres")
+			#$Leaves/MultiMeshInstance3D2.material_override = load("res://simulations/railway/fade_in.tres")
+			#$Leaves/MultiMeshInstance3D3.material_override = load("res://simulations/railway/fade_in.tres")
 			$Leaves.visible = true
+			#var tween2 = get_tree().create_tween()
+			#tween2.tween_property($Leaves/MultiMeshInstance3D, "material_override:albedo_color", Color("5a330056"), 0.3).set_trans(Tween.TRANS_SINE)
+			#await tween2.finished
+			#$Leaves/MultiMeshInstance3D.material_override = null
+			#$Leaves/MultiMeshInstance3D2.material_override = null
+			#$Leaves/MultiMeshInstance3D3.material_override = null
+			
+			
 	$CanvasLayer/VBoxContainer/Options.select(0)
 
 func _on_stay_pressed() -> void:

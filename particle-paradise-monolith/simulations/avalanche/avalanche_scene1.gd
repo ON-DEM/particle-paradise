@@ -2,8 +2,6 @@ extends Node3D
 
 @export var particle_scene: PackedScene
 
-const AVALANCHE_INITIAL_PARTICLES = "res://simulations/data/avalanche/avalancheInitialParticles.bin"
-
 const BASELINE_G0 = "res://simulations/data/avalanche/BaseLine_g0.bin"
 const BASELINE_G30 = "res://simulations/data/avalanche/BaseLine_g30.bin"
 
@@ -40,11 +38,6 @@ const WALL_G30_A45_DZ10 = "res://simulations/data/avalanche/Wall_g30_a45_dz1.0.b
 const WALL_G30_A45_DZ15 = "res://simulations/data/avalanche/Wall_g30_a45_dz1.5.bin"
 
 const SIM_CONFIGS = {
-
-	"AVALANCHE_INITIAL_PARTICLES": {
-		"file": AVALANCHE_INITIAL_PARTICLES,
-		"geometry": ["G0_SLOPE", "HOUSE_G0"]
-	},
 
 	"BASELINE_G0": {
 		"file": BASELINE_G0,
