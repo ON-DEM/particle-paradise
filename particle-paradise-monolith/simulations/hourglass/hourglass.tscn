@@ -966,7 +966,6 @@ one_shot = true
 autostart = true
 
 [node name="Welcome" type="CanvasLayer" parent="." unique_id=1716753966]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1493771949]
 material = SubResource("ShaderMaterial_p45mw")
@@ -1029,6 +1028,7 @@ theme_override_font_sizes/font_size = 48
 text = "OKAY"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1827876935]
+visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
 offset_right = 1920.0
@@ -1340,6 +1340,23 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nmree")
 theme_override_font_sizes/font_size = 48
 text = "GOAL TIME: 3.00-4.00"
+horizontal_alignment = 1
+
+[node name="CurSand" type="Label" parent="CanvasLayer" unique_id=1220056981]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -84.0
+offset_right = 280.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_nmree")
+theme_override_font_sizes/font_size = 48
+text = "CURRENT SAND: PIT SAND"
 horizontal_alignment = 1
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]

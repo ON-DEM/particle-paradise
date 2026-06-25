@@ -509,9 +509,11 @@ func _on_next_level_pressed() -> void:
 		1:
 			load_simulation("HourGlass_river_03")
 			$Particles1.multimesh.mesh.material.albedo_color = Color("9b8565ff")
+			$CanvasLayer/CurSand.text = "CURRENT SAND: RIVER SAND"
 		2:
 			load_simulation("HourGlass_sea_03")
 			$Particles1.multimesh.mesh.material.albedo_color = Color("efc189ff")
+			$CanvasLayer/CurSand.text = "CURRENT SAND: SEA SAND"
 
 	$CanvasLayer/VBoxContainer/Options.select(0)
 
