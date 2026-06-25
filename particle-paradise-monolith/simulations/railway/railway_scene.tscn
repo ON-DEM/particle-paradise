@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="2_w6vnj"]
 [ext_resource type="Texture2D" uid="uid://b3ehu3xrcm35k" path="res://simulations/menu/Untitled design.png" id="3_bvx25"]
 [ext_resource type="Texture2D" uid="uid://b8mrtej5h6ook" path="res://people/assets/hourglassradius.png" id="5_37voy"]
-[ext_resource type="Material" uid="uid://jwa1pix1pq24" path="res://simulations/railway/fade_in.tres" id="7_0vih0"]
 [ext_resource type="ArrayMesh" uid="uid://bi7j0acfc7ku1" path="res://simulations/railway/leaf_mesh.tres" id="7_5nk27"]
 [ext_resource type="ArrayMesh" uid="uid://c3fqrqvv5qkjx" path="res://simulations/railway/leaf_mesh2.tres" id="8_wosye"]
 
@@ -940,7 +939,6 @@ visible = false
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Leaves" unique_id=1420505481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80718684, 0.16348514, 0)
-material_override = ExtResource("7_0vih0")
 multimesh = SubResource("MultiMesh_5nk27")
 
 [node name="MultiMeshInstance3D2" type="MultiMeshInstance3D" parent="Leaves" unique_id=263996038]
@@ -995,10 +993,6 @@ size = Vector3(2.9394531, 0.20678711, 0.064453125)
 [node name="GPUParticlesCollisionBox3D4" type="GPUParticlesCollisionBox3D" parent="Leaves" unique_id=1304016814]
 transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364816, 0, -0.17364816, 0.98480767, 1.0215101, -0.07421553, -0.026898295)
 size = Vector3(2.9394531, 0.20678711, 0.064453125)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Leaves" unique_id=2009923504]
-transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0.6283155, 0.18057775, 0)
-mesh = ExtResource("7_5nk27")
 
 [node name="RailPlaceholder" type="MeshInstance3D" parent="Leaves" unique_id=632997911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8839934, 0.15161261, 0)

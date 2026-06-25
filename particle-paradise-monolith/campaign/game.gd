@@ -46,7 +46,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	print('lower limit: ', lowerLimit)
 	 
 	for c in new_text:
-		if c.is_valid_int():  # keeps only digits
+		if c in "0123456789":
 			filtered += c
 
 	## Avoid recursion loop
@@ -64,7 +64,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
 		$CanvasLayer/GUI/Numbers/Force/LineEdit.caret_column = 3
 		
-	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
+	#$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = force
 	
 	var cue = current_level.get_node("Cue")
 	cue.update_cue_drag(force)
@@ -74,8 +74,8 @@ func _on_button_pressed() -> void:
 	# applies lower bound for the force, but only after pressing the hit button
 	# this avoids interference with the UI while typing a force value
 	print('force when hit button pressed: ', force)
-	if force < 6:
-		force = 6
+	if force < 1:
+		force = 1
 		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
 	
 	apply_shot(force)
@@ -122,6 +122,7 @@ func apply_shot(force):
 
 
 func _on_reset_button_pressed() -> void:
+	var mass = $CanvasLayer/GUI/Sliders/MassSlider.value
 	for nodes in get_tree().get_nodes_in_group("balls"):
 		nodes.remove_from_group("balls")
 	stop_timer_running = false
@@ -134,8 +135,9 @@ func _on_reset_button_pressed() -> void:
 	$CanvasLayer/GUI/Buttons/Button.disabled = false
 	if force != 0:
 		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+		$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
 	else:
-		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+		$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = 1
 
 	# levelCounter dependent on where the level sits in the order of levels
 	# find a solution that is independent of this
@@ -146,6 +148,20 @@ func _on_reset_button_pressed() -> void:
 	cue.update_cue_drag(force)
 	cue.update_cue_central($CanvasLayer/GUI/Sliders/PositionSlider.value)
 	cue.update_cue_radial($CanvasLayer/GUI/Sliders/RadialSlider.value)
+	
+	if levelCounter == 4:
+		$CanvasLayer/GUI/Sliders/MassSlider.value = mass
+		var second_ball = current_level.get_node("CueBall/Ball2")
+		var collision = second_ball.get_node("CollisionShape2D")
+		var mesh = second_ball.get_node("MeshInstance2D")
+		second_ball.mass = mass
+		var mass_slider = get_node("CanvasLayer/GUI/Sliders/MassSlider")
+		var min_scale = 1.0
+		var max_scale = 4.0
+		var scaleValue = remap(mass, mass_slider.min_value, mass_slider.max_value, min_scale, max_scale)
+		#second_ball.scale = Vector2(scaleValue, scaleValue)
+		collision.scale = Vector2(scaleValue, scaleValue)
+		mesh.scale = Vector2(scaleValue, scaleValue)
 	
 #func prepare_next_try():
 	#print('next try is called')
@@ -159,7 +175,7 @@ func _on_reset_button_pressed() -> void:
 		#force = force_level5
 		#$CanvasLayer/GUI/Numbers/Force/LineEdit.editable = false
 		#$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
-		#$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
+		#$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = force
 	#get_tree().paused = false
 
 
@@ -264,8 +280,13 @@ func load_next_level(force = 0):
 	
 	$CanvasLayer/GUI/Buttons/Button.disabled = false
 	$CanvasLayer/GUI/Numbers/Velocity/TextureProgressBar.value = force
+	$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
+	if levelCounter == 4:
+		force = 100
+		$CanvasLayer/GUI/Numbers/Velocity/TextureProgressBar.value = force
+		$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
 	#$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
-	#$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
+	#$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	$CanvasLayer/GUI/Sliders/RadialSlider.value = 0
 	$CanvasLayer/GUI/Sliders/PositionSlider.value = 0
 	
@@ -279,15 +300,15 @@ func load_level_two():
 	$CanvasLayer/GUI/SliderLabels/RadialLabel.visible = true
 	
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
-	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	
 func load_level_three():
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
-	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	
 func load_level_four():
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
-	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = 0
+	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	
 	$CanvasLayer/GUI/Numbers/VelocityBall2/TextureProgressBar.visible = true
 	$CanvasLayer/GUI/Numbers/VelocityBall2/LineEdit.visible = true
@@ -299,7 +320,8 @@ func load_level_five():
 	force = force_level5
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.editable = false
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
-	$CanvasLayer/GUI/Numbers/Force/TextureProgressBar.value = force
+	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = force
+	$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
 	$CanvasLayer/GUI/SliderLabels/MassLabel.visible = true
 	$CanvasLayer/GUI/Sliders/MassSlider.visible = true
 	print('force: ', force)
@@ -397,3 +419,14 @@ func _on_next_try_popup_confirmed() -> void:
 
 func _on_back_pressed() -> void:
 	get_parent().levelSelect()
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(int(value))
+		
+	force = int(value)
+		
+	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = force
+	
+	var cue = current_level.get_node("Cue")
+	cue.update_cue_drag(force)

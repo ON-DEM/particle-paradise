@@ -134,6 +134,7 @@ theme_override_constants/separation = 16
 [node name="Labels" type="VBoxContainer" parent="CanvasLayer/GUI" unique_id=2075191021]
 layout_direction = 2
 layout_mode = 2
+theme_override_constants/separation = 14
 
 [node name="ForceLabel" type="Label" parent="CanvasLayer/GUI/Labels" unique_id=132124003]
 custom_minimum_size = Vector2(400, 0)
@@ -187,20 +188,29 @@ layout_mode = 2
 [node name="Force" type="HBoxContainer" parent="CanvasLayer/GUI/Numbers" unique_id=1816968338]
 layout_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/GUI/Numbers/Force" unique_id=1287106145]
-custom_minimum_size = Vector2(400, 0)
+[node name="Container" type="CenterContainer" parent="CanvasLayer/GUI/Numbers/Force" unique_id=1347183152]
 layout_mode = 2
-min_value = 5.0
-value = 5.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/GUI/Numbers/Force/Container" unique_id=1287106145]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+min_value = 1.0
+value = 1.0
 nine_patch_stretch = true
 texture_progress = ExtResource("3_feb5d")
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/GUI/Numbers/Force/Container" unique_id=2066478521]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+min_value = 1.0
+value = 1.0
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/GUI/Numbers/Force" unique_id=1250628744]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ctvy1")
 theme_override_font_sizes/font_size = 36
-placeholder_text = "INPUT"
 alignment = 1
+editable = false
 virtual_keyboard_type = 2
 script = SubResource("GDScript_feb5d")
 
@@ -414,6 +424,7 @@ dialog_text = "This did not work out! Try again!"
 
 [connection signal="confirmed" from="CanvasLayer/IntroPopup" to="." method="_on_intro_popup_confirmed"]
 [connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="CanvasLayer/GUI/Numbers/Force/Container/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="text_changed" from="CanvasLayer/GUI/Numbers/Force/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="CanvasLayer/GUI/Buttons/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/Buttons/ResetButton" to="." method="_on_reset_button_pressed"]

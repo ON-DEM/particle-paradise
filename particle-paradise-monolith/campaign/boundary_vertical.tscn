@@ -7,7 +7,7 @@ size = Vector2(800, 40)
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1480277478]
 rotation = 1.5707964
-color = Color(0, 0, 0, 1)
+color = Color(0.4509804, 0.22745098, 0, 1)
 polygon = PackedVector2Array(-400, -20, 400, -20, 400, 20, -400, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1498613503]

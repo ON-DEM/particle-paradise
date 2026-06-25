@@ -36,7 +36,7 @@ position = Vector2(970, 780)
 position = Vector2(230, 400)
 
 [node name="BoundaryVertical2" parent="." unique_id=1386050651 instance=ExtResource("5_5hph3")]
-position = Vector2(1700, 400)
+position = Vector2(1703, 400)
 
 [node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
 process_mode = 2
