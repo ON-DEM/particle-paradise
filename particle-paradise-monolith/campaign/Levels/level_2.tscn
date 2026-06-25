@@ -15,13 +15,13 @@ polygon = PackedVector2Array(220, 0, 1720, 0, 1720, 800, 220, 800)
 [node name="Goal" parent="." unique_id=1489381621 instance=ExtResource("1_bcgyv")]
 position = Vector2(1500, 150)
 
-[node name="CueBall" type="Node" parent="." unique_id=303841185]
+[node name="CueBall" type="Node2D" parent="." unique_id=942617160]
 
 [node name="Ball" parent="CueBall" unique_id=64094305 instance=ExtResource("2_fbld2")]
 position = Vector2(580, 400)
 mass = 0.001
 
-[node name="Balls" type="Node" parent="." unique_id=1068746779]
+[node name="Balls" type="Node2D" parent="." unique_id=367344012]
 
 [node name="Cue" parent="." unique_id=76996580 instance=ExtResource("3_s275v")]
 position = Vector2(580, 400)

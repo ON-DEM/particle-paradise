@@ -15,7 +15,7 @@ polygon = PackedVector2Array(220, 0, 1720, 0, 1720, 800, 220, 800)
 [node name="Goal" parent="." unique_id=1489381621 instance=ExtResource("1_ki7po")]
 position = Vector2(1236, 411)
 
-[node name="CueBall" type="Node" parent="." unique_id=303841185]
+[node name="CueBall" type="Node2D" parent="." unique_id=201381789]
 
 [node name="Ball" parent="CueBall" unique_id=64094305 instance=ExtResource("2_321yd")]
 position = Vector2(1300, 650)
@@ -25,7 +25,7 @@ mass = 0.001
 position = Vector2(1417, 650)
 mass = 0.001
 
-[node name="Balls" type="Node" parent="." unique_id=1068746779]
+[node name="Balls" type="Node2D" parent="." unique_id=1941056119]
 
 [node name="Cue" parent="." unique_id=76996580 instance=ExtResource("3_1xify")]
 position = Vector2(1300, 650)

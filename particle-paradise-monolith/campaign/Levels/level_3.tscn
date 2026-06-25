@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://b06nos28j4afk"]
 
-[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://goal.tscn" id="1_padch"]
-[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://ball.tscn" id="2_uwxw1"]
-[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://cue.tscn" id="3_ay5qi"]
-[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://boundary_horizontal.tscn" id="4_fa81k"]
-[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://boundary_vertical.tscn" id="5_ck3gp"]
+[ext_resource type="PackedScene" uid="uid://b8pkbrw37e2kn" path="res://campaign/goal.tscn" id="1_padch"]
+[ext_resource type="PackedScene" uid="uid://bj7m5hs6omqvj" path="res://campaign/ball.tscn" id="2_uwxw1"]
+[ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_ay5qi"]
+[ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_fa81k"]
+[ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_ck3gp"]
 
 [node name="Level3" type="Node2D" unique_id=1643673815]
 
@@ -15,13 +15,13 @@ polygon = PackedVector2Array(222, 402, 1286, 398, 1286, 2, 1720, 0, 1720, 800, 2
 [node name="Goal" parent="." unique_id=1489381621 instance=ExtResource("1_padch")]
 position = Vector2(1508, 210)
 
-[node name="CueBall" type="Node" parent="." unique_id=303841185]
+[node name="CueBall" type="Node2D" parent="." unique_id=2054198855]
 
 [node name="Ball" parent="CueBall" unique_id=64094305 instance=ExtResource("2_uwxw1")]
 position = Vector2(871, 570)
 mass = 0.001
 
-[node name="Balls" type="Node" parent="." unique_id=1068746779]
+[node name="Balls" type="Node2D" parent="." unique_id=1683391988]
 
 [node name="Cue" parent="." unique_id=76996580 instance=ExtResource("3_ay5qi")]
 position = Vector2(871, 570)

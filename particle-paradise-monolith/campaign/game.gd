@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var force = 0
 var speed = 0
