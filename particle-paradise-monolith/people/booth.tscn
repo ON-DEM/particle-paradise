@@ -517,7 +517,7 @@ debug_color = Color(0, 0.6509804, 0.14509805, 0.6431373)
 [node name="GridMap" parent="." unique_id=851886611 instance=ExtResource("3_vsnn2")]
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=929252856]
-transform = Transform3D(0.83292127, -0.30624217, 0.46093157, 0, 0.83292127, 0.5533915, -0.5533915, -0.46093157, 0.69375783, 0, 1.5, 0)
+transform = Transform3D(-1.8066207e-15, -1, 2.9802322e-08, -4.3711385e-08, 2.9802322e-08, 1, -0.99999994, -8.5791446e-16, -4.371139e-08, 0, 1.9310765, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1025004324]
 collision_mask = 4
@@ -525,7 +525,7 @@ shape = SubResource("SphereShape3D_vsnn2")
 spring_length = 12.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1257827851]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 8.72)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1773256725]
 visible = false
@@ -749,7 +749,8 @@ theme_override_fonts/font = ExtResource("6_pbe8u")
 theme_override_font_sizes/font_size = 36
 text = "LEFT CLICK: PLACE EXHIBIT
 RIGHT CLICK: DELETE EXHIBIT
-MIDDLE CLICK (HOLD): ROTATE CAMERA"
+MIDDLE CLICK (HOLD): ROTATE CAMERA
+SCROLL IN/OUT: ZOOM IN/OUT"
 
 [node name="GridSprite" parent="." unique_id=848423882 instance=ExtResource("6_vol78")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
