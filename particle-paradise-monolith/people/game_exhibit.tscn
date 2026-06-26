@@ -14,7 +14,6 @@ uv1_scale = Vector3(3, 2, 0)
 material = SubResource("StandardMaterial3D_x6fak")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
-custom_solver_bias = 0.9
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 1.5

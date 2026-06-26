@@ -14,7 +14,8 @@ func _on_timer_timeout() -> void:
 
 func _ready():
 	$MeshInstance3D.set_surface_override_material(0, $MeshInstance3D.mesh.material.duplicate())
-	$Hat.make_random_visible()
+	var hatChildren =  $Hat.get_children()
+	hatChildren[randi_range(0, hatChildren.size() - 1)].visible = true
 
 func _process(delta):
 	boredom = clampf(boredom, 0.0, 10)
