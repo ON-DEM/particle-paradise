@@ -15,6 +15,9 @@ material = SubResource("StandardMaterial3D_x6fak")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8stp"]
+size = Vector3(0.8, 0.8, 0.8)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 1.5
 
@@ -55,6 +58,9 @@ mesh = SubResource("BoxMesh_gic0v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1420209624]
 shape = SubResource("BoxShape3D_x6fak")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1322130975]
+shape = SubResource("BoxShape3D_p8stp")
 
 [node name="Attractor" type="Area3D" parent="." unique_id=749676100]
 gravity_point = true

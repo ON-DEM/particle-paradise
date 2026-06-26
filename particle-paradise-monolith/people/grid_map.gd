@@ -11,8 +11,10 @@ extends GridMap
 @onready var liqMesh = $Selector/liquefaction_exhibit_mesh
 
 const RAY_LENGTH = 4444
-const CELL_SIZE = 1.0
-const CHECK_INTERVAL = 0.01 # seconds between selector updates
+const GRID_SIZE = 40
+const GRID_OFFSET = 20
+
+const CHECK_INTERVAL = 0.01
 
 var current_selection: Vector3i = Vector3i.ZERO
 var time_since_last_check: float = 0.0
@@ -25,24 +27,33 @@ var canMakeSelectorVisible = true
 var availableExhibits = {"HOURGLASS": 4, "GAME": 4, "LIQUEFACTION": 2}
 
 var tapToDelete = false
+var onMobile = false
 
-var grid = [[]]
+# GRID NOW STORES NODE REFERENCES
+var grid = []
 
 func _ready():
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		canMakeSelectorVisible = false
-	
-	for i in range(0,40):
-		grid.append([])
-		for j in range(0,40):
-			grid[i].append([0])
+		onMobile = true
+
+	grid.resize(GRID_SIZE)
+
+	for x in range(GRID_SIZE):
+		grid[x] = []
+		grid[x].resize(GRID_SIZE)
+		for z in range(GRID_SIZE):
+			grid[x][z] = null
+
 
 func _process(delta):
-	# Update the selector periodically
+	if onMobile:
+		return
+
 	time_since_last_check += delta
 	if time_since_last_check >= CHECK_INTERVAL:
 		time_since_last_check = 0.0
-		
+
 		var hit = get_mouse_hit()
 		if hit:
 			var selection = local_to_map(hit.position)
@@ -51,90 +62,192 @@ func _process(delta):
 		else:
 			$Selector.visible = false
 
-func _input(event):
-	if get_parent().boothOpen == false:
-		if Input.is_action_just_pressed("left_click"):
-			if tapToDelete == true:
-				if current_selection != null:
-					clear_exhibit(current_selection)
-					return
-			# Place a block at the last known selection
-			if current_selection != null:
-				make_new_exhibit(current_selection)
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			# Place a block at the last known selection
-			if current_selection != null:
-				clear_exhibit(current_selection)
 
-# 🔹 Handles the raycast from the mouse
-func get_mouse_hit():
-	var mouse_pos = get_viewport().get_mouse_position()
+func _input(event):
+	if get_parent().boothOpen == true:
+		return
+
+	var hit = {}
+
+	# Mouse
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			hit = get_mouse_hit(event.position)
+
+			if tapToDelete:
+				clear_exhibit_from_hit(hit)
+			else:
+				make_new_exhibit_from_hit(hit)
+
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			hit = get_mouse_hit(event.position)
+			clear_exhibit_from_hit(hit)
+
+	# Touch
+	elif event is InputEventScreenTouch and event.pressed:
+		hit = get_mouse_hit(event.position)
+
+		if tapToDelete:
+			clear_exhibit_from_hit(hit)
+		else:
+			make_new_exhibit_from_hit(hit)
+
+
+# -----------------------------
+# RAYCAST
+# -----------------------------
+func get_mouse_hit(screen_pos: Vector2 = Vector2(-1, -1)):
 	var camera = $".."/CameraPivot/SpringArm3D/Camera3D
-	
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * RAY_LENGTH
-	
+
+	if screen_pos == Vector2(-1, -1):
+		screen_pos = get_viewport().get_mouse_position()
+
+	var from = camera.project_ray_origin(screen_pos)
+	var to = from + camera.project_ray_normal(screen_pos) * RAY_LENGTH
+
 	var query = PhysicsRayQueryParameters3D.create(from, to)
-	query.collision_mask = (1 << 1) # layer 2
+	query.collision_mask = (1 << 1)
 	query.collide_with_areas = false
-	
+
 	return get_world_3d().direct_space_state.intersect_ray(query)
 
-func prettyPrintGrid():
-	var string = ""
-	for i in range(0,40):
-		string = string + "\n"
-		for j in range(0,40):
-			string = string + str(grid[i][j][0])
-	print(string)
+
+# -----------------------------
+# GRID HELPERS
+# -----------------------------
+func get_grid_pos(cell: Vector3i) -> Vector2i:
+	return Vector2i(cell.x + GRID_OFFSET, cell.z + GRID_OFFSET)
 
 
-# 🔹 Box + top-to-bottom ray check
-func is_cell_occupied(cell_pos: Vector3i) -> bool:
-	
-	var space_state = get_world_3d().direct_space_state
-	
-	# ----- BOX CHECK (slightly smaller for adjacency) -----
-	var shape = BoxShape3D.new()
-	shape.size = Vector3(0.95, 0.95, 0.95)
-	
-	var world_pos = map_to_local(cell_pos)
-	world_pos.y = 0.5
-	
-	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+func is_valid_cell(x: int, z: int) -> bool:
+	return x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE
+
+func is_path_cell(x: int, z: int) -> bool:
+	var center = GRID_SIZE / 2
+
+	# vertical path
+	if x >= center -1 and x <= center:
 		return true
-	
-	var box_query = PhysicsShapeQueryParameters3D.new()
-	box_query.shape = shape
-	box_query.transform = Transform3D(Basis(), world_pos)
-	box_query.collision_mask = (1 << 0) # layer 1
-	box_query.collide_with_areas = false
-	
-	if space_state.intersect_shape(box_query).size() > 0:
-		return true
-	
-	# ----- RAYCHECK TOP -> BOTTOM (catch fully contained objects) -----
-	var ray_from = world_pos + Vector3(0, 0.5, 0)
-	var ray_to   = world_pos + Vector3(0, -0.5, 0)
-	
-	var ray_query = PhysicsRayQueryParameters3D.create(ray_from, ray_to)
-	ray_query.collision_mask = (1 << 0)
-	ray_query.collide_with_areas = false
-	
-	if space_state.intersect_ray(ray_query):
-		return true
-	
+
+	## horizontal path
+	#if z >= center - 1 and z <= center + 1:
+		#return true
+
 	return false
 
-# 🔹 Visual selector logic
+func is_cell_occupied(cell_pos: Vector3i) -> bool:
+	var p = get_grid_pos(cell_pos)
+
+	if not is_valid_cell(p.x, p.y):
+		return false
+
+	if grid[p.x][p.y] != null:
+		return true
+
+	# optional physics fallback (kept from your system)
+	var world_pos = map_to_local(cell_pos)
+	world_pos.y = 0.5
+
+	var shape = BoxShape3D.new()
+	shape.size = Vector3(0.95, 0.95, 0.95)
+
+	var query = PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	query.transform = Transform3D(Basis(), world_pos)
+	query.collision_mask = (1 << 0)
+
+	return get_world_3d().direct_space_state.intersect_shape(query).size() > 0
+
+
+# -----------------------------
+# PLACE
+# -----------------------------
+func make_new_exhibit_from_hit(hit):
+	if hit.is_empty():
+		return
+
+	var cell = local_to_map(hit.position)
+	make_new_exhibit(cell)
+
+
+func make_new_exhibit(pos: Vector3i):
+	var p = get_grid_pos(pos)
+
+	if not is_valid_cell(p.x, p.y):
+		return
+
+	if is_path_cell(p.x, p.y):
+		return
+
+	if grid[p.x][p.y] != null:
+		return
+
+	var world_pos = map_to_local(pos)
+	world_pos.y = 0.5
+
+	if is_cell_occupied(pos):
+		return
+
+	var new_exhibit = selectedExhibit.instantiate()
+	var type = exhibitToString(new_exhibit)
+
+	if availableExhibits[type] <= 0:
+		new_exhibit.queue_free()
+		return
+
+	availableExhibits[type] -= 1
+
+	add_child(new_exhibit)
+	new_exhibit.global_position = world_pos
+
+	grid[p.x][p.y] = new_exhibit
+
+
+# -----------------------------
+# DELETE (FIXED — NO RAYCASTS)
+# -----------------------------
+func clear_exhibit_from_hit(hit):
+	if hit.is_empty():
+		return
+
+	var cell = local_to_map(hit.position)
+	clear_exhibit(cell)
+
+
+func clear_exhibit(pos: Vector3):
+	var p = get_grid_pos(pos)
+
+	if not is_valid_cell(p.x, p.y):
+		return
+
+	var node = grid[p.x][p.y]
+	if node == null:
+		return
+
+	if not is_instance_valid(node):
+		grid[p.x][p.y] = null
+		return
+
+	var type = exhibitToString(node)
+	if availableExhibits.has(type):
+		availableExhibits[type] += 1
+
+	node.queue_free()
+	grid[p.x][p.y] = null
+
+
+# -----------------------------
+# SELECTOR (unchanged)
+# -----------------------------
 func update_selector(selection: Vector3i):
 	revealSelector()
+
 	var world_pos = map_to_local(selection)
 	world_pos.y = 0.5
-	
+
 	for i in $Selector.get_children():
 		i.visible = false
-	
+
 	match selectedExhibit:
 		hourglassExhibit:
 			hourMesh.visible = true
@@ -142,14 +255,22 @@ func update_selector(selection: Vector3i):
 			gameMesh.visible = true
 		liquefactionExhibit:
 			liqMesh.visible = true
-	
+
 	$Selector.global_position = world_pos
+
+	var p = get_grid_pos(selection)
 	
-	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
+
+	if is_valid_cell(p.x, p.y) and grid[p.x][p.y] != null:
 		$Selector.get_active_material(0).stencil_color = Color("1485ffff")
 		$Selector.get_active_material(0).albedo_color = Color("9bd4ff40")
 		return
-	
+
+	if is_path_cell(p.x, p.y):
+		$Selector.get_active_material(0).stencil_color = Color("555555")
+		$Selector.get_active_material(0).albedo_color = Color("33333340")
+		return
+
 	if is_cell_occupied(selection):
 		$Selector.get_active_material(0).stencil_color = Color("red")
 		$Selector.get_active_material(0).albedo_color = Color("fabab640")
@@ -157,86 +278,14 @@ func update_selector(selection: Vector3i):
 		$Selector.get_active_material(0).stencil_color = Color("00b900")
 		$Selector.get_active_material(0).albedo_color = Color("6ceb9040")
 
-# 🔹 Placement logic
-func make_new_exhibit(pos: Vector3i):
-	var hit = get_mouse_hit()
-	if hit.size() == 0:
-		return
-	
-	var world_pos = map_to_local(pos)
-	world_pos.y = 0.5
-	
-	if grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
-		return
-	
-	var new_exhibit = selectedExhibit.instantiate()
-	
-	if availableExhibits[exhibitToString(new_exhibit)] == 0:
-		new_exhibit.queue_free()
-		return
-	
 
-	
-	if is_cell_occupied(pos):
-		new_exhibit.queue_free()
-		return
-
-	availableExhibits[exhibitToString(new_exhibit)] -= 1
-	grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] = 1
-	
-	add_child(new_exhibit)
-	new_exhibit.global_position = world_pos
-
-
-
-func clear_exhibit(pos: Vector3):
-	var hit = get_mouse_hit()
-	if hit.size() == 0:
-		return
-	
-	if !is_cell_occupied(pos):
-		return
-	
-	var world_pos = map_to_local(pos)
-	
-	if !grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] == 1:
-		return
-	
-	for i in get_children():
-		if i.global_position == Vector3(pos.x + 0.5, pos.y + 0.5, pos.z + 0.5):
-			if i.has_method("exhibitID"):
-				if i.is_queued_for_deletion():
-					continue
-				availableExhibits[exhibitToString(i)] += 1
-				i.queue_free()
-				grid[int(floor(world_pos.x))+20][int(floor(world_pos.z))+20][0] = 0
-
-# 🔹 Debug visualisation
-func debug_draw_box(cell_pos: Vector3i):
-	var box = MeshInstance3D.new()
-	var mesh = BoxMesh.new()
-	mesh.size = Vector3(0.95, 0.95, 0.95)
-	box.mesh = mesh
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(1, 0, 0, 0.2)
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	box.material_override = mat
-	
-	var world_pos = map_to_local(cell_pos)
-	world_pos.y = 0.5
-	
-	add_child(box)
-	box.global_position = world_pos
-	await get_tree().create_timer(0.1).timeout
-	box.queue_free()
-
-
+# -----------------------------
+# UTIL
+# -----------------------------
 func revealSelector():
-	if selectorVisible == true and canMakeSelectorVisible == true:
+	if selectorVisible and canMakeSelectorVisible:
 		$Selector.visible = true
-	else:
-		return
+
 
 func exhibitToString(exhibit):
 	if exhibit.has_method("hourglassID"):
