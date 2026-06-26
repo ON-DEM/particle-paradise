@@ -969,8 +969,11 @@ autostart = true
 
 [node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1493771949]
 material = SubResource("ShaderMaterial_p45mw")
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("CameraTexture_15qsj")
 
 [node name="Correct" type="PanelContainer" parent="Welcome" unique_id=1286733861]
@@ -1031,8 +1034,11 @@ text = "OKAY"
 visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

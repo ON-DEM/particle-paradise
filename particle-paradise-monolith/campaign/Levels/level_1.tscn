@@ -5,6 +5,29 @@
 [ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="2_ihfcg"]
 [ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_rka8t"]
 [ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_5hph3"]
+[ext_resource type="PackedScene" uid="uid://bxkteq5sk0www" path="res://campaign/boundary_corner.tscn" id="6_2j565"]
+[ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="6_ahaky"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="6_b63x0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2j565"]
+shader = ExtResource("6_b63x0")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_x7jym"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b63x0"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [node name="Level1" type="Node2D" unique_id=1643673815]
 
@@ -27,7 +50,7 @@ mass = 0.001
 position = Vector2(580, 400)
 
 [node name="BoundaryHorizontal" parent="." unique_id=2060034322 instance=ExtResource("4_rka8t")]
-position = Vector2(970, 17)
+position = Vector2(970, 20)
 
 [node name="BoundaryHorizontal2" parent="." unique_id=2074033235 instance=ExtResource("4_rka8t")]
 position = Vector2(970, 780)
@@ -38,12 +61,24 @@ position = Vector2(230, 400)
 [node name="BoundaryVertical2" parent="." unique_id=1386050651 instance=ExtResource("5_5hph3")]
 position = Vector2(1703, 400)
 
+[node name="BoundaryCorner" parent="." unique_id=824885935 instance=ExtResource("6_2j565")]
+position = Vector2(230, 20)
+
+[node name="BoundaryCorner2" parent="." unique_id=658867658 instance=ExtResource("6_2j565")]
+position = Vector2(1703, 20)
+
+[node name="BoundaryCorner3" parent="." unique_id=88672169 instance=ExtResource("6_2j565")]
+position = Vector2(1703, 780)
+
+[node name="BoundaryCorner4" parent="." unique_id=200448904 instance=ExtResource("6_2j565")]
+position = Vector2(230, 780)
+
 [node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
 process_mode = 2
 oversampling_override = 1.0
 title = "Congratulations!"
 position = Vector2i(960, 600)
-size = Vector2i(114, 100)
+size = Vector2i(882, 132)
 unresizable = true
 ok_button_text = "Continue with level 2"
 dialog_text = "Congratulations! You succesfully managed a central collision. 
@@ -59,4 +94,56 @@ size = Vector2i(114, 100)
 ok_button_text = "Try Again"
 dialog_text = "This did not work out! Try again!"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2053957528]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=432937985]
+material = SubResource("ShaderMaterial_2j565")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_x7jym")
+
+[node name="NextLevel" type="PanelContainer" parent="CanvasLayer" unique_id=823990221]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b63x0")
+
+[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/NextLevel" unique_id=212731625]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=191074836]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_ahaky")
+theme_override_font_sizes/font_size = 48
+text = "CONGRATULATIONS! YOU SUCCESSFULLY MANAGED A CENTRAL COLLISION.
+
+IN A CENTRAL COLLISION, THE FORCE IS TRANSFERRED IN THE DIRECTION
+OF THE CONTACT AND EVERYTHING STAYS IN A STRAIGHT LINE."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetsGo" type="Button" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=728453558]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_ahaky")
+theme_override_font_sizes/font_size = 48
+text = "LETS GO TO LEVEL 2!"
+
 [connection signal="confirmed" from="WinPopup" to="Goal" method="_on_win_popup_confirmed"]
+[connection signal="pressed" from="CanvasLayer/NextLevel/CenterContainer/LetsGo" to="Goal" method="_on_lets_go_pressed"]

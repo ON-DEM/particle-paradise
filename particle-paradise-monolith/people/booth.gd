@@ -22,6 +22,12 @@ var residence = 0
 
 func _ready() -> void:
 	$SpawnTimer.paused = true
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		$CanvasLayer/MobileControls.visible = true
+		$CanvasLayer/PCControls/FoldableContainer/Label.text = "TAP: PLACE EXHIBIT
+TAP AFTER TOGGLE: DELETE EXHIBIT
+TWO FINGER SWIPE: ROTATE CAMERA"
+	get_tree().paused = true
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -119,7 +125,7 @@ func _on_open_close_pressed() -> void:
 		$SpawnTimer.paused = true
 		for i in $Particles.get_children():
 			i.queue_free()
-		$CanvasLayer/OpenClose.text = "OPEN BOOTH"
+		$CanvasLayer/VBoxContainer/OpenClose.text = "OPEN BOOTH"
 		$GridMap.selectorVisible = true
 		residence = 0
 		$GridMap/Selector.visible = true
@@ -138,3 +144,20 @@ func _on_speed_slider_value_changed(value: float) -> void:
 func _on_back_pressed() -> void:
 	Engine.time_scale = 1
 	get_parent().levelSelect()
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	$GridMap.tapToDelete = toggled_on
+
+
+func _on_foldable_container_folding_changed(is_folded: bool) -> void:
+	if is_folded:
+		$CanvasLayer/PCControls/FoldableContainer.title = "SHOW CONTROLS"
+	else:
+		$CanvasLayer/PCControls/FoldableContainer.title = "HIDE CONTROLS"
+
+
+func _on_okay_pressed() -> void:
+	$Welcome.visible = false
+	get_tree().paused = false
+	$CanvasLayer.visible = true

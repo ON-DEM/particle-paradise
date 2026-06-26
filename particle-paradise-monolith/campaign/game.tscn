@@ -5,6 +5,16 @@
 [ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="3_ctvy1"]
 [ext_resource type="Texture2D" uid="uid://bb6bu3ag6u1i4" path="res://campaign/gradient_texture.tres" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://b3ehu3xrcm35k" path="res://simulations/menu/Untitled design.png" id="4_2uftl"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="6_s4wyw"]
+
+[sub_resource type="Gradient" id="Gradient_ctvy1"]
+offsets = PackedFloat32Array(0, 0.87782806)
+colors = PackedColorArray(0.88407624, 0.7173958, 0.40126094, 1, 0.29254818, 0.409187, 0.15902865, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s4wyw"]
+gradient = SubResource("Gradient_ctvy1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctvy1"]
 content_margin_left = 4.0
@@ -86,6 +96,38 @@ func _process(delta: float) -> void:
 	pass
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyoa4"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ixl6"]
+shader = ExtResource("6_s4wyw")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_on28i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u327y"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
 [node name="Game" type="Control" unique_id=493975840]
 layout_mode = 3
 anchors_preset = 8
@@ -101,9 +143,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_feb5d")
 
-[node name="Level1" parent="." unique_id=1643673815 instance=ExtResource("2_e2o6t")]
+[node name="Background" type="CanvasLayer" parent="." unique_id=697460324]
+layer = -1
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1310538229]
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1493143719]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_s4wyw")
+
+[node name="Level1" parent="." unique_id=1643673815 instance=ExtResource("2_e2o6t")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=685822092]
 
@@ -375,6 +428,7 @@ custom_minimum_size = Vector2(290, 0)
 layout_mode = 2
 
 [node name="PosLabel" type="Label" parent="CanvasLayer/GUI/SliderLabels" unique_id=525382552]
+visible = false
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ctvy1")
@@ -385,6 +439,7 @@ text = "CLUB POSITION"
 visible = false
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_ctvy1")
 theme_override_font_sizes/font_size = 36
 text = "RADIAL POSITION"
@@ -403,6 +458,7 @@ layout_mode = 2
 theme_override_constants/separation = 21
 
 [node name="PositionSlider" type="HSlider" parent="CanvasLayer/GUI/Sliders" unique_id=1291810396]
+visible = false
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 min_value = -20.0
@@ -424,17 +480,121 @@ max_value = 0.1
 step = 0.001
 value = 0.001
 
+[node name="TryAgain" type="PanelContainer" parent="CanvasLayer" unique_id=616670554]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lyoa4")
+
+[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/TryAgain" unique_id=1862863237]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/TryAgain/CenterContainer" unique_id=857019889]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_ctvy1")
+theme_override_font_sizes/font_size = 48
+text = " NOT QUITE, TRY AGAIN "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TryAgain" type="Button" parent="CanvasLayer/TryAgain/CenterContainer" unique_id=919036960]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ctvy1")
+theme_override_font_sizes/font_size = 36
+text = "OKAY"
+
 [node name="ShotFinishedTimer" type="Timer" parent="." unique_id=36498327]
 one_shot = true
 
 [node name="NextTryPopup" type="AcceptDialog" parent="." unique_id=10259603]
 process_mode = 2
 oversampling_override = 1.0
-title = "Fail!"
-position = Vector2i(960, 600)
-size = Vector2i(264, 100)
-ok_button_text = "Try Again"
-dialog_text = "This did not work out! Try again!"
+title = "NOT QUITE!"
+initial_position = 2
+size = Vector2i(480, 200)
+content_scale_mode = 1
+content_scale_aspect = 4
+ok_button_text = "TRY AGAIN"
+dialog_text = "YOU CAN DO THIS! TRY AGAIN"
+
+[node name="Welcome" type="CanvasLayer" parent="." unique_id=1959866049]
+
+[node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=267851158]
+material = SubResource("ShaderMaterial_1ixl6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_on28i")
+
+[node name="Correct" type="PanelContainer" parent="Welcome" unique_id=139680081]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -29.0
+offset_right = 67.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_u327y")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Welcome/Correct" unique_id=933975857]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=461131002]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_ctvy1")
+theme_override_font_sizes/font_size = 64
+text = "WELCOME TO MINI GOLF!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=504500961]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_ctvy1")
+theme_override_font_sizes/font_size = 36
+text = "YOUR GOAL IS TO GET A GOLF BALL IN THE HOLE ON EACH LEVEL.
+
+CHANGE THE FORCE OF THE HIT AND OTHER INPUTS AS YOU PROGRESS TO
+CHANGE WHERE THE BALL ENDS UP.
+
+ENJOY LEARNING ABOUT THE PHYSICS OF PARTICLE INTERACTIONS!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Welcome/Correct/CenterContainer" unique_id=1627893008]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Okay" type="Button" parent="Welcome/Correct/CenterContainer/HBoxContainer" unique_id=2053155524]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_ctvy1")
+theme_override_font_sizes/font_size = 48
+text = "WILL DO!"
 
 [connection signal="confirmed" from="CanvasLayer/IntroPopup" to="." method="_on_intro_popup_confirmed"]
 [connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
@@ -445,5 +605,7 @@ dialog_text = "This did not work out! Try again!"
 [connection signal="value_changed" from="CanvasLayer/GUI/Sliders/PositionSlider" to="." method="_on_position_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/GUI/Sliders/RadialSlider" to="." method="_on_radial_slider_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/GUI/Sliders/MassSlider" to="." method="_on_mass_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/TryAgain/CenterContainer/TryAgain" to="." method="_on_try_again_pressed"]
 [connection signal="timeout" from="ShotFinishedTimer" to="." method="_on_shot_finished_timer_timeout"]
 [connection signal="confirmed" from="NextTryPopup" to="." method="_on_next_try_popup_confirmed"]
+[connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]

@@ -242,6 +242,11 @@ func all_balls_stopped() -> bool:
 	return true
 	
 	
+func highlight(node, color1, color2, repeats):
+	var tween = get_tree().create_tween()
+	for i in repeats:
+		tween.tween_property(node, "theme_override_colors/font_color", color1, 0.2).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(node, "theme_override_colors/font_color", color2, 0.2).set_trans(Tween.TRANS_SINE)
 
 
 func load_next_level(force = 0):
@@ -302,6 +307,8 @@ func load_level_two():
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
 	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	
+	highlight($CanvasLayer/GUI/SliderLabels/RadialLabel, Color(0.961, 0.0, 0.063, 1.0), Color(1.0, 1.0, 1.0, 1.0), 4)
+	
 func load_level_three():
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
 	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
@@ -311,7 +318,7 @@ func load_level_four():
 	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = 0
 	
 	$CanvasLayer/GUI/Numbers/VelocityBall2/TextureProgressBar.visible = true
-	$CanvasLayer/GUI/Numbers/VelocityBall2/LineEdit.visible = true
+	$CanvasLayer/GUI/Numbers/VelocityBall2.visible = true
 	$CanvasLayer/GUI/Labels/VelocityLabel2.visible = true
 	$CanvasLayer/GUI/SliderLabels/RadialLabel.visible = false
 	$CanvasLayer/GUI/Sliders/RadialSlider.visible = false
@@ -380,8 +387,7 @@ func _on_shot_finished_timer_timeout() -> void:
 	shot_in_progress = false
 	print('shot timer timeout')
 	get_tree().paused = true
-	var next_try_popup = get_node("NextTryPopup")
-	next_try_popup.popup_centered()
+	$CanvasLayer/TryAgain.visible = true
 	#prepare_next_try()
 
 
@@ -430,3 +436,37 @@ func _on_h_slider_value_changed(value: float) -> void:
 	
 	var cue = current_level.get_node("Cue")
 	cue.update_cue_drag(force)
+
+
+func _on_try_again_pressed() -> void:
+	$CanvasLayer/TryAgain.visible = false
+	for nodes in get_tree().get_nodes_in_group("balls"):
+		nodes.remove_from_group("balls")
+	stop_timer_running = false
+	shot_in_progress = false
+	var newLevel = levels[levelCounter].instantiate()
+	add_child(newLevel)
+	current_level.queue_free()
+	current_level = newLevel
+	
+	$CanvasLayer/GUI/Buttons/Button.disabled = false
+	
+	if force != 0:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
+	else:
+		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = ""
+
+	# levelCounter dependent on where the level sits in the order of levels
+	# find a solution that is independent of this
+	if levelCounter == 4:
+		load_level_five()
+	
+	var cue = current_level.get_node("Cue")
+	cue.update_cue_drag(force)
+	cue.update_cue_central($CanvasLayer/GUI/Sliders/PositionSlider.value)
+	cue.update_cue_radial($CanvasLayer/GUI/Sliders/RadialSlider.value)
+	get_tree().paused = false
+
+
+func _on_okay_pressed() -> void:
+	$Welcome.visible = false

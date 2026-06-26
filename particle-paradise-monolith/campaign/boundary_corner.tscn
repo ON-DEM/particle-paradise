@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bxkteq5sk0www"]
+
+[node name="BoundaryCorner" type="StaticBody2D" unique_id=2060034322]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1480277478]
+rotation = 1.5707964
+color = Color(0.4509804, 0.22745098, 0, 1)
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1619774688]
+rotation = 1.5707964
+color = Color(0.6594677, 0.343834, 3.85046e-07, 1)
+polygon = PackedVector2Array(-11.999999, 12.000001, 12.000001, 11.999999, 20, 20, -20, 20)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=546192751]
+rotation = 1.5707964
+color = Color(0.6594677, 0.343834, 3.85046e-07, 1)
+polygon = PackedVector2Array(-12.000001, -11.999999, 11.999999, -12.000001, 20, -20, -20, -20)
+
+[node name="Polygon2D4" type="Polygon2D" parent="." unique_id=1005966573]
+rotation = 1.5707964
+color = Color(0.96, 0.59264, 0.1728, 1)
+polygon = PackedVector2Array(-12.000001, -11.999999, -11.999999, 12.000001, -20, 20, -20, -20)
+
+[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=575254457]
+rotation = 1.5707964
+color = Color(0.9607843, 0.5921569, 0.17254902, 1)
+polygon = PackedVector2Array(11.999999, -12.000001, 12.000001, 11.999999, 20, 20, 20, -20)

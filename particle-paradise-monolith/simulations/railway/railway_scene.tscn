@@ -557,8 +557,11 @@ autostart = true
 
 [node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1378492856]
 material = SubResource("ShaderMaterial_37voy")
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("CameraTexture_nodmk")
 
 [node name="Correct" type="PanelContainer" parent="Welcome" unique_id=1084539831]
@@ -618,8 +621,11 @@ text = "OKAY"
 visible = false
 
 [node name="Container" type="Container" parent="CanvasLayer" unique_id=103311888]
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -826,7 +832,7 @@ icon = ExtResource("3_bvx25")
 icon_alignment = 1
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2129843, 0.884, 0.017804861)
+transform = Transform3D(1, 0, 0, 0, 0.98220867, 0.18779275, 0, -0.18779275, 0.98220867, 1.2129843, 0.884, 0.017804861)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1948988531]
 shape = SubResource("SphereShape3D_wqgaf")

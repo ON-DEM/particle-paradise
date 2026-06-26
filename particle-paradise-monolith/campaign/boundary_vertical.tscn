@@ -10,6 +10,15 @@ rotation = 1.5707964
 color = Color(0.4509804, 0.22745098, 0, 1)
 polygon = PackedVector2Array(-400, -20, 400, -20, 400, 20, -400, 20)
 
+[node name="Polygon2D2" type="Polygon2D" parent="Polygon2D" unique_id=807266404]
+color = Color(0.23921569, 0.10980392, 0, 1)
+polygon = PackedVector2Array(-400, -19.999983, 400, -20.000017, 400, -10.000017, -400, -9.999983)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Polygon2D" unique_id=382160627]
+position = Vector2(0, 40)
+color = Color(0.23921569, 0.10980392, 0, 1)
+polygon = PackedVector2Array(-400, -19.999983, 400, -20.000017, 400, -30.000017, -400, -29.999983)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1498613503]
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_eyggb")

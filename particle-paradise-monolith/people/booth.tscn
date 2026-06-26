@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b3ehu3xrcm35k" path="res://simulations/menu/Untitled design.png" id="7_dttqs"]
 [ext_resource type="Script" uid="uid://c50b6ktk6foh2" path="res://people/exit_area.gd" id="8_ix50c"]
 [ext_resource type="Script" uid="uid://cecf1hs1fcj7e" path="res://people/exit_pull.gd" id="9_c0njq"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="12_bqo55"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsnn2"]
 sky_top_color = Color(5.2943824e-07, 0.22819391, 0.6056769, 1)
@@ -242,6 +243,16 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="DPITexture" id="DPITexture_pbe8u"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
+"
+base_scale = 3.0
+
+[sub_resource type="DPITexture" id="DPITexture_bqo55"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#1a1a1a\" fill-opacity=\".5\" rx=\"2.333\"/></svg>
+"
+base_scale = 3.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_s7l85"]
 size = Vector3(5, 1, 3)
 
@@ -250,6 +261,26 @@ radius = 20.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r67tw"]
 size = Vector3(8, 1, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3yqr"]
+shader = ExtResource("12_bqo55")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_mu2ai"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kc2y"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [node name="Booth" type="Node3D" unique_id=1714966585]
 script = ExtResource("1_i5ap0")
@@ -497,6 +528,7 @@ spring_length = 12.0
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1773256725]
+visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1351207039]
 anchors_preset = 5
@@ -667,6 +699,58 @@ theme_override_fonts/font = ExtResource("6_pbe8u")
 theme_override_font_sizes/font_size = 48
 text = "OPEN BOOTH"
 
+[node name="MobileControls" type="VBoxContainer" parent="CanvasLayer" unique_id=471737234]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -565.0
+offset_top = 999.0
+offset_right = -21.0
+offset_bottom = 1051.0
+grow_horizontal = 0
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/MobileControls" unique_id=1579272554]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+theme_override_icons/checked = SubResource("DPITexture_pbe8u")
+theme_override_icons/unchecked = SubResource("DPITexture_bqo55")
+text = "TOGGLE TAP DELETES EXHIBITS"
+
+[node name="PCControls" type="VBoxContainer" parent="CanvasLayer" unique_id=686592026]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -178.0
+offset_right = 707.0
+offset_bottom = -29.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
+
+[node name="FoldableContainer" type="FoldableContainer" parent="CanvasLayer/PCControls" unique_id=1568697535]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 36
+folded = true
+title = "SHOW CONTROLS"
+
+[node name="Label" type="Label" parent="CanvasLayer/PCControls/FoldableContainer" unique_id=1315760162]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 36
+text = "LEFT CLICK: PLACE EXHIBIT
+RIGHT CLICK: DELETE EXHIBIT
+MIDDLE CLICK (HOLD): ROTATE CAMERA"
+
 [node name="GridSprite" parent="." unique_id=848423882 instance=ExtResource("6_vol78")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 
@@ -716,6 +800,78 @@ script = ExtResource("9_c0njq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 shape = SubResource("BoxShape3D_r67tw")
 
+[node name="Welcome" type="CanvasLayer" parent="." unique_id=2113569058]
+process_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Welcome" unique_id=1757791151]
+material = SubResource("ShaderMaterial_n3yqr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_mu2ai")
+
+[node name="Correct" type="PanelContainer" parent="Welcome" unique_id=165909227]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -29.0
+offset_right = 67.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_4kc2y")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Welcome/Correct" unique_id=1574242550]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=1558201878]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "WELCOME TO PEOPLE AS PARTICLES!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=580364123]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 36
+text = "YOUR GOAL IS TO PLACE EXHIBITS IN YOUR BOOTH TO ATTRACT PEOPLE AND KEEP THEM AT YOUR STAND
+FOR AS LONG AS POSSIBLE.
+
+EACH EXHIBIT ATTRACTS PEOPLE IN A DIFFERENT WAY, EXPERIMENT WITH THE PLACEMENT TO SEE HOW
+IT AFFECTS THE FLOW OF THE PARTICLES.
+
+AS AN EXTRA CHALLENGE, SEE IF YOU CAN MAKE THE FLOW OF PARTICLES JAM!
+
+THESE KIND OF SIMULATIONS ARE USED IN REAL LIFE TO PREDICT THE FLOW OF PEOPLE WITHIN BUILDINGS.
+FOR EXAMPLE DURING AN EMERGENCY SUCH AS A FIRE, OR JUST THE GENERAL FLOW OF PEOPLE AT LARGE
+EVENT SUCH AS THIS."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Welcome/Correct/CenterContainer" unique_id=1500695243]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Okay" type="Button" parent="Welcome/Correct/CenterContainer/HBoxContainer" unique_id=1347028605]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "OKAY!"
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="KillZone" to="KillZone" method="_on_body_entered"]
 [connection signal="body_entered" from="KillZone2" to="KillZone2" method="_on_body_entered"]
@@ -723,3 +879,6 @@ shape = SubResource("BoxShape3D_r67tw")
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/VBoxContainer/SpeedSlider" to="." method="_on_speed_slider_value_changed"]
 [connection signal="item_selected" from="CanvasLayer/VBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/OpenClose" to="." method="_on_open_close_pressed"]
+[connection signal="toggled" from="CanvasLayer/MobileControls/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="folding_changed" from="CanvasLayer/PCControls/FoldableContainer" to="." method="_on_foldable_container_folding_changed"]
+[connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]

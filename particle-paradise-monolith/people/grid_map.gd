@@ -20,13 +20,18 @@ var time_since_last_check: float = 0.0
 @onready var selectedExhibit = hourglassExhibit
 
 var selectorVisible = true
+var canMakeSelectorVisible = true
 
 var availableExhibits = {"HOURGLASS": 4, "GAME": 4, "LIQUEFACTION": 2}
 
+var tapToDelete = false
 
 var grid = [[]]
 
 func _ready():
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		canMakeSelectorVisible = false
+	
 	for i in range(0,40):
 		grid.append([])
 		for j in range(0,40):
@@ -49,6 +54,10 @@ func _process(delta):
 func _input(event):
 	if get_parent().boothOpen == false:
 		if Input.is_action_just_pressed("left_click"):
+			if tapToDelete == true:
+				if current_selection != null:
+					clear_exhibit(current_selection)
+					return
 			# Place a block at the last known selection
 			if current_selection != null:
 				make_new_exhibit(current_selection)
@@ -224,7 +233,7 @@ func debug_draw_box(cell_pos: Vector3i):
 
 
 func revealSelector():
-	if selectorVisible == true:
+	if selectorVisible == true and canMakeSelectorVisible == true:
 		$Selector.visible = true
 	else:
 		return

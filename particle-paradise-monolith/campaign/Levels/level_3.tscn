@@ -5,6 +5,30 @@
 [ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_ay5qi"]
 [ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_fa81k"]
 [ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_ck3gp"]
+[ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="6_8lwdl"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="6_c2nbc"]
+[ext_resource type="PackedScene" uid="uid://bxkteq5sk0www" path="res://campaign/boundary_corner.tscn" id="6_peftd"]
+[ext_resource type="Texture2D" uid="uid://dwxp8f36gr842" path="res://campaign/reflection.png" id="7_si382"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_peftd"]
+shader = ExtResource("6_c2nbc")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_2sqwc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_si382"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [node name="Level3" type="Node2D" unique_id=1643673815]
 
@@ -26,39 +50,57 @@ mass = 0.001
 [node name="Cue" parent="." unique_id=76996580 instance=ExtResource("3_ay5qi")]
 position = Vector2(871, 570)
 
+[node name="BoundaryVertical4" parent="." unique_id=1865440373 instance=ExtResource("5_ck3gp")]
+position = Vector2(1603.9999, 629)
+rotation = 0.5602507
+scale = Vector2(0.99999994, 0.48)
+
 [node name="BoundaryHorizontal" parent="." unique_id=2060034322 instance=ExtResource("4_fa81k")]
-position = Vector2(1497, 17)
+position = Vector2(1497, 20)
 scale = Vector2(0.3, 1)
 
 [node name="BoundaryHorizontal2" parent="." unique_id=2074033235 instance=ExtResource("4_fa81k")]
-position = Vector2(970, 780)
+position = Vector2(970, 783)
 
 [node name="BoundaryHorizontal3" parent="." unique_id=595381643 instance=ExtResource("4_fa81k")]
-position = Vector2(769, 401)
+position = Vector2(768, 407)
 scale = Vector2(0.72, 1)
 
 [node name="BoundaryVertical" parent="." unique_id=331332573 instance=ExtResource("5_ck3gp")]
-position = Vector2(235, 592)
+position = Vector2(235, 595)
 scale = Vector2(1, 0.52)
 
 [node name="BoundaryVertical2" parent="." unique_id=1386050651 instance=ExtResource("5_ck3gp")]
-position = Vector2(1703, 400)
+position = Vector2(1703, 403)
 
 [node name="BoundaryVertical3" parent="." unique_id=937974101 instance=ExtResource("5_ck3gp")]
-position = Vector2(1291, 200)
+position = Vector2(1290, 200)
 scale = Vector2(1, 0.5)
 
-[node name="BoundaryVertical4" parent="." unique_id=1865440373 instance=ExtResource("5_ck3gp")]
-position = Vector2(1603.9999, 626)
-rotation = 0.5602507
-scale = Vector2(1, 0.48)
+[node name="BoundaryCorner" parent="." unique_id=1099957339 instance=ExtResource("6_peftd")]
+position = Vector2(235, 407)
+
+[node name="BoundaryCorner2" parent="." unique_id=1380979698 instance=ExtResource("6_peftd")]
+position = Vector2(1290, 407)
+
+[node name="BoundaryCorner3" parent="." unique_id=914208097 instance=ExtResource("6_peftd")]
+position = Vector2(1290, 20)
+
+[node name="BoundaryCorner4" parent="." unique_id=1650372432 instance=ExtResource("6_peftd")]
+position = Vector2(1703, 20)
+
+[node name="BoundaryCorner5" parent="." unique_id=1240057801 instance=ExtResource("6_peftd")]
+position = Vector2(1703, 783)
+
+[node name="BoundaryCorner6" parent="." unique_id=903251987 instance=ExtResource("6_peftd")]
+position = Vector2(235, 783)
 
 [node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
 process_mode = 2
 oversampling_override = 1.0
 title = "Congratulations!"
 position = Vector2i(960, 600)
-size = Vector2i(114, 100)
+size = Vector2i(434, 158)
 ok_button_text = "Next Level"
 dialog_text = "Well done!
 
@@ -74,5 +116,88 @@ size = Vector2i(114, 100)
 ok_button_text = "Try Again"
 dialog_text = "This did not work out! Try again!"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971838290]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=274822383]
+material = SubResource("ShaderMaterial_peftd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_2sqwc")
+
+[node name="NextLevel" type="PanelContainer" parent="CanvasLayer" unique_id=93882167]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_si382")
+
+[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/NextLevel" unique_id=822114909]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=1031130181]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_8lwdl")
+theme_override_font_sizes/font_size = 48
+text = "GREAT JOB!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=893088389]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_8lwdl")
+theme_override_font_sizes/font_size = 36
+text = "YOU'VE WITNESSED A DEFLECTION, IN WHICH THE ANGLE OF INCIDENCE WAS EQUAL TO THE ANGLE OF REFLECTION.
+
+THE ANGLE OF INCIDENCE \"i\" IS THE ANGLE BETWEEN THE INCOMING BALL AND AN IMAGINARY LINE CALLED
+THE \"NORMAL\", WHICH IS DRAWN PERPENDICULAR (AT A 90° ANGLE) TO THE WALL."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=1135519008]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_si382")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/NextLevel/CenterContainer/PanelContainer" unique_id=539001572]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_si382")
+stretch_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=432572007]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_8lwdl")
+theme_override_font_sizes/font_size = 36
+text = "THE ANGLE OF REFLECTION \"r\" IS MEASURED IN THE SAME WAY, BUT IS EQUAL TO THE ANGLE
+BETWEEN THE DIRECTION OF THE BALL AFTER IT BOUNCES AND THE \"NORMAL\".
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetsGo" type="Button" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=673889841]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_8lwdl")
+theme_override_font_sizes/font_size = 48
+text = "LETS GO TO LEVEL 4!"
+
 [connection signal="confirmed" from="WinPopup" to="Goal" method="_on_win_popup_confirmed"]
 [connection signal="confirmed" from="NextTryPopup" to="CueBall/Ball" method="_on_next_try_popup_confirmed"]
+[connection signal="pressed" from="CanvasLayer/NextLevel/CenterContainer/LetsGo" to="Goal" method="_on_lets_go_pressed"]

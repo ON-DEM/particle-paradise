@@ -28,8 +28,10 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_timer_timeout() -> void:
 	if ball_inside != null:
 		get_tree().paused = true
-		var popup = get_node("../WinPopup")
-		popup.popup_centered()
+		#var popup = get_node("../WinPopup")
+		#popup.popup_centered()
+		var canvas_layer = get_node("../CanvasLayer")
+		canvas_layer.visible = true
 
 func _on_win_popup_confirmed() -> void:
 	#print("confirmation")
@@ -42,3 +44,9 @@ func _on_win_popup_confirmed() -> void:
 	#$IntroPopup.hide()
 	#get_tree().paused = false
 	##pass # Replace with function body.
+
+
+func _on_lets_go_pressed() -> void:
+	get_tree().paused = false
+	get_parent().get_parent().stopTimer()
+	get_parent().get_parent().load_next_level()

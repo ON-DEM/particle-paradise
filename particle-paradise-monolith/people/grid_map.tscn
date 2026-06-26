@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bba0yp327jpqm"]
 
-[ext_resource type="Script" path="res://people/grid_map.gd" id="1_lq4m8"]
+[ext_resource type="Script" uid="uid://dl87w6g62xp6c" path="res://people/grid_map.gd" id="1_lq4m8"]
 [ext_resource type="PackedScene" uid="uid://qxtwpou5pdb0" path="res://people/liquefaction_exhibit_mesh.blend" id="2_ex0vt"]
-[ext_resource type="PackedScene" path="res://people/hourglass_exhibit_mesh.tscn" id="3_g21fd"]
+[ext_resource type="PackedScene" uid="uid://dfdbqgme2khip" path="res://people/hourglass_exhibit_mesh.tscn" id="3_g21fd"]
 [ext_resource type="PackedScene" uid="uid://b2svtsmoykxdd" path="res://people/game_exhibit_mesh.blend" id="4_tf3up"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gc0wv"]
@@ -83,6 +83,7 @@ curve = SubResource("Curve3D_lq4m8")
 
 [node name="Selector" type="MeshInstance3D" parent="." unique_id=219344332]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_ex0vt")
 
 [node name="liquefaction_exhibit_mesh" parent="Selector" unique_id=1111960064 instance=ExtResource("2_ex0vt")]
@@ -91,5 +92,5 @@ visible = false
 [node name="hourglass_exhibit_mesh" parent="Selector" unique_id=1989477380 instance=ExtResource("3_g21fd")]
 visible = false
 
-[node name="game_exhibit_mesh" parent="Selector" unique_id=1424447271 instance=ExtResource("4_tf3up")]
+[node name="game_exhibit_mesh" parent="Selector" unique_id=701417990 instance=ExtResource("4_tf3up")]
 visible = false

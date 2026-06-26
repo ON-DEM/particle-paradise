@@ -5,6 +5,29 @@
 [ext_resource type="PackedScene" uid="uid://xr4drh0ka522" path="res://campaign/cue.tscn" id="3_waaef"]
 [ext_resource type="PackedScene" uid="uid://dsk1wqmwufwal" path="res://campaign/boundary_horizontal.tscn" id="4_fqog2"]
 [ext_resource type="PackedScene" uid="uid://bfoijli6jioc7" path="res://campaign/boundary_vertical.tscn" id="5_ben3k"]
+[ext_resource type="PackedScene" uid="uid://bxkteq5sk0www" path="res://campaign/boundary_corner.tscn" id="6_04jfe"]
+[ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="6_bcscg"]
+[ext_resource type="FontFile" uid="uid://ck2fxaa8d4pn1" path="res://simulations/menu/SuperFrog-Yqy1q.ttf" id="7_04jfe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61if4"]
+shader = ExtResource("6_bcscg")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_8qwpw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfqy4"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
 
 [node name="Level4" type="Node2D" unique_id=1643673815]
 
@@ -30,43 +53,58 @@ mass = 0.001
 [node name="Cue" parent="." unique_id=76996580 instance=ExtResource("3_waaef")]
 position = Vector2(608, 570)
 
+[node name="BoundaryVertical3" parent="." unique_id=937974101 instance=ExtResource("5_ben3k")]
+position = Vector2(1272, 205)
+scale = Vector2(1, 0.5)
+
+[node name="BoundaryVertical4" parent="." unique_id=1865440373 instance=ExtResource("5_ben3k")]
+position = Vector2(1604.0001, 626)
+rotation = 0.5602507
+scale = Vector2(0.99999994, 0.48)
+
+[node name="BoundaryVertical6" parent="." unique_id=1181403133 instance=ExtResource("5_ben3k")]
+position = Vector2(1541.9999, 106.999985)
+rotation = 2.0385447
+scale = Vector2(1, 0.48)
+
 [node name="BoundaryHorizontal" parent="." unique_id=2060034322 instance=ExtResource("4_fqog2")]
-position = Vector2(1497, 17)
+position = Vector2(1497, 20)
 scale = Vector2(0.3, 1)
 
 [node name="BoundaryHorizontal2" parent="." unique_id=2074033235 instance=ExtResource("4_fqog2")]
 position = Vector2(970, 780)
 
 [node name="BoundaryHorizontal3" parent="." unique_id=595381643 instance=ExtResource("4_fqog2")]
-position = Vector2(771, 17)
+position = Vector2(771, 20)
 scale = Vector2(0.72, 1)
 
 [node name="BoundaryVertical2" parent="." unique_id=1386050651 instance=ExtResource("5_ben3k")]
 position = Vector2(237, 400)
 
 [node name="BoundaryVertical5" parent="." unique_id=109400852 instance=ExtResource("5_ben3k")]
-position = Vector2(1704, 399)
+position = Vector2(1703, 400)
 
-[node name="BoundaryVertical3" parent="." unique_id=937974101 instance=ExtResource("5_ben3k")]
-position = Vector2(1272, 202)
-scale = Vector2(1, 0.5)
+[node name="BoundaryCorner" parent="." unique_id=1768831657 instance=ExtResource("6_04jfe")]
+position = Vector2(237, 20)
 
-[node name="BoundaryVertical4" parent="." unique_id=1865440373 instance=ExtResource("5_ben3k")]
-position = Vector2(1603.9999, 626)
-rotation = 0.5602507
-scale = Vector2(1, 0.48)
+[node name="BoundaryCorner2" parent="." unique_id=865968571 instance=ExtResource("6_04jfe")]
+position = Vector2(1703, 20)
 
-[node name="BoundaryVertical6" parent="." unique_id=1181403133 instance=ExtResource("5_ben3k")]
-position = Vector2(1541.9999, 103.999985)
-rotation = 2.0385447
-scale = Vector2(1, 0.48)
+[node name="BoundaryCorner3" parent="." unique_id=582396422 instance=ExtResource("6_04jfe")]
+position = Vector2(1703, 780)
+
+[node name="BoundaryCorner4" parent="." unique_id=1739248188 instance=ExtResource("6_04jfe")]
+position = Vector2(237, 780)
+
+[node name="BoundaryCorner5" parent="." unique_id=1098742439 instance=ExtResource("6_04jfe")]
+position = Vector2(1272, 385)
 
 [node name="WinPopup" type="AcceptDialog" parent="." unique_id=1082899268]
 process_mode = 2
 oversampling_override = 1.0
 title = "Congratulations!"
 position = Vector2i(960, 600)
-size = Vector2i(114, 100)
+size = Vector2i(731, 158)
 ok_button_text = "Next Level"
 dialog_text = "Well done!
 
@@ -82,5 +120,60 @@ size = Vector2i(114, 100)
 ok_button_text = "Try Again"
 dialog_text = "This did not work out! Try again!"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1174267198]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1406435575]
+material = SubResource("ShaderMaterial_61if4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_8qwpw")
+
+[node name="NextLevel" type="PanelContainer" parent="CanvasLayer" unique_id=604906030]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfqy4")
+
+[node name="CenterContainer" type="VBoxContainer" parent="CanvasLayer/NextLevel" unique_id=1168024260]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=1647221252]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("7_04jfe")
+theme_override_font_sizes/font_size = 48
+text = "AWESOME!
+
+YOU HAVE PERFORMED A CENTRAL COLLISION BETWEEN TWO PARTICLES OF
+EQUAL MASS.
+
+THIS MEANS THAT ALL OF THE MOMENTUM OF THE MOVING PARTICLE IS
+TRANSFERRED TO THE SECOND PARTICLE."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LetsGo" type="Button" parent="CanvasLayer/NextLevel/CenterContainer" unique_id=82581146]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_04jfe")
+theme_override_font_sizes/font_size = 48
+text = "LETS GO TO LEVEL 5!"
+
 [connection signal="confirmed" from="WinPopup" to="Goal" method="_on_win_popup_confirmed"]
 [connection signal="confirmed" from="NextTryPopup" to="CueBall/Ball" method="_on_next_try_popup_confirmed"]
+[connection signal="pressed" from="CanvasLayer/NextLevel/CenterContainer/LetsGo" to="Goal" method="_on_lets_go_pressed"]

@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://dsk1wqmwufwal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eyggb"]
-size = Vector2(1506, 37)
+size = Vector2(1505, 40)
 
 [node name="BoundaryHorizontal" type="StaticBody2D" unique_id=2060034322]
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1480277478]
-position = Vector2(0, 1.5)
-scale = Vector2(1, 0.925)
 color = Color(0.45222628, 0.22839764, 2.4065375e-07, 1)
 polygon = PackedVector2Array(-752.5, -20, 752.5, -20, 752.5, 20, -752.5, 20)
 
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1080806878]
+color = Color(0.23821926, 0.108504765, 4.813075e-08, 1)
+polygon = PackedVector2Array(-752.5, -20, 752.5, -20, 752.5, -10, -752.5, -10)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=558807756]
+position = Vector2(0, 40)
+color = Color(0.23921569, 0.10980392, 0, 1)
+polygon = PackedVector2Array(-752.5, -20, 752.5, -20, 752.5, -30, -752.5, -30)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1498613503]
-position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_eyggb")
 debug_color = Color(0, 0, 0, 0.41960785)
