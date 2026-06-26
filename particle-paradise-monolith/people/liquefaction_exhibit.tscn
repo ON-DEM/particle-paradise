@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://n7ksjsmduabg" path="res://people/liquefaction_exhibit.gd" id="1_vjxdc"]
 [ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://people/icon.svg" id="2_431xo"]
 [ext_resource type="PackedScene" uid="uid://qxtwpou5pdb0" path="res://people/liquefaction_exhibit_mesh.blend" id="3_431xo"]
-[ext_resource type="Texture2D" uid="uid://b6octyjiktv7b" path="res://people/assets/liquefactionradius.png" id="4_f5qfg"]
+[ext_resource type="Texture2D" uid="uid://b8mrtej5h6ook" path="res://people/assets/hourglassradius.png" id="4_t7y5y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
 albedo_color = Color(0.75387883, 0.5933501, 3.85046e-07, 1)
@@ -14,6 +14,9 @@ uv1_scale = Vector3(3, 2, 0)
 material = SubResource("StandardMaterial3D_x6fak")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7y5y"]
+size = Vector3(0.8, 0.8, 0.8)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 5.0
@@ -44,6 +47,9 @@ shape = SubResource("BoxShape3D_x6fak")
 
 [node name="liquefaction_exhibit_mesh" parent="StaticBody3D" unique_id=2083089786 instance=ExtResource("3_431xo")]
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1709270631]
+shape = SubResource("BoxShape3D_t7y5y")
+
 [node name="Attractor" type="Area3D" parent="." unique_id=749676100]
 visible = false
 gravity_point = true
@@ -59,9 +65,10 @@ visible = false
 mesh = SubResource("SphereMesh_x6fak")
 
 [node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=1762032168]
+modulate = Color(0.859975, 0.7119299, 3.85046e-07, 1)
 axis = 1
 billboard = 2
-texture = ExtResource("4_f5qfg")
+texture = ExtResource("4_t7y5y")
 
 [connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
 [connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]

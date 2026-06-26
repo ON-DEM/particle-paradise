@@ -3,16 +3,20 @@ extends GridMap
 @onready var hourglassExhibit = preload("res://people/hourglass_exhibit.tscn")
 @onready var gameExhibit = preload("res://people/game_exhibit.tscn")
 @onready var liquefactionExhibit = preload("res://people/liquefaction_exhibit.tscn")
+@onready var trackExhibit = preload("res://people/track_exhibit.tscn")
+@onready var avalancheExhibit = preload("res://people/avalanche_exhibit.tscn")
 
-@onready var exhibits = [hourglassExhibit, gameExhibit, liquefactionExhibit]
+@onready var exhibits = [hourglassExhibit, gameExhibit, liquefactionExhibit, trackExhibit, avalancheExhibit]
 
 @onready var hourMesh = $Selector/hourglass_exhibit_mesh
 @onready var gameMesh = $Selector/game_exhibit_mesh
 @onready var liqMesh = $Selector/liquefaction_exhibit_mesh
+@onready var traMesh = $Selector/track_exhibit_mesh
+@onready var avaMesh = $Selector/avalanche_exhibit_mesh
 
 const RAY_LENGTH = 4444
-const GRID_SIZE = 40
-const GRID_OFFSET = 20
+const GRID_SIZE = 10
+const GRID_OFFSET = 5
 
 const CHECK_INTERVAL = 0.01
 
@@ -24,7 +28,7 @@ var time_since_last_check: float = 0.0
 var selectorVisible = true
 var canMakeSelectorVisible = true
 
-var availableExhibits = {"HOURGLASS": 4, "GAME": 4, "LIQUEFACTION": 2}
+var availableExhibits = {"HOURGLASS": 4, "GAME": 4, "LIQUEFACTION": 2, "TRACK": 2, "AVALANCHE": 2}
 
 var tapToDelete = false
 var onMobile = false
@@ -115,6 +119,16 @@ func get_mouse_hit(screen_pos: Vector2 = Vector2(-1, -1)):
 # -----------------------------
 # GRID HELPERS
 # -----------------------------
+func get_grid(x: int, z: int):
+	if x < 0 or x >= GRID_SIZE or z < 0 or z >= GRID_SIZE:
+		return null
+	return grid[x][z]
+
+func set_grid(x: int, z: int, value):
+	if x < 0 or x >= GRID_SIZE or z < 0 or z >= GRID_SIZE:
+		return
+	grid[x][z] = value
+
 func get_grid_pos(cell: Vector3i) -> Vector2i:
 	return Vector2i(cell.x + GRID_OFFSET, cell.z + GRID_OFFSET)
 
@@ -141,7 +155,7 @@ func is_cell_occupied(cell_pos: Vector3i) -> bool:
 	if not is_valid_cell(p.x, p.y):
 		return false
 
-	if grid[p.x][p.y] != null:
+	if get_grid(p.x, p.y) != null:
 		return true
 
 	# optional physics fallback (kept from your system)
@@ -179,7 +193,7 @@ func make_new_exhibit(pos: Vector3i):
 	if is_path_cell(p.x, p.y):
 		return
 
-	if grid[p.x][p.y] != null:
+	if get_grid(p.x, p.y) != null:
 		return
 
 	var world_pos = map_to_local(pos)
@@ -200,7 +214,7 @@ func make_new_exhibit(pos: Vector3i):
 	add_child(new_exhibit)
 	new_exhibit.global_position = world_pos
 
-	grid[p.x][p.y] = new_exhibit
+	set_grid(p.x, p.y, new_exhibit)
 
 
 # -----------------------------
@@ -220,12 +234,12 @@ func clear_exhibit(pos: Vector3):
 	if not is_valid_cell(p.x, p.y):
 		return
 
-	var node = grid[p.x][p.y]
+	var node = get_grid(p.x, p.y)
 	if node == null:
 		return
 
 	if not is_instance_valid(node):
-		grid[p.x][p.y] = null
+		set_grid(p.x, p.y, null)
 		return
 
 	var type = exhibitToString(node)
@@ -233,7 +247,7 @@ func clear_exhibit(pos: Vector3):
 		availableExhibits[type] += 1
 
 	node.queue_free()
-	grid[p.x][p.y] = null
+	set_grid(p.x, p.y, null)
 
 
 # -----------------------------
@@ -255,13 +269,17 @@ func update_selector(selection: Vector3i):
 			gameMesh.visible = true
 		liquefactionExhibit:
 			liqMesh.visible = true
+		trackExhibit:
+			traMesh.visible = true
+		avalancheExhibit:
+			avaMesh.visible = true
 
 	$Selector.global_position = world_pos
 
 	var p = get_grid_pos(selection)
 	
 
-	if is_valid_cell(p.x, p.y) and grid[p.x][p.y] != null:
+	if is_valid_cell(p.x, p.y) and get_grid(p.x, p.y) != null:
 		$Selector.get_active_material(0).stencil_color = Color("1485ffff")
 		$Selector.get_active_material(0).albedo_color = Color("9bd4ff40")
 		return
@@ -294,3 +312,7 @@ func exhibitToString(exhibit):
 		return "GAME"
 	elif exhibit.has_method("liqID"):
 		return "LIQUEFACTION"
+	elif exhibit.has_method("trackID"):
+		return "TRACK"
+	elif exhibit.has_method("avaID"):
+		return "AVALANCHE"

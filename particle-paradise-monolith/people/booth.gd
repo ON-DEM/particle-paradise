@@ -117,7 +117,7 @@ func _on_open_close_pressed() -> void:
 		$GridMap.selectorVisible = false
 		$GridMap/Selector.visible = false
 		for i in $GridMap.get_children():
-			if i.has_method("liqID"):
+			if i.has_method("liqID") or i.has_method("avaID"):
 				i.counter = 0
 				i.subCounter = 0
 	else:

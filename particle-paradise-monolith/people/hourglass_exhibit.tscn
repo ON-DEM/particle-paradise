@@ -15,6 +15,9 @@ material = SubResource("StandardMaterial3D_x6fak")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xikos"]
+size = Vector3(0.8, 0.8, 0.8)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
 radius = 5.0
 
@@ -74,6 +77,9 @@ mesh = SubResource("BoxMesh_gic0v")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1420209624]
 shape = SubResource("BoxShape3D_x6fak")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1396418625]
+shape = SubResource("BoxShape3D_xikos")
+
 [node name="Attractor" type="Area3D" parent="." unique_id=749676100]
 gravity_point = true
 gravity_point_center = Vector3(0, 0, 0)
@@ -119,6 +125,7 @@ cast_shadow = 0
 mesh = SubResource("SphereMesh_aqvoj")
 
 [node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=1739751419]
+modulate = Color(9.62615e-08, 0.98166317, 0.19626042, 1)
 axis = 1
 billboard = 2
 texture = ExtResource("4_er7t7")

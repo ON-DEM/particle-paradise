@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://4e34ipf8700g"]
+
+[ext_resource type="Script" uid="uid://cot1vm3skv03u" path="res://people/avalanche_exhibit.gd" id="1_wmiun"]
+[ext_resource type="Texture2D" uid="uid://cv7cfo25sttm6" path="res://people/icon.svg" id="2_af0sv"]
+[ext_resource type="PackedScene" uid="uid://bh0k8thfjt3da" path="res://people/avalanche.blend" id="3_af0sv"]
+[ext_resource type="Texture2D" uid="uid://b8mrtej5h6ook" path="res://people/assets/hourglassradius.png" id="4_foryn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6fak"]
+albedo_color = Color(8.1822276e-07, 0.7428247, 0.28087848, 1)
+albedo_texture = ExtResource("2_af0sv")
+uv1_scale = Vector3(3, 2, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gic0v"]
+material = SubResource("StandardMaterial3D_x6fak")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6fak"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xikos"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lvoh4"]
+radius = 5.0
+
+[node name="AvalancheExhibit" type="Node3D" unique_id=40654562]
+script = ExtResource("1_wmiun")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1824960225]
+collision_layer = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1173853251]
+visible = false
+mesh = SubResource("BoxMesh_gic0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1420209624]
+shape = SubResource("BoxShape3D_x6fak")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1396418625]
+shape = SubResource("BoxShape3D_xikos")
+
+[node name="avalanche" parent="StaticBody3D" unique_id=1021387954 instance=ExtResource("3_af0sv")]
+
+[node name="Attractor" type="Area3D" parent="." unique_id=749676100]
+visible = false
+gravity_point = true
+gravity_point_center = Vector3(0, 0, 0)
+gravity_direction = Vector3(0, 0, 0)
+gravity = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attractor" unique_id=561818501]
+shape = SubResource("SphereShape3D_lvoh4")
+
+[node name="Sprite3D" type="Sprite3D" parent="Attractor" unique_id=1739751419]
+modulate = Color(0.18509215, 0.6362377, 0.9999998, 1)
+axis = 1
+billboard = 2
+texture = ExtResource("4_foryn")
+
+[connection signal="body_entered" from="Attractor" to="." method="_on_attractor_body_entered"]
+[connection signal="body_exited" from="Attractor" to="." method="_on_attractor_body_exited"]
