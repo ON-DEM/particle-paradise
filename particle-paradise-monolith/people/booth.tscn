@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c50b6ktk6foh2" path="res://people/exit_area.gd" id="8_ix50c"]
 [ext_resource type="Script" uid="uid://cecf1hs1fcj7e" path="res://people/exit_pull.gd" id="9_c0njq"]
 [ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="12_bqo55"]
+[ext_resource type="Texture2D" uid="uid://lru0n7iyg6na" path="res://people/assets/game_exhibit_pic.jpg" id="13_n3yqr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsnn2"]
 sky_top_color = Color(5.2943824e-07, 0.22819391, 0.6056769, 1)
@@ -152,39 +153,51 @@ size = Vector3(30, 16.821228, 9.3811035)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vsnn2"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmj3r"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
 [sub_resource type="ImageTexture" id="ImageTexture_vsnn2"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_jsafk"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_pnu0e"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vsnn2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgxnw"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 4.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
+content_margin_bottom = 4.0
 bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 6
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+expand_margin_top = 32.0
+expand_margin_bottom = 32.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vol78"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
 bg_color = Color(0.44705883, 1, 0.11372549, 0.79607844)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 corner_detail = 6
+expand_margin_top = 32.0
+expand_margin_bottom = 32.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_vsnn2"]
 font = ExtResource("6_pbe8u")
-font_size = 36
+font_size = 48
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbe8u"]
 content_margin_left = 4.0
@@ -271,6 +284,26 @@ shader_parameter/tint_color = Color(0, 0, 0, 0)
 [sub_resource type="CameraTexture" id="CameraTexture_mu2ai"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kc2y"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mu2ai"]
+shader = ExtResource("12_bqo55")
+shader_parameter/samples = 35
+shader_parameter/lod = 2
+shader_parameter/tint_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CameraTexture" id="CameraTexture_4kc2y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6e8j"]
 content_margin_left = 16.0
 content_margin_top = 4.0
 content_margin_right = 16.0
@@ -530,7 +563,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 10)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1773256725]
 visible = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1351207039]
+[node name="HBoxContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1005156338]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -539,66 +572,26 @@ offset_top = 6.0
 offset_right = 302.0
 offset_bottom = 46.0
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wmj3r")
 
 [node name="HSlider" type="HSlider" parent="CanvasLayer/HBoxContainer" unique_id=1428096498]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_icons/grabber = SubResource("ImageTexture_vsnn2")
 theme_override_icons/grabber_highlight = SubResource("ImageTexture_jsafk")
 theme_override_icons/grabber_disabled = SubResource("ImageTexture_pnu0e")
-theme_override_styles/slider = SubResource("StyleBoxFlat_vsnn2")
+theme_override_styles/slider = SubResource("StyleBoxFlat_dgxnw")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vol78")
 editable = false
 scrollable = false
 ticks_position = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/HSlider" unique_id=1599133834]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.5
-offset_top = -11.5
-offset_right = 55.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=1599133834]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("6_pbe8u")
 theme_override_font_sizes/font_size = 36
-text = "APPEAL"
-label_settings = SubResource("LabelSettings_vsnn2")
-horizontal_alignment = 1
-
-[node name="HSlider2" type="HSlider" parent="CanvasLayer/HBoxContainer" unique_id=828409061]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_vsnn2")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_jsafk")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_pnu0e")
-theme_override_styles/slider = SubResource("StyleBoxFlat_vsnn2")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vol78")
-max_value = 20.0
-step = 0.2
-editable = false
-scrollable = false
-ticks_position = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/HSlider2" unique_id=1250759688]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.5
-offset_top = -11.5
-offset_right = 55.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "RESIDENCE"
+text = "PEOPLE GOAL: "
 label_settings = SubResource("LabelSettings_vsnn2")
 horizontal_alignment = 1
 
@@ -845,23 +838,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Welcome/Correct/CenterContainer" unique_id=580364123]
+custom_minimum_size = Vector2(1200, 0)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("6_pbe8u")
 theme_override_font_sizes/font_size = 36
-text = "YOUR GOAL IS TO PLACE EXHIBITS IN YOUR BOOTH TO ATTRACT PEOPLE AND KEEP THEM AT YOUR STAND
-FOR AS LONG AS POSSIBLE.
+text = "YOUR GOAL IS TO PLACE EXHIBITS IN YOUR BOOTH TO ATTRACT PEOPLE AND KEEP THEM AT YOUR BOOTH FOR AS LONG AS POSSIBLE.
 
-EACH EXHIBIT ATTRACTS PEOPLE IN A DIFFERENT WAY, EXPERIMENT WITH THE PLACEMENT TO SEE HOW
-IT AFFECTS THE FLOW OF THE PARTICLES.
+EACH EXHIBIT ATTRACTS PEOPLE IN A DIFFERENT WAY, EXPERIMENT WITH THE PLACEMENT TO SEE HOW IT AFFECTS THE FLOW OF THE PARTICLES.
 
-AS AN EXTRA CHALLENGE, SEE IF YOU CAN MAKE THE FLOW OF PARTICLES JAM!
-
-THESE KIND OF SIMULATIONS ARE USED IN REAL LIFE TO PREDICT THE FLOW OF PEOPLE WITHIN BUILDINGS.
-FOR EXAMPLE DURING AN EMERGENCY SUCH AS A FIRE, OR JUST THE GENERAL FLOW OF PEOPLE AT LARGE
-EVENT SUCH AS THIS."
+EACH LEVEL WILL ADD A NEW EXHIBIT TO USE, BUT ALSO INCREASE THE NUMBER OF PEOPLE YOU NEED AT YOUR BOOTH TO PROGRESS!"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Welcome/Correct/CenterContainer" unique_id=1500695243]
 layout_mode = 2
@@ -875,6 +864,83 @@ theme_override_fonts/font = ExtResource("6_pbe8u")
 theme_override_font_sizes/font_size = 48
 text = "OKAY!"
 
+[node name="Level1Complete" type="CanvasLayer" parent="." unique_id=1454824938]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Level1Complete" unique_id=2022147215]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level1Complete" unique_id=933606497]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level1Complete/NextLevel" unique_id=431439136]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="Level1Complete/NextLevel/CenterContainer" unique_id=341609776]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "GREAT JOB!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level1Complete/NextLevel/CenterContainer" unique_id=1450949459]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "YOU SUCCESSFULLY USED THE HOURGLASS TO KEEP PEOPLE AT YOUR BOOTH!
+
+NOW LETS ADD ANOTHER TYPE OF EXHIBIT: THE GAME EXHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level1Complete/NextLevel/CenterContainer" unique_id=1535277498]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_n3yqr")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="Level1Complete/NextLevel/CenterContainer" unique_id=506872129]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THIS EXHIBIT HAS A HIGH LEVEL OF ATTRACTION, BUT A LOWER
+ATTRACTION RADIUS."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level1Go" type="Button" parent="Level1Complete/NextLevel/CenterContainer" unique_id=1385740720]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "LETS GO TO LEVEL 2!"
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="KillZone" to="KillZone" method="_on_body_entered"]
 [connection signal="body_entered" from="KillZone2" to="KillZone2" method="_on_body_entered"]
@@ -885,3 +951,4 @@ text = "OKAY!"
 [connection signal="toggled" from="CanvasLayer/MobileControls/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="folding_changed" from="CanvasLayer/PCControls/FoldableContainer" to="." method="_on_foldable_container_folding_changed"]
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
+[connection signal="pressed" from="Level1Complete/NextLevel/CenterContainer/Level1Go" to="." method="_on_level_1_go_pressed"]

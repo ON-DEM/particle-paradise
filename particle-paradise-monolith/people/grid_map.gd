@@ -36,6 +36,13 @@ var onMobile = false
 # GRID NOW STORES NODE REFERENCES
 var grid = []
 
+func rebuild_item_list():
+	$"../CanvasLayer/VBoxContainer/ItemList".clear()
+
+	for exhibit_name in availableExhibits.keys():
+		if availableExhibits[exhibit_name] > 0:
+			$"../CanvasLayer/VBoxContainer/ItemList".add_item(exhibit_name)
+
 func _ready():
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		canMakeSelectorVisible = false

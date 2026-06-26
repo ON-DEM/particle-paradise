@@ -20,6 +20,86 @@ var ignoreFirstInput = true
 
 var residence = 0
 
+var levels = [
+	{
+		"exhibits": {
+			"HOURGLASS": 4
+		},
+		"particles": 16
+	},
+	{
+		"exhibits": {
+			"HOURGLASS": 2,
+			"GAME": 2
+		},
+		"particles": 24
+	},
+	{
+		"exhibits": {
+			"HOURGLASS": 2,
+			"GAME": 2,
+			"LIQUEFACTION": 2
+		},
+		"particles": 32
+	},
+	{
+		"exhibits": {
+			"HOURGLASS": 2,
+			"GAME": 2,
+			"LIQUEFACTION": 2,
+			"TRACK": 2
+		},
+		"particles": 40
+	},
+	{
+		"exhibits": {
+			"HOURGLASS": 1,
+			"GAME": 1,
+			"LIQUEFACTION": 1,
+			"TRACK": 1,
+			"AVALANCHE": 1
+		},
+		"particles": 48
+	}
+]
+
+var current_level := 0
+
+func apply_level(level_index: int):
+	current_level = level_index
+
+	var level_data = levels[current_level]
+
+	$GridMap.availableExhibits = level_data["exhibits"].duplicate(true)
+
+	$GridMap.rebuild_item_list()
+
+	$CanvasLayer/HBoxContainer/HSlider.max_value = level_data["particles"]
+	$CanvasLayer/HBoxContainer/Label.text = "PEOPLE GOAL: " + str(level_data["particles"])
+
+	if boothOpen == true:
+		boothOpen = false
+		$SpawnTimer.paused = true
+		for i in $Particles.get_children():
+			i.queue_free()
+		$CanvasLayer/VBoxContainer/OpenClose.text = "OPEN BOOTH"
+		$GridMap.selectorVisible = true
+		$GridMap/Selector.visible = true
+	# reset UI if needed
+	update_exhibit_ui()
+
+func update_exhibit_ui():
+	var keys = $GridMap.availableExhibits.keys()
+
+	for i in range($CanvasLayer/VBoxContainer/ItemList.item_count):
+		if i < keys.size():
+			var k = keys[i]
+			$CanvasLayer/VBoxContainer/ItemList.set_item_text(
+				i,
+				str($GridMap.availableExhibits[k]) + " x " + k
+			)
+
+
 func _ready() -> void:
 	$SpawnTimer.paused = true
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
@@ -28,6 +108,7 @@ func _ready() -> void:
 TAP AFTER TOGGLE: DELETE EXHIBIT
 TWO FINGER SWIPE: ROTATE CAMERA"
 	get_tree().paused = true
+	apply_level(current_level)
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -95,17 +176,36 @@ func _on_spawn_timer_timeout() -> void:
 func exitReached():
 	pass
 
+func check_level_complete():
+	var target = levels[current_level]["particles"]
+
+	if $Particles.get_child_count() >= target:
+		match current_level:
+			0:
+				get_tree().paused = true
+				$Level1Complete.visible = true
+
+func advance_level():
+	if current_level + 1 >= levels.size():
+		print("GAME COMPLETE")
+		return
+
+	# clear world
+	for p in $Particles.get_children():
+		p.queue_free()
+
+	for e in $GridMap.get_children():
+		if e != $GridMap/Selector:
+			e.queue_free()
+
+	apply_level(current_level + 1)
+
 func _process(delta: float) -> void:
 	var residenceTotal = 0
-	for i in $Particles.get_children():
-		residenceTotal += i.residenceTime
-	residence = residenceTotal/($Particles.get_child_count() + 0.01)
-	residence = clamp(residence, 0, 20)
-	$CanvasLayer/HBoxContainer/HSlider2.value = residence
-	$CanvasLayer/HBoxContainer/HSlider.value = float($GridMap.get_children().size() - 3) / 10.0 * 100.0
+	$CanvasLayer/HBoxContainer/HSlider.value = $Particles.get_child_count()
 	$SpawnTimer.wait_time = 0.5 - ($GridMap.get_children().size() * 0.01)
-	for i in $CanvasLayer/VBoxContainer/ItemList.item_count:
-		$CanvasLayer/VBoxContainer/ItemList.set_item_text(i, str($GridMap.availableExhibits[$GridMap.availableExhibits.keys()[i]]) + " x " + $GridMap.availableExhibits.keys()[i])
+	update_exhibit_ui()
+	check_level_complete()
 
 func _on_open_close_pressed() -> void:
 	if boothOpen == false:
@@ -132,8 +232,20 @@ func _on_open_close_pressed() -> void:
 
 
 func _on_item_list_item_selected(index: int) -> void:
-	$GridMap.selectedExhibit = $GridMap.exhibits[index]
-	$GridMap.update_selector($GridMap.current_selection)
+	var item_list = $CanvasLayer/VBoxContainer/ItemList
+
+	# convert string back to scene
+	match index:
+		0:
+			$GridMap.selectedExhibit = $GridMap.hourglassExhibit
+		1:
+			$GridMap.selectedExhibit = $GridMap.gameExhibit
+		2:
+			$GridMap.selectedExhibit = $GridMap.liquefactionExhibit
+		3:
+			$GridMap.selectedExhibit = $GridMap.trackExhibit
+		4:
+			$GridMap.selectedExhibit = $GridMap.avalancheExhibit
 
 
 func _on_speed_slider_value_changed(value: float) -> void:
@@ -161,3 +273,9 @@ func _on_okay_pressed() -> void:
 	$Welcome.visible = false
 	get_tree().paused = false
 	$CanvasLayer.visible = true
+
+
+func _on_level_1_go_pressed() -> void:
+	advance_level()
+	get_tree().paused = false
+	$Level1Complete.visible = false
