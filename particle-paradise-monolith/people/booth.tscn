@@ -1085,6 +1085,13 @@ ACTIVATES FOR THREE SECONDS AT A TIME."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Level2Go" type="Button" parent="Level2Complete/NextLevel/CenterContainer" unique_id=121301080]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "LETS GO TO LEVEL 3!"
+
 [node name="Level3Complete" type="CanvasLayer" parent="." unique_id=1253109477]
 visible = false
 
@@ -1344,6 +1351,7 @@ text = "FREE PLAY!"
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="pressed" from="Level0LetsGo/NextLevel/CenterContainer/Level0Go" to="." method="_on_level_0_go_pressed"]
 [connection signal="pressed" from="Level1Complete/NextLevel/CenterContainer/Level1Go" to="." method="_on_level_1_go_pressed"]
+[connection signal="pressed" from="Level2Complete/NextLevel/CenterContainer/Level2Go" to="." method="_on_level_2_go_pressed"]
 [connection signal="pressed" from="Level3Complete/Level2Go" to="." method="_on_level_2_go_pressed"]
 [connection signal="pressed" from="Level3Complete/NextLevel/CenterContainer/Level3Go" to="." method="_on_level_3_go_pressed"]
 [connection signal="pressed" from="Level4Complete/NextLevel/CenterContainer/Level4Go" to="." method="_on_level_4_go_pressed"]

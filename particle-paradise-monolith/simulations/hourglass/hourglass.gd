@@ -18,7 +18,7 @@ const HourGlass_river_07 = "res://simulations/data/hourglass/HourGlass_river_0.0
 
 const HourGlass_sea_03 = "res://simulations/data/hourglass/HourGlass_sea_0.03.bin"
 const HourGlass_sea_04 = "res://simulations/data/hourglass/HourGlass_sea_0.04.bin"
-const HourGlass_sea_05 = "res://simulations/data/hourglass/HourGlass_sea_0.05.bin"
+const HourGlass_sea_05 = "res://simulations/data/hourglass/HourGlass_sea_0.05_extended.bin"
 const HourGlass_sea_06 = "res://simulations/data/hourglass/HourGlass_sea_0.06.bin"
 const HourGlass_sea_07 = "res://simulations/data/hourglass/HourGlass_sea_0.07.bin"
 

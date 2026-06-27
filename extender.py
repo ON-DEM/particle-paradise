@@ -1,8 +1,8 @@
 import csv
 
-INPUT_FILE = "./simulation-data/HourGlass_pit_0.05.csv"
-OUTPUT_FILE = "HourGlass_pit_0.05.csv"
-END_TIME = 5.1
+INPUT_FILE = "./simulation-data/HourGlass_sea_0.05.csv"
+OUTPUT_FILE = "HourGlass_sea_0.05_extended.csv"
+END_TIME = 3.1
 
 # Read all rows
 with open(INPUT_FILE, "r", newline="") as f:
