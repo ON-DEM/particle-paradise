@@ -97,7 +97,7 @@ size = Vector3(4, 1, 10)
 size = Vector3(4, 1, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnu0e"]
-albedo_color = Color(0.49354547, 0.49354553, 0.49354553, 1)
+albedo_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7kol0"]
 material = SubResource("StandardMaterial3D_pnu0e")
@@ -700,21 +700,28 @@ text = "OPEN BOOTH"
 
 [node name="MobileControls" type="VBoxContainer" parent="CanvasLayer" unique_id=471737234]
 visible = false
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -565.0
-offset_top = 999.0
-offset_right = -21.0
-offset_bottom = 1051.0
+anchor_bottom = 1.0
+offset_left = -687.0
+offset_top = -87.0
+offset_right = 52.0
+offset_bottom = -31.0
 grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="CanvasLayer/MobileControls" unique_id=1579272554]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_pbe8u")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 36
 theme_override_icons/checked = SubResource("DPITexture_pbe8u")
 theme_override_icons/unchecked = SubResource("DPITexture_bqo55")
 text = "TOGGLE TAP DELETES EXHIBITS"

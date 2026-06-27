@@ -93,10 +93,13 @@ func apply_level(level_index: int):
 		for i in $Particles.get_children():
 			i.queue_free()
 		$CanvasLayer/VBoxContainer/OpenClose.text = "OPEN BOOTH"
-		$GridMap.selectorVisible = true
-		$GridMap/Selector.visible = true
+		if onMobile == false:
+			$GridMap.selectorVisible = true
+			$GridMap/Selector.visible = true
 	# reset UI if needed
 	update_exhibit_ui()
+	$CanvasLayer/VBoxContainer/ItemList.select(0)
+	$GridMap.selectedExhibit = $GridMap.hourglassExhibit
 
 func update_exhibit_ui():
 	var keys = $GridMap.availableExhibits.keys()
@@ -109,6 +112,7 @@ func update_exhibit_ui():
 				str($GridMap.availableExhibits[k]) + " x " + k
 			)
 
+
 var onMobile = false
 
 func _ready() -> void:
@@ -118,8 +122,7 @@ func _ready() -> void:
 		$CanvasLayer/MobileControls.visible = true
 		scale_ui_fonts($CanvasLayer, 1.5)
 		$CanvasLayer/PCControls/FoldableContainer/Label.text = "TAP: PLACE EXHIBIT
-TAP AFTER TOGGLE: DELETE EXHIBIT
-TWO FINGER SWIPE: ROTATE CAMERA"
+TAP AFTER TOGGLE: DELETE EXHIBIT"
 	get_tree().paused = true
 	apply_level(current_level)
 

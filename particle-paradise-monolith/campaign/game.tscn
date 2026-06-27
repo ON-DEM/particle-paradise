@@ -469,7 +469,8 @@ step = 0.1
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-max_value = 360.0
+min_value = -90.0
+max_value = 90.0
 
 [node name="MassSlider" type="HSlider" parent="CanvasLayer/GUI/Sliders" unique_id=2051744476]
 visible = false

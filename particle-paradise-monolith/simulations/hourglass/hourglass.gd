@@ -193,9 +193,9 @@ func _input(event: InputEvent) -> void:
 
 	
 	if event.is_action_pressed("scroll_in"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 4.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 5.0)
 	if event.is_action_pressed("scroll_out"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 4.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 5.0)
 
 	# -------------------
 	# Touch handling
@@ -222,7 +222,7 @@ func _input(event: InputEvent) -> void:
 				cameraSpring.spring_length = clamp(
 					cameraSpring.spring_length - delta * PINCH_SENSITIVITY,
 					0.05,
-					4.0
+					5.0
 				)
 
 			last_pinch_distance = distance

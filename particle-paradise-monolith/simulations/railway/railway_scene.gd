@@ -164,9 +164,9 @@ func _input(event: InputEvent) -> void:
 
 	
 	if event.is_action_pressed("scroll_in"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 6.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length -0.05, 0.05, 8.0)
 	if event.is_action_pressed("scroll_out"):
-		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 6.0)
+		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 8.0)
 
 	# -------------------
 	# Touch handling
@@ -193,7 +193,7 @@ func _input(event: InputEvent) -> void:
 				cameraSpring.spring_length = clamp(
 					cameraSpring.spring_length - delta * PINCH_SENSITIVITY,
 					0.05,
-					4.0
+					8.0
 				)
 
 			last_pinch_distance = distance
@@ -206,7 +206,12 @@ func _ready():
 	load_simulation(data_path)
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
-		scale_ui_fonts($CanvasLayer, 1.5)
+		scale_ui_fonts($CanvasLayer/VBoxContainer, 1.5)
+		scale_ui_fonts($"CanvasLayer/Correct/CenterContainer/HBoxContainer/Next Level", 1.5)
+		scale_ui_fonts($CanvasLayer/Correct/CenterContainer/HBoxContainer/Stay, 1.5)
+		scale_ui_fonts($"CanvasLayer/You win/CenterContainer/HBoxContainer/Main menu", 1.5)
+		scale_ui_fonts($"CanvasLayer/You win/CenterContainer/HBoxContainer/Stay", 1.5)
+		scale_ui_fonts($"CanvasLayer/Try again/CenterContainer/Stay", 1.5)
 	$Leaves/MultiMeshInstance3D3.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D3.multimesh)
 	$Leaves/MultiMeshInstance3D2.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D2.multimesh)
 	$Leaves/MultiMeshInstance3D.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D.multimesh)

@@ -689,6 +689,7 @@ text = "PLAY"
 
 [node name="Correct" type="PanelContainer" parent="CanvasLayer" unique_id=1421753186]
 visible = false
+z_index = 10
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -737,6 +738,7 @@ text = "STAY"
 
 [node name="You win" type="PanelContainer" parent="CanvasLayer" unique_id=612584526]
 visible = false
+z_index = 10
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -785,6 +787,7 @@ text = "STAY"
 
 [node name="Try again" type="PanelContainer" parent="CanvasLayer" unique_id=351093921]
 visible = false
+z_index = 10
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -832,11 +835,11 @@ icon = ExtResource("3_bvx25")
 icon_alignment = 1
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=571896389]
-transform = Transform3D(1, 0, 0, 0, 0.98220867, 0.18779275, 0, -0.18779275, 0.98220867, 1.2129843, 0.884, 0.017804861)
+transform = Transform3D(1, 0, 0, 0, 0.98220867, 0.18779275, 0, -0.18779275, 0.98220867, 1.2129843, 1.2324464, 0.017804861)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1948988531]
 shape = SubResource("SphereShape3D_wqgaf")
-spring_length = 4.5
+spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1069047184]
 transform = Transform3D(1, 0, 0, 0, 0.99115777, 0.1326889, 0, -0.1326889, 0.99115777, 0, 0, 0)
