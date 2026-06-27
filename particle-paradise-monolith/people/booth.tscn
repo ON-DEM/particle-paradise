@@ -12,7 +12,11 @@
 [ext_resource type="Script" uid="uid://c50b6ktk6foh2" path="res://people/exit_area.gd" id="8_ix50c"]
 [ext_resource type="Script" uid="uid://cecf1hs1fcj7e" path="res://people/exit_pull.gd" id="9_c0njq"]
 [ext_resource type="Shader" uid="uid://d1gpq5h3htfo" path="res://simulations/avalanche/blur.gdshader" id="12_bqo55"]
+[ext_resource type="Texture2D" uid="uid://babv7k08ittog" path="res://people/assets/hourglass_exhibit_pic.jpg" id="13_dgxnw"]
 [ext_resource type="Texture2D" uid="uid://lru0n7iyg6na" path="res://people/assets/game_exhibit_pic.jpg" id="13_n3yqr"]
+[ext_resource type="Texture2D" uid="uid://buhhq8obhrck3" path="res://people/assets/liquefaction_exhibit_pic.jpg" id="14_mu2ai"]
+[ext_resource type="Texture2D" uid="uid://cyrxn8dk0p36q" path="res://people/assets/track_exhibit_pic.jpg" id="15_4kc2y"]
+[ext_resource type="Texture2D" uid="uid://ctq3r1d7konpr" path="res://people/assets/avalanche_exhibit_pic.jpg" id="16_wmj3r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsnn2"]
 sky_top_color = Color(5.2943824e-07, 0.22819391, 0.6056769, 1)
@@ -861,8 +865,77 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("6_pbe8u")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
 text = "OKAY!"
+
+[node name="Level0LetsGo" type="CanvasLayer" parent="." unique_id=49658565]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Level0LetsGo" unique_id=1831123851]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level0LetsGo" unique_id=1296553837]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level0LetsGo/NextLevel" unique_id=612225097]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label2" type="Label" parent="Level0LetsGo/NextLevel/CenterContainer" unique_id=41496649]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THE FIRST EXHIBIT YOU CAN PLACE IN THE BOOTH IS:
+THE HOURGLASS EXHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level0LetsGo/NextLevel/CenterContainer" unique_id=645014289]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_dgxnw")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="Level0LetsGo/NextLevel/CenterContainer" unique_id=2053998996]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THIS EXHIBIT HAS A HIGH RANGE OF ATTRACTION, AND A MEDIUM
+ATTRACTING FORCE.
+
+FOR LEVEL 1 YOU NEED TO HAVE 16 PEOPLE AT YOUR BOOTH. GOOD LUCK!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level0Go" type="Button" parent="Level0LetsGo/NextLevel/CenterContainer" unique_id=1043060588]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "LETS DO IT!"
 
 [node name="Level1Complete" type="CanvasLayer" parent="." unique_id=1454824938]
 visible = false
@@ -938,8 +1011,326 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("6_pbe8u")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 64
 text = "LETS GO TO LEVEL 2!"
+
+[node name="Level2Complete" type="CanvasLayer" parent="." unique_id=1906199842]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Level2Complete" unique_id=178614785]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level2Complete" unique_id=738453681]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level2Complete/NextLevel" unique_id=1053237745]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="Level2Complete/NextLevel/CenterContainer" unique_id=742441605]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "AWESOME!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level2Complete/NextLevel/CenterContainer" unique_id=1876734175]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "YOU COMBINED THE EXHIBITS TO DIRECT THE FLOW OF PARTICLES AND
+KEEP PEOPLE AT THE BOOTH.
+
+NOW LETS ADD ANOTHER TYPE OF EXHIBIT: THE LIQUEFACTION EXHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level2Complete/NextLevel/CenterContainer" unique_id=986140139]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("14_mu2ai")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="Level2Complete/NextLevel/CenterContainer" unique_id=1674619943]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THIS EXHIBIT HAS A VERY HIGH LEVEL OF ATTRACTION, BUT ONLY
+ACTIVATES FOR THREE SECONDS AT A TIME."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level3Complete" type="CanvasLayer" parent="." unique_id=1253109477]
+visible = false
+
+[node name="Level2Go" type="Button" parent="Level3Complete" unique_id=1749663380]
+offset_left = 733.0
+offset_top = 934.0
+offset_right = 1335.0
+offset_bottom = 1000.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "LETS GO TO LEVEL 3!"
+
+[node name="TextureRect" type="TextureRect" parent="Level3Complete" unique_id=1471220405]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level3Complete" unique_id=380474607]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level3Complete/NextLevel" unique_id=373913366]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="Level3Complete/NextLevel/CenterContainer" unique_id=679898693]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "NICE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level3Complete/NextLevel/CenterContainer" unique_id=2039424325]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "DID YOU KNOW, THESE KIND OF PARTICLE SIMULATIONS ARE USED TO
+MAP OUT HOW PEOPLE BEHAVE IN EMERGENCY SITUATIONS, SUCH AS
+DURING A FIRE?
+
+NOW LETS ADD ANOTHER TYPE OF EXHIBIT: THE STAY ON TRACK EXHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level3Complete/NextLevel/CenterContainer" unique_id=213779152]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_4kc2y")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="Level3Complete/NextLevel/CenterContainer" unique_id=1365946056]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THIS EXHIBIT HAS THE SAME RANGE OF ATTRACTION AS THE HOURGLASS,
+BUT IS MUCH WEAKER AT LARGER DISTANCES, AND MUCH STRONGER AT
+CLOSER ONES."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level3Go" type="Button" parent="Level3Complete/NextLevel/CenterContainer" unique_id=2028442196]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "LETS GO TO LEVEL 4!"
+
+[node name="Level4Complete" type="CanvasLayer" parent="." unique_id=1117190487]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Level4Complete" unique_id=329306681]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level4Complete" unique_id=1578041931]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level4Complete/NextLevel" unique_id=1214019443]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="Level4Complete/NextLevel/CenterContainer" unique_id=692162827]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "YOU'RE ON TO THE FINAL LEVEL!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level4Complete/NextLevel/CenterContainer" unique_id=1073275317]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "IF YOU HAVEN'T YET, CHECK OUT THESE EXHIBITS AT OUR SHIFTING SANDS
+BOOTH!
+
+AND LAST BUT NOT LEAST: THE AVALANCHE EXHIBIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Level4Complete/NextLevel/CenterContainer" unique_id=562296450]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("16_wmj3r")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="Level4Complete/NextLevel/CenterContainer" unique_id=1180611192]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "THIS EXHIBIT BEHAVES SIMILARLY TO THE LIQUEFACTION EXHIBIT,
+BUT STAYS ON FOR FIVE SECONDS!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level4Go" type="Button" parent="Level4Complete/NextLevel/CenterContainer" unique_id=1917047149]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "LETS GO TO LEVEL 5!"
+
+[node name="Level5Complete" type="CanvasLayer" parent="." unique_id=20724288]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Level5Complete" unique_id=1358377567]
+material = SubResource("ShaderMaterial_mu2ai")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_4kc2y")
+
+[node name="NextLevel" type="PanelContainer" parent="Level5Complete" unique_id=916073984]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -48.5
+offset_right = 273.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6e8j")
+
+[node name="CenterContainer" type="VBoxContainer" parent="Level5Complete/NextLevel" unique_id=177784160]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="Level5Complete/NextLevel/CenterContainer" unique_id=588331890]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "YOU DID IT!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level5Complete/NextLevel/CenterContainer" unique_id=2122809306]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "GREAT JOB! TRY OUT THE OTHER GAMES BY GOING BACK TO THE MAIN MENU,
+OR KEEP PLAYING WITH THE EXHIBITS HERE IN THE FREE PLAY MODE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Level5Complete/NextLevel/CenterContainer" unique_id=1443319659]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 48
+text = "EITHER WAY, THANK YOU FOR PLAYING!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level5Complete/NextLevel/CenterContainer" unique_id=24069382]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="Level5Complete/NextLevel/CenterContainer/HBoxContainer" unique_id=2147081948]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "MAIN MENU"
+
+[node name="Level5Go" type="Button" parent="Level5Complete/NextLevel/CenterContainer/HBoxContainer" unique_id=1908259515]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("6_pbe8u")
+theme_override_font_sizes/font_size = 64
+text = "FREE PLAY!"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="KillZone" to="KillZone" method="_on_body_entered"]
@@ -951,4 +1342,10 @@ text = "LETS GO TO LEVEL 2!"
 [connection signal="toggled" from="CanvasLayer/MobileControls/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="folding_changed" from="CanvasLayer/PCControls/FoldableContainer" to="." method="_on_foldable_container_folding_changed"]
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
+[connection signal="pressed" from="Level0LetsGo/NextLevel/CenterContainer/Level0Go" to="." method="_on_level_0_go_pressed"]
 [connection signal="pressed" from="Level1Complete/NextLevel/CenterContainer/Level1Go" to="." method="_on_level_1_go_pressed"]
+[connection signal="pressed" from="Level3Complete/Level2Go" to="." method="_on_level_2_go_pressed"]
+[connection signal="pressed" from="Level3Complete/NextLevel/CenterContainer/Level3Go" to="." method="_on_level_3_go_pressed"]
+[connection signal="pressed" from="Level4Complete/NextLevel/CenterContainer/Level4Go" to="." method="_on_level_4_go_pressed"]
+[connection signal="pressed" from="Level5Complete/NextLevel/CenterContainer/HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Level5Complete/NextLevel/CenterContainer/HBoxContainer/Level5Go" to="." method="_on_level_5_go_pressed"]

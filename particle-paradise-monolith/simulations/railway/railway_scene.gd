@@ -165,13 +165,31 @@ func _input(event: InputEvent) -> void:
 func _ready():
 	$CanvasLayer/VBoxContainer/Options.select(0)
 	load_simulation(data_path)
-	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
+		scale_ui_fonts($CanvasLayer, 1.5)
 	$Leaves/MultiMeshInstance3D3.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D3.multimesh)
 	$Leaves/MultiMeshInstance3D2.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D2.multimesh)
 	$Leaves/MultiMeshInstance3D.multimesh = enable_colors_on_existing_multimesh($Leaves/MultiMeshInstance3D.multimesh)
-	
+
+func scale_ui_fonts(node: Node, scale: float) -> void:
+	# If this node is a Control, check for a font size override
+	if node is Control:
+		var control := node as Control
+
+		# Get the current override (0 means no override)
+		var font_size := control.get_theme_font_size("font_size")
+
+		if font_size > 0:
+			control.add_theme_font_size_override(
+				"font_size",
+				roundi(font_size * scale)
+			)
+
+	# Recurse through children
+	for child in node.get_children():
+		scale_ui_fonts(child, scale)
+
 func enable_colors_on_existing_multimesh(multimesh):
 	var old_mm = multimesh
 
@@ -269,7 +287,6 @@ func load_wheel_binary(path: String):
 
 	file.close()
 
-	print("Loaded wheel frames: ", wheel_frames.size())
 
 func smooth_wheel_frames():
 

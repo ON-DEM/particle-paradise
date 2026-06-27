@@ -29,9 +29,12 @@ var levelCounter = 0
 
 var force_level5 := 100
 
+var onMobile = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		onMobile = true
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -43,7 +46,6 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	#var lowerLimit = int(cue_ball.sleep_speed)
 	var lowerLimit = 0
 	var upperLimit = 100
-	print('lower limit: ', lowerLimit)
 	 
 	for c in new_text:
 		if c in "0123456789":
@@ -73,7 +75,6 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 func _on_button_pressed() -> void:
 	# applies lower bound for the force, but only after pressing the hit button
 	# this avoids interference with the UI while typing a force value
-	print('force when hit button pressed: ', force)
 	if force < 1:
 		force = 1
 		$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
@@ -82,13 +83,11 @@ func _on_button_pressed() -> void:
 	$CanvasLayer/GUI/Buttons/Button.disabled = true
 	
 func apply_shot(force):
-	print('force in apply_shot: ', force)
 	var cue = current_level.get_node("Cue")
 	var cue_ball = current_level.get_node("CueBall/Ball")
 	var tip = current_level.get_node("Cue/Tip")
 
 	initial_position = cue_ball.global_position
-	print('initial position: ', initial_position)
 	var forcePercentage = force / 100.0
 	var max_force := 1.0
 	
@@ -118,8 +117,6 @@ func apply_shot(force):
 	cue.update_cue_drag(0)
 	## Apply to the cue ball (recommended)
 	cue_ball.apply_impulse(impulse, offset)
-	print("impulse: ", impulse)
-
 
 func _on_reset_button_pressed() -> void:
 	var mass = $CanvasLayer/GUI/Sliders/MassSlider.value
@@ -331,7 +328,6 @@ func load_level_five():
 	$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
 	$CanvasLayer/GUI/SliderLabels/MassLabel.visible = true
 	$CanvasLayer/GUI/Sliders/MassSlider.visible = true
-	print('force: ', force)
 	
 	var cue = current_level.get_node("Cue")
 	cue.update_cue_drag(force)
@@ -363,11 +359,8 @@ func _on_mass_slider_value_changed(value: float) -> void:
 	#second_ball.scale = Vector2(scaleValue, scaleValue)
 	collision.scale = Vector2(scaleValue, scaleValue)
 	mesh.scale = Vector2(scaleValue, scaleValue)
-	print("mass second ball: ", second_ball.mass)
-	print("scale of ball: ", second_ball.scale)
 
 func _on_intro_popup_confirmed() -> void:
-	print('confirmed intro popup')
 	get_tree().paused = false
 	#var intro_popup = get_node('../IntroPopup')
 	#intro_popup.hide()
@@ -385,7 +378,6 @@ func _on_shot_finished_timer_timeout() -> void:
 	#ball_stopped()
 	stop_timer_running = false
 	shot_in_progress = false
-	print('shot timer timeout')
 	get_tree().paused = true
 	$CanvasLayer/TryAgain.visible = true
 	#prepare_next_try()

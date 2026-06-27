@@ -76,7 +76,6 @@ func request_reset():
 
 func _on_next_try_popup_confirmed() -> void:
 	var game = get_parent().get_parent().get_parent()
-	print('popup confirmed')
 	reset_state = true
 	has_moved = false
 	game.prepare_next_try()

@@ -295,7 +295,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("scroll_out"):
 		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 4.0)
 
-
+var onMobile = false
 # ----------------------------
 # READY
 # ----------------------------
@@ -306,6 +306,26 @@ func _ready():
 	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
+		onMobile = true
+		scale_ui_fonts($CanvasLayer, 1.5)
+
+func scale_ui_fonts(node: Node, scale: float) -> void:
+	# If this node is a Control, check for a font size override
+	if node is Control:
+		var control := node as Control
+
+		# Get the current override (0 means no override)
+		var font_size := control.get_theme_font_size("font_size")
+
+		if font_size > 0:
+			control.add_theme_font_size_override(
+				"font_size",
+				roundi(font_size * scale)
+			)
+
+	# Recurse through children
+	for child in node.get_children():
+		scale_ui_fonts(child, scale)
 
 var particle_count = 0
 # ----------------------------

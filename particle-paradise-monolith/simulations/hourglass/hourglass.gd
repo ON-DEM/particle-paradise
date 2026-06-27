@@ -195,9 +195,28 @@ func _ready():
 	$CanvasLayer/VBoxContainer/Options.select(0)
 	$CanvasLayer/VBoxContainer2/HBoxContainer/ConcreteOptions.select(0)
 	load_simulation(data_path)
-	
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
 		mouseSensitivity = 0.04
+		scale_ui_fonts($CanvasLayer, 1.5)
+
+
+func scale_ui_fonts(node: Node, scale: float) -> void:
+	# If this node is a Control, check for a font size override
+	if node is Control:
+		var control := node as Control
+
+		# Get the current override (0 means no override)
+		var font_size := control.get_theme_font_size("font_size")
+
+		if font_size > 0:
+			control.add_theme_font_size_override(
+				"font_size",
+				roundi(font_size * scale)
+			)
+
+	# Recurse through children
+	for child in node.get_children():
+		scale_ui_fonts(child, scale)
 
 var particle_count = 0
 # ----------------------------
@@ -361,9 +380,9 @@ func _process(delta):
 	update_interpolated(accumulator / frame_time)
 
 func end_reached():
-	for pid in pid_to_instance.keys():
-		if frames[current_frame][pid]["pos"].y > 0.2:
-			print(pid)
+	#for pid in pid_to_instance.keys():
+		#if frames[current_frame][pid]["pos"].y > 0.2:
+			#print(pid)
 	update_time = false
 	var cur_sim = data_path
 	

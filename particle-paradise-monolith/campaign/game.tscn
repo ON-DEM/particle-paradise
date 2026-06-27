@@ -267,7 +267,7 @@ nine_patch_stretch = true
 texture_progress = ExtResource("3_feb5d")
 
 [node name="HSlider" type="HSlider" parent="CanvasLayer/GUI/Numbers/Force/Container" unique_id=2066478521]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
 min_value = 1.0
 value = 1.0
@@ -459,7 +459,7 @@ theme_override_constants/separation = 21
 
 [node name="PositionSlider" type="HSlider" parent="CanvasLayer/GUI/Sliders" unique_id=1291810396]
 visible = false
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 min_value = -20.0
 max_value = 20.0
@@ -467,13 +467,13 @@ step = 0.1
 
 [node name="RadialSlider" type="HSlider" parent="CanvasLayer/GUI/Sliders" unique_id=248781665]
 visible = false
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 max_value = 360.0
 
 [node name="MassSlider" type="HSlider" parent="CanvasLayer/GUI/Sliders" unique_id=2051744476]
 visible = false
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 min_value = 0.001
 max_value = 0.1

@@ -54,12 +54,22 @@ var levels = [
 	{
 		"exhibits": {
 			"HOURGLASS": 1,
-			"GAME": 1,
+			"GAME": 2,
 			"LIQUEFACTION": 1,
 			"TRACK": 1,
 			"AVALANCHE": 1
 		},
 		"particles": 48
+	},
+	{
+		"exhibits": {
+			"HOURGLASS": 80,
+			"GAME": 80,
+			"LIQUEFACTION": 80,
+			"TRACK": 80,
+			"AVALANCHE": 80
+		},
+		"particles": 1000
 	}
 ]
 
@@ -99,16 +109,38 @@ func update_exhibit_ui():
 				str($GridMap.availableExhibits[k]) + " x " + k
 			)
 
+var onMobile = false
 
 func _ready() -> void:
 	$SpawnTimer.paused = true
 	if OS.has_feature("web_android") or OS.has_feature("web_ios"):
+		onMobile = true
 		$CanvasLayer/MobileControls.visible = true
+		scale_ui_fonts($CanvasLayer, 1.5)
 		$CanvasLayer/PCControls/FoldableContainer/Label.text = "TAP: PLACE EXHIBIT
 TAP AFTER TOGGLE: DELETE EXHIBIT
 TWO FINGER SWIPE: ROTATE CAMERA"
 	get_tree().paused = true
 	apply_level(current_level)
+
+
+func scale_ui_fonts(node: Node, scale: float) -> void:
+	# If this node is a Control, check for a font size override
+	if node is Control:
+		var control := node as Control
+
+		# Get the current override (0 means no override)
+		var font_size := control.get_theme_font_size("font_size")
+
+		if font_size > 0:
+			control.add_theme_font_size_override(
+				"font_size",
+				roundi(font_size * scale)
+			)
+
+	# Recurse through children
+	for child in node.get_children():
+		scale_ui_fonts(child, scale)
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -156,7 +188,6 @@ func restoreMouse():
 
 func gen_random_pos():
 	var x = randf_range(origin.x, spawnArea.x)
-	print(x)
 	var y = randf_range(origin.z - 0.5, origin.z)
 	
 	return Vector2(x, y)
@@ -180,14 +211,23 @@ func check_level_complete():
 	var target = levels[current_level]["particles"]
 
 	if $Particles.get_child_count() >= target:
+		get_tree().paused = true
 		match current_level:
 			0:
-				get_tree().paused = true
 				$Level1Complete.visible = true
+			1:
+				$Level2Complete.visible = true
+			2:
+				$Level3Complete.visible = true
+			3:
+				$Level4Complete.visible = true
+			4:
+				$Level5Complete.visible = true
+			5:
+				get_parent().levelSelect()
 
 func advance_level():
 	if current_level + 1 >= levels.size():
-		print("GAME COMPLETE")
 		return
 
 	# clear world
@@ -201,7 +241,6 @@ func advance_level():
 	apply_level(current_level + 1)
 
 func _process(delta: float) -> void:
-	var residenceTotal = 0
 	$CanvasLayer/HBoxContainer/HSlider.value = $Particles.get_child_count()
 	$SpawnTimer.wait_time = 0.5 - ($GridMap.get_children().size() * 0.01)
 	update_exhibit_ui()
@@ -226,15 +265,12 @@ func _on_open_close_pressed() -> void:
 		for i in $Particles.get_children():
 			i.queue_free()
 		$CanvasLayer/VBoxContainer/OpenClose.text = "OPEN BOOTH"
-		$GridMap.selectorVisible = true
-		residence = 0
-		$GridMap/Selector.visible = true
+		if onMobile == false:
+			$GridMap.selectorVisible = true
+			$GridMap/Selector.visible = true
 
 
 func _on_item_list_item_selected(index: int) -> void:
-	var item_list = $CanvasLayer/VBoxContainer/ItemList
-
-	# convert string back to scene
 	match index:
 		0:
 			$GridMap.selectedExhibit = $GridMap.hourglassExhibit
@@ -271,11 +307,42 @@ func _on_foldable_container_folding_changed(is_folded: bool) -> void:
 
 func _on_okay_pressed() -> void:
 	$Welcome.visible = false
+	$Level0LetsGo.visible = true
+
+func _on_level_0_go_pressed() -> void:
+	$Level0LetsGo.visible = false
 	get_tree().paused = false
 	$CanvasLayer.visible = true
-
 
 func _on_level_1_go_pressed() -> void:
 	advance_level()
 	get_tree().paused = false
 	$Level1Complete.visible = false
+
+
+func _on_level_2_go_pressed() -> void:
+	advance_level()
+	get_tree().paused = false
+	$Level2Complete.visible = false
+
+
+func _on_level_3_go_pressed() -> void:
+	advance_level()
+	get_tree().paused = false
+	$Level3Complete.visible = false
+
+
+func _on_level_4_go_pressed() -> void:
+	advance_level()
+	get_tree().paused = false
+	$Level4Complete.visible = false
+
+
+func _on_level_5_go_pressed() -> void:
+	advance_level()
+	get_tree().paused = false
+	$Level5Complete.visible = false
+
+
+func _on_main_menu_pressed() -> void:
+	get_parent().levelSelect()
