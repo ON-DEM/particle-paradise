@@ -725,18 +725,19 @@ text = "OPEN BOOTH"
 [node name="MobileControls" type="VBoxContainer" parent="CanvasLayer" unique_id=471737234]
 visible = false
 anchors_preset = -1
-anchor_left = 1.0
+anchor_left = 0.92700005
 anchor_top = 0.94500005
-anchor_right = 1.0
+anchor_right = 0.92700005
 anchor_bottom = 0.94500005
-offset_left = -727.0
+offset_left = -586.8401
 offset_top = -27.600037
-offset_right = 12.0
+offset_right = 152.15991
 offset_bottom = 28.399963
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 2
 
 [node name="CheckBox" type="CheckBox" parent="CanvasLayer/MobileControls" unique_id=1579272554]
 layout_mode = 2
