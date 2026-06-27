@@ -144,11 +144,11 @@ func is_valid_cell(x: int, z: int) -> bool:
 	return x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE
 
 func is_path_cell(x: int, z: int) -> bool:
-	var center = GRID_SIZE / 2
-
-	# vertical path
-	if x >= center -1 and x <= center:
-		return true
+	#var center = GRID_SIZE / 2
+#
+	## vertical path
+	#if x >= center -1 and x <= center:
+		#return true
 
 	## horizontal path
 	#if z >= center - 1 and z <= center + 1:

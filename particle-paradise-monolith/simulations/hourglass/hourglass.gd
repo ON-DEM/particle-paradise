@@ -2,87 +2,115 @@ extends Node3D
 
 @export var particle_scene: PackedScene
 
-const AVALANCHE_INITIAL_PARTICLES = "res://simulations/data/avalanche/avalancheInitialParticles.bin"
+const HourGlass_pit_03 = "res://simulations/data/hourglass/HourGlass2_pit_0.03.bin"
+const HourGlass_pit_04 = "res://simulations/data/hourglass/HourGlass2_pit_0.04.bin"
+const HourGlass_pit_05 = "res://simulations/data/hourglass/HourGlass2_pit_0.05.bin"
+const HourGlass_pit_06 = "res://simulations/data/hourglass/HourGlass2_pit_0.06.bin"
+const HourGlass_pit_07 = "res://simulations/data/hourglass/HourGlass2_pit_0.07.bin"
 
-const HourGlass_pit_03 = "res://simulations/data/hourglass/HourGlass_pit_0.03.bin"
-const HourGlass_pit_04 = "res://simulations/data/hourglass/HourGlass_pit_0.04.bin"
-const HourGlass_pit_05 = "res://simulations/data/hourglass/HourGlass_pit_0.05_extended.bin"
-const HourGlass_pit_06 = "res://simulations/data/hourglass/HourGlass_pit_0.06.bin"
-const HourGlass_pit_07 = "res://simulations/data/hourglass/HourGlass_pit_0.07.bin"
+const HourGlass_river_03 = "res://simulations/data/hourglass/HourGlass2_river_0.03.bin"
+const HourGlass_river_04 = "res://simulations/data/hourglass/HourGlass2_river_0.04.bin"
+const HourGlass_river_05 = "res://simulations/data/hourglass/HourGlass2_river_0.05.bin"
+const HourGlass_river_06 = "res://simulations/data/hourglass/HourGlass2_river_0.06.bin"
+const HourGlass_river_07 = "res://simulations/data/hourglass/HourGlass2_river_0.07.bin"
 
-const HourGlass_river_03 = "res://simulations/data/hourglass/HourGlass_river_0.03.bin"
-const HourGlass_river_04 = "res://simulations/data/hourglass/HourGlass_river_0.04.bin"
-const HourGlass_river_05 = "res://simulations/data/hourglass/HourGlass_river_0.05.bin"
-const HourGlass_river_06 = "res://simulations/data/hourglass/HourGlass_river_0.06.bin"
-const HourGlass_river_07 = "res://simulations/data/hourglass/HourGlass_river_0.07.bin"
-
-const HourGlass_sea_03 = "res://simulations/data/hourglass/HourGlass_sea_0.03.bin"
-const HourGlass_sea_04 = "res://simulations/data/hourglass/HourGlass_sea_0.04.bin"
-const HourGlass_sea_05 = "res://simulations/data/hourglass/HourGlass_sea_0.05_extended.bin"
-const HourGlass_sea_06 = "res://simulations/data/hourglass/HourGlass_sea_0.06.bin"
-const HourGlass_sea_07 = "res://simulations/data/hourglass/HourGlass_sea_0.07.bin"
+const HourGlass_sea_03 = "res://simulations/data/hourglass/HourGlass2_sea_0.03.bin"
+const HourGlass_sea_04 = "res://simulations/data/hourglass/HourGlass2_sea_0.04.bin"
+const HourGlass_sea_05 = "res://simulations/data/hourglass/HourGlass2_sea_0.05.bin"
+const HourGlass_sea_06 = "res://simulations/data/hourglass/HourGlass2_sea_0.06.bin"
+const HourGlass_sea_07 = "res://simulations/data/hourglass/HourGlass2_sea_0.07.bin"
 
 
 const SIM_CONFIGS = {
 	"HourGlass_pit_03": {
 		"file": HourGlass_pit_03,
-		"geometry": ["HourGlass_pit_003"]
+		"geometry": ["HourGlass_pit_003"],
+		"timer_stop": 3.53,
+		"jammed": true
 	},
 	"HourGlass_pit_04": {
 		"file": HourGlass_pit_04,
-		"geometry": ["HourGlass_pit_004"]
+		"geometry": ["HourGlass_pit_004"],
+		"timer_stop": 2.63,
+		"jammed": true
 	},
 	"HourGlass_pit_05": {
 		"file": HourGlass_pit_05,
-		"geometry": ["HourGlass_pit_005"]
+		"geometry": ["HourGlass_pit_005"],
+		"timer_stop": 2.33,
+		"jammed": false
 	},
 	"HourGlass_pit_06": {
 		"file": HourGlass_pit_06,
-		"geometry": ["HourGlass_pit_006"]
+		"geometry": ["HourGlass_pit_006"],
+		"timer_stop": 1.73,
+		"jammed": false
 	},
 	"HourGlass_pit_07": {
 		"file": HourGlass_pit_07,
-		"geometry": ["HourGlass_pit_007"]
+		"geometry": ["HourGlass_pit_007"],
+		"timer_stop": 1.53,
+		"jammed": false
 	},
 	"HourGlass_river_03": {
 		"file": HourGlass_river_03,
-		"geometry": ["HourGlass_pit_003"]
+		"geometry": ["HourGlass_pit_003"],
+		"timer_stop": 3.40,
+		"jammed": true
 	},
 	"HourGlass_river_04": {
 		"file": HourGlass_river_04,
-		"geometry": ["HourGlass_pit_004"]
+		"geometry": ["HourGlass_pit_004"],
+		"timer_stop": 2.20,
+		"jammed": true
 	},
 	"HourGlass_river_05": {
 		"file": HourGlass_river_05,
-		"geometry": ["HourGlass_pit_005"]
+		"geometry": ["HourGlass_pit_005"],
+		"timer_stop": 1.70,
+		"jammed": false
 	},
 	"HourGlass_river_06": {
 		"file": HourGlass_river_06,
-		"geometry": ["HourGlass_pit_006"]
+		"geometry": ["HourGlass_pit_006"],
+		"timer_stop": 1.30,
+		"jammed": false
 	},
 	"HourGlass_river_07": {
 		"file": HourGlass_river_07,
-		"geometry": ["HourGlass_pit_007"]
+		"geometry": ["HourGlass_pit_007"],
+		"timer_stop": 1.30,
+		"jammed": false
 	},
 	"HourGlass_sea_03": {
 		"file": HourGlass_sea_03,
-		"geometry": ["HourGlass_pit_003"]
+		"geometry": ["HourGlass_pit_003"],
+		"timer_stop": 2.60,
+		"jammed": true
 	},
 	"HourGlass_sea_04": {
 		"file": HourGlass_sea_04,
-		"geometry": ["HourGlass_pit_004"]
+		"geometry": ["HourGlass_pit_004"],
+		"timer_stop": 2.89,
+		"jammed": false
 	},
 	"HourGlass_sea_05": {
 		"file": HourGlass_sea_05,
-		"geometry": ["HourGlass_pit_005"]
+		"geometry": ["HourGlass_pit_005"],
+		"timer_stop": 1.59,
+		"jammed": false
 	},
 	"HourGlass_sea_06": {
 		"file": HourGlass_sea_06,
-		"geometry": ["HourGlass_pit_006"]
+		"geometry": ["HourGlass_pit_006"],
+		"timer_stop": 1.29,
+		"jammed": false
 	},
 	"HourGlass_sea_07": {
 		"file": HourGlass_sea_07,
-		"geometry": ["HourGlass_pit_007"]
+		"geometry": ["HourGlass_pit_007"],
+		"timer_stop": 1.29,
+		"jammed": false
 	},
 }
 
@@ -139,7 +167,7 @@ func load_simulation(sim_name: String):
 
 @export var data_path = "HourGlass_pit_03"
 
-const FPS := 12.5
+const FPS := 10.0
 
 var frames := []                  # frames[frame][pid] = {pos, size}
 var particle_nodes := {}         # pid -> Node3D
@@ -371,11 +399,14 @@ var time = 0.00
 # MAIN LOOP
 # ----------------------------
 func _process(delta):
+	var config = SIM_CONFIGS[data_path]
 	if update_time:
 		time = snappedf(10.0 - $CanvasLayer/VBoxContainer3/PanelContainer/HourglassTimer.time_left, 0.01)
-		if time > 3.0 and time < 4.0:
+		if time >= config["timer_stop"]:
+			update_time = false
+		if time > 1.55 and time < 1.85:
 			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Green")
-		if time > 4.0 or time < 3.0:
+		if time > 1.85 or time < 1.55:
 			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("White")
 		if str(time).length() < 4:
 			$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.text = str(time) + "0"
@@ -417,13 +448,21 @@ func _process(delta):
 		ensure_particle(pid, frame_a)
 	
 	update_interpolated(accumulator / frame_time)
+	
+	#var pidCount = 0
+	#for pid in pid_to_instance.keys():
+		#if frames[current_frame][pid]["pos"].y < 0.32:
+			#pidCount += 1
+	#if pidCount <= (particle_count * 0.95):
+		#print(str(time))
 
 func end_reached():
-	#for pid in pid_to_instance.keys():
-		#if frames[current_frame][pid]["pos"].y > 0.2:
-			#print(pid)
 	update_time = false
 	var cur_sim = data_path
+	
+	var config = SIM_CONFIGS[cur_sim]
+	if config["jammed"] == true:
+		$CanvasLayer/VBoxContainer3/PanelContainer/TimerLabel.modulate = Color("Red")
 	
 	#Update to check for correct
 	if flat_plane:
@@ -432,10 +471,10 @@ func end_reached():
 				if cur_sim == "HourGlass_pit_06":
 					$CanvasLayer/Correct.visible = true
 			1:
-				if cur_sim == "HourGlass_river_04" or cur_sim == "HourGlass_river_05":
+				if cur_sim == "HourGlass_river_05":
 					$CanvasLayer/Correct.visible = true
 			2:
-				if cur_sim == "HourGlass_sea_04" or cur_sim == "HourGlass_sea_05":
+				if cur_sim == "HourGlass_sea_05":
 					$"CanvasLayer/You win".visible = true
 
 	if $CanvasLayer/Correct.visible == false and $"CanvasLayer/You win".visible == false:
@@ -565,10 +604,12 @@ func _on_next_level_pressed() -> void:
 	level += 1
 	match level:
 		1:
+			data_path = "HourGlass_river_03"
 			load_simulation("HourGlass_river_03")
 			$Particles1.multimesh.mesh.material.albedo_color = Color("9b8565ff")
 			$CanvasLayer/CurSand.text = "CURRENT SAND: RIVER SAND"
 		2:
+			data_path = "HourGlass_sea_03"
 			load_simulation("HourGlass_sea_03")
 			$Particles1.multimesh.mesh.material.albedo_color = Color("efc189ff")
 			$CanvasLayer/CurSand.text = "CURRENT SAND: SEA SAND"

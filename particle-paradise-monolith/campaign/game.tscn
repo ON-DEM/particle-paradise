@@ -73,6 +73,63 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="DPITexture" id="DPITexture_s4wyw"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".75\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_1ixl6"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="DPITexture" id="DPITexture_on28i"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><circle cx=\"8\" cy=\"8\" r=\"7\" fill=\"#fefefe\" fill-opacity=\".37\"/></svg>
+"
+base_scale = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ky02v"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86mwd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yj2j"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
 [sub_resource type="GDScript" id="GDScript_feb5d"]
 script/source = "extends LineEdit
 
@@ -269,6 +326,12 @@ texture_progress = ExtResource("3_feb5d")
 [node name="HSlider" type="HSlider" parent="CanvasLayer/GUI/Numbers/Force/Container" unique_id=2066478521]
 custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+theme_override_icons/grabber = SubResource("DPITexture_s4wyw")
+theme_override_icons/grabber_highlight = SubResource("DPITexture_1ixl6")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_on28i")
+theme_override_styles/slider = SubResource("StyleBoxFlat_ky02v")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_86mwd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4yj2j")
 min_value = 1.0
 value = 1.0
 
@@ -461,6 +524,12 @@ theme_override_constants/separation = 21
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
+theme_override_icons/grabber = SubResource("DPITexture_s4wyw")
+theme_override_icons/grabber_highlight = SubResource("DPITexture_1ixl6")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_on28i")
+theme_override_styles/slider = SubResource("StyleBoxFlat_ky02v")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_86mwd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4yj2j")
 min_value = -20.0
 max_value = 20.0
 step = 0.1
@@ -469,6 +538,12 @@ step = 0.1
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
+theme_override_icons/grabber = SubResource("DPITexture_s4wyw")
+theme_override_icons/grabber_highlight = SubResource("DPITexture_1ixl6")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_on28i")
+theme_override_styles/slider = SubResource("StyleBoxFlat_ky02v")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_86mwd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4yj2j")
 min_value = -90.0
 max_value = 90.0
 
@@ -476,6 +551,12 @@ max_value = 90.0
 visible = false
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
+theme_override_icons/grabber = SubResource("DPITexture_s4wyw")
+theme_override_icons/grabber_highlight = SubResource("DPITexture_1ixl6")
+theme_override_icons/grabber_disabled = SubResource("DPITexture_on28i")
+theme_override_styles/slider = SubResource("StyleBoxFlat_ky02v")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_86mwd")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4yj2j")
 min_value = 0.001
 max_value = 0.1
 step = 0.001

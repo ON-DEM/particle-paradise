@@ -4,11 +4,11 @@ from collections import defaultdict
 from pathlib import Path
 
 INPUT_DIR = Path("./simulation-data")
-OUTPUT_DIR = Path("./particle-paradise-monolith/simulations/data/railway")
+OUTPUT_DIR = Path("./particle-paradise-monolith/simulations/data/hourglass")
 
 WHEEL_INPUT_DIR = Path("./wheel-data")
 
-INPUT_FPS = 20
+INPUT_FPS = 51
 TARGET_FPS = 20
 
 STEP = max(1, round(INPUT_FPS / TARGET_FPS))
@@ -19,26 +19,27 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 def convert_csv_to_bin(input_file: Path, output_file: Path):
 
     frames = defaultdict(list)
+    pid_frames = defaultdict(list)
 
     print(f"\nReading: {input_file.name}")
-
-    min_frame = None
-    max_frame = None
 
     with open(input_file, newline="") as f:
         reader = csv.reader(f)
 
         for row in reader:
+
             if len(row) < 6:
                 continue
 
             try:
                 time = float(row[0])
                 pid = int(row[1])
+
                 x = float(row[2])
                 y = float(row[3])
                 z = float(row[4])
                 size = float(row[5])
+
             except ValueError:
                 continue
 
@@ -49,33 +50,18 @@ def convert_csv_to_bin(input_file: Path, output_file: Path):
                 continue
 
             frames[frame].append((pid, x, y, z, size))
+            pid_frames[pid].append(frame)
 
-            if min_frame is None or frame < min_frame:
-                min_frame = frame
-            if max_frame is None or frame > max_frame:
-                max_frame = frame
+    frame_keys = sorted(frames.keys())
+    frame_count = len(frame_keys)
 
-    if min_frame is None:
-        print("No valid data found.")
-        return
-
-    # 🧠 FORCE START AT FRAME 0
-    start_frame = 0
-    end_frame = max_frame
-
-    print(f"Raw frame range: {min_frame} → {max_frame}")
-    print(f"Expanded frame range: {start_frame} → {end_frame}")
-
-    particle_ids = {
+    particle_count = len({
         pid
-        for frame_data in frames.values()
-        for pid, *_ in frame_data
-    }
+        for frame in frame_keys
+        for pid, *_ in frames[frame]
+    })
 
-    particle_count = len(particle_ids)
-    frame_count = end_frame - start_frame + 1
-
-    print(f"Frames (padded): {frame_count}")
+    print(f"Frames: {frame_count}")
     print(f"Particles: {particle_count}")
 
     with open(output_file, "wb") as f:
@@ -89,12 +75,11 @@ def convert_csv_to_bin(input_file: Path, output_file: Path):
 
         offsets = []
 
-        # 🧠 WRITE CONTINUOUS FRAMES (INCLUDING EMPTY ONES)
-        for frame in range(start_frame, end_frame + 1):
+        for frame in frame_keys:
 
             offsets.append(f.tell())
 
-            frame_data = frames.get(frame, [])
+            frame_data = frames[frame]
 
             f.write(struct.pack("<I", len(frame_data)))
 
@@ -103,6 +88,7 @@ def convert_csv_to_bin(input_file: Path, output_file: Path):
 
         # patch offsets
         end_pos = f.tell()
+
         f.seek(offset_table_pos)
 
         for offset in offsets:

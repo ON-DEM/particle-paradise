@@ -663,7 +663,7 @@ tracks/0/path = NodePath("HourGlass_pit_003:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -675,7 +675,7 @@ tracks/1/path = NodePath("HourGlass_pit_004:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -687,7 +687,7 @@ tracks/2/path = NodePath("HourGlass_pit_005:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -699,7 +699,7 @@ tracks/3/path = NodePath("HourGlass_pit_006:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -711,7 +711,7 @@ tracks/4/path = NodePath("HourGlass_pit_007:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -723,7 +723,7 @@ tracks/5/path = NodePath("HourGlassCaps:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1.005, 1.46),
+"times": PackedFloat32Array(0, 0.98, 1.44),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -735,7 +735,7 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(1.005),
+"times": PackedFloat32Array(0.98),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -746,7 +746,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id="Animation_sf5hq"]
 resource_name = "HourglassFlip_2"
 length = 2.0
-step = 0.04
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -754,7 +754,7 @@ tracks/0/path = NodePath("HourGlass_pit_003:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -766,7 +766,7 @@ tracks/1/path = NodePath("HourGlass_pit_004:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.245),
+"times": PackedFloat32Array(0, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -778,7 +778,7 @@ tracks/2/path = NodePath("HourGlass_pit_005:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.245),
+"times": PackedFloat32Array(0, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -790,7 +790,7 @@ tracks/3/path = NodePath("HourGlass_pit_006:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.245),
+"times": PackedFloat32Array(0, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -802,7 +802,7 @@ tracks/4/path = NodePath("HourGlass_pit_007:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.245),
+"times": PackedFloat32Array(0, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -814,7 +814,7 @@ tracks/5/path = NodePath("HourGlassCaps:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.0030502528, 0.8530853, 1.245),
+"times": PackedFloat32Array(0.0030502528, 0.845, 1.2325),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -826,7 +826,7 @@ tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.85),
+"times": PackedFloat32Array(0.845),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -845,7 +845,7 @@ tracks/0/path = NodePath("HourGlass_pit_003:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.850035, 1.2481809),
+"times": PackedFloat32Array(0, 0.850035, 1.23),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -3.1415927)]
@@ -1011,7 +1011,7 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_nmree")
 theme_override_font_sizes/font_size = 36
 text = "YOUR GOAL IS FOR THE SAND TO MAKE IT THROUGH TO THE OTHER SIDE OF THE GLASS
-BETWEEN 2.5 AND 4.0 SECONDS WITHOUT IT JAMMING.
+BETWEEN 1.55 AND 1.85 SECONDS WITHOUT IT JAMMING.
 
 THERE ARE THREE DIFFERENT KINDS OF SAND, TRY CHANGING THE HOURGLASS SIZE
 TO SEE HOW IT FLOWS AND JAMS."
@@ -1346,7 +1346,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nmree")
 theme_override_font_sizes/font_size = 36
-text = "GOAL TIME: 3.00-4.00"
+text = "GOAL TIME: 1.55-1.85"
 horizontal_alignment = 1
 
 [node name="CurSand" type="Label" parent="CanvasLayer" unique_id=1220056981]
