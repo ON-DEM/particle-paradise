@@ -162,7 +162,9 @@ FROM ONE TO THE OTHER, DEPENDENT ON THEIR VELOCITIES AND MASS.
 
 AFTER THE COLLISION, THE MOMENTUM OF THE TWO PARTICLES HAS TO BE
 EQUAL, WHICH IS WHY A BIGGER PARTICLE IS SLOWER THAN A
-SMALLER PARTICLE."
+SMALLER PARTICLE.
+
+THAT'S ALL THE LEVELS FOR NOW! GREAT JOB!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -171,7 +173,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("7_f3epd")
 theme_override_font_sizes/font_size = 48
-text = "LETS GO TO LEVEL 6!"
+text = "MAIN MENU"
 
 [connection signal="confirmed" from="WinPopup" to="Goal" method="_on_win_popup_confirmed"]
 [connection signal="confirmed" from="NextTryPopup" to="CueBall/Ball" method="_on_next_try_popup_confirmed"]

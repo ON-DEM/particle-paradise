@@ -153,6 +153,11 @@ var accumulator := 0.0
 var cameraInputDirection = Vector2.ZERO
 var mouseSensitivity = 0.4
 
+var touches := {}
+var last_pinch_distance := -1.0
+
+const PINCH_SENSITIVITY := 0.003
+
 # ----------------------------
 # SPAWN QUEUE SYSTEM (NEW)
 # ----------------------------
@@ -173,11 +178,16 @@ func restoreMouse():
 # INPUT
 # ----------------------------
 func _unhandled_input(event: InputEvent) -> void:
+	if is_pinching():
+		return
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if ignore_next_motion:
 			ignore_next_motion = false
 			return
 		cameraInputDirection = event.screen_relative * mouseSensitivity
+
+func is_pinching() -> bool:
+	return touches.size() == 2
 
 func _input(event: InputEvent) -> void:
 
@@ -187,6 +197,35 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("scroll_out"):
 		cameraSpring.spring_length = clamp(cameraSpring.spring_length +0.05, 0.05, 4.0)
 
+	# -------------------
+	# Touch handling
+	# -------------------
+
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			touches[event.index] = event.position
+		else:
+			touches.erase(event.index)
+			last_pinch_distance = -1.0
+
+	elif event is InputEventScreenDrag:
+		touches[event.index] = event.position
+
+		if touches.size() == 2:
+			var positions = touches.values()
+
+			var distance = positions[0].distance_to(positions[1])
+
+			if last_pinch_distance > 0:
+				var delta = distance - last_pinch_distance
+
+				cameraSpring.spring_length = clamp(
+					cameraSpring.spring_length - delta * PINCH_SENSITIVITY,
+					0.05,
+					4.0
+				)
+
+			last_pinch_distance = distance
 
 # ----------------------------
 # READY

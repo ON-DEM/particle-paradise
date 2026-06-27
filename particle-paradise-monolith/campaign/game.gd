@@ -253,7 +253,8 @@ func load_next_level(force = 0):
 	
 	levelCounter = levelCounter + 1
 	if levelCounter == 5:
-		levelCounter = 4
+		get_parent().levelSelect()
+		return
 	
 	var newLevel = levels[levelCounter].instantiate()
 	#print(newLevel)
@@ -272,7 +273,7 @@ func load_next_level(force = 0):
 	elif levelCounter == 4:
 		load_level_five()
 	elif levelCounter == 5:
-		load_level_six()
+		get_parent().levelSelect()
 	elif levelCounter == 6:
 		load_level_seven()
 	elif levelCounter > maxLevelCounter:

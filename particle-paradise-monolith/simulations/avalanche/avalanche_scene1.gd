@@ -264,7 +264,7 @@ var mouseSensitivity = 0.4
 var touches := {}
 var last_pinch_distance := -1.0
 
-const PINCH_SENSITIVITY := 0.005
+const PINCH_SENSITIVITY := 0.003
 
 # ----------------------------
 # SPAWN QUEUE SYSTEM (NEW)
