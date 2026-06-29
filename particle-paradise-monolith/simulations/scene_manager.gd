@@ -62,3 +62,12 @@ func campaignScene():
 	add_child(newScene)
 	curScene.queue_free()
 	curScene = newScene
+
+
+func playPop():
+	#$PopPlayer.play()
+	pass
+
+func playHover():
+	#$HoverPlayer.play()
+	pass

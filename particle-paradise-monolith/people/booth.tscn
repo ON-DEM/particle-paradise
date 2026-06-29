@@ -301,6 +301,18 @@ corner_detail = 6
 expand_margin_top = 10.0
 expand_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0r3l"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.39215687)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="DPITexture" id="DPITexture_pbe8u"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
 "
@@ -618,10 +630,15 @@ label_settings = SubResource("LabelSettings_vsnn2")
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="CanvasLayer" unique_id=839256966]
-offset_left = 9.0
-offset_top = 9.0
-offset_right = 627.75
-offset_bottom = 615.25
+anchors_preset = -1
+anchor_left = 0.030000001
+anchor_top = 0.053000003
+anchor_right = 0.030000001
+anchor_bottom = 0.053000003
+offset_left = -48.600002
+offset_top = -48.24
+offset_right = 570.15
+offset_bottom = 558.01
 scale = Vector2(0.16, 0.16)
 theme_override_styles/normal = SubResource("StyleBoxFlat_pbe8u")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqo55")
@@ -725,13 +742,13 @@ text = "OPEN BOOTH"
 [node name="MobileControls" type="VBoxContainer" parent="CanvasLayer" unique_id=471737234]
 visible = false
 anchors_preset = -1
-anchor_left = 0.92700005
+anchor_left = 1.0
 anchor_top = 0.94500005
-anchor_right = 0.92700005
+anchor_right = 1.0
 anchor_bottom = 0.94500005
-offset_left = -586.8401
+offset_left = -760.0
 offset_top = -27.600037
-offset_right = 152.15991
+offset_right = -21.0
 offset_bottom = 28.399963
 grow_horizontal = 0
 grow_vertical = 0
@@ -739,7 +756,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 2
 
-[node name="CheckBox" type="CheckBox" parent="CanvasLayer/MobileControls" unique_id=1579272554]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MobileControls" unique_id=1944268317]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_v0r3l")
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/MobileControls/PanelContainer" unique_id=1579272554]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -751,13 +773,15 @@ theme_override_icons/unchecked = SubResource("DPITexture_bqo55")
 text = "TOGGLE TAP DELETES EXHIBITS"
 
 [node name="PCControls" type="VBoxContainer" parent="CanvasLayer" unique_id=686592026]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 37.0
-offset_top = -178.0
-offset_right = 707.0
-offset_bottom = -29.0
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.95400006
+anchor_right = 0.095000006
+anchor_bottom = 0.95400006
+offset_left = -145.40001
+offset_top = -128.32007
+offset_right = 524.6
+offset_bottom = 20.679932
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -1377,7 +1401,7 @@ text = "FREE PLAY!"
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/VBoxContainer/SpeedSlider" to="." method="_on_speed_slider_value_changed"]
 [connection signal="item_selected" from="CanvasLayer/VBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/OpenClose" to="." method="_on_open_close_pressed"]
-[connection signal="toggled" from="CanvasLayer/MobileControls/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="CanvasLayer/MobileControls/PanelContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="folding_changed" from="CanvasLayer/PCControls/FoldableContainer" to="." method="_on_foldable_container_folding_changed"]
 [connection signal="pressed" from="Welcome/Correct/CenterContainer/HBoxContainer/Okay" to="." method="_on_okay_pressed"]
 [connection signal="pressed" from="Level0LetsGo/NextLevel/CenterContainer/Level0Go" to="." method="_on_level_0_go_pressed"]

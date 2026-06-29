@@ -1,6 +1,7 @@
 extends Control
 
 func _on_start_pressed() -> void:
+	get_parent().playPop()
 	get_parent().levelSelect()
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _on_start_focus_exited() -> void:
 
 
 func _on_start_mouse_entered() -> void:
+	get_parent().playHover()
 	TweenFX.snap($Start, 0.1, Vector2(1.3,1.3), TweenFX.PlayState.ENTER)
 
 

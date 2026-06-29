@@ -2,8 +2,23 @@
 
 [ext_resource type="Script" uid="uid://cxgg6kuep6yys" path="res://simulations/scene_manager.gd" id="1_jo5df"]
 [ext_resource type="PackedScene" uid="uid://de8ae14kpthv4" path="res://simulations/menu/main_menu.tscn" id="2_a4gjy"]
+[ext_resource type="AudioStream" uid="uid://da5ql36atvsdk" path="res://simulations/sfx/pop.mp3" id="3_xw4ue"]
+[ext_resource type="AudioStream" uid="uid://dnwqxldi15tu7" path="res://simulations/sfx/hover.mp3" id="4_l6u0c"]
 
 [node name="SceneManager" type="Node" unique_id=407046137]
 script = ExtResource("1_jo5df")
 
 [node name="MainMenu" parent="." unique_id=1627887069 instance=ExtResource("2_a4gjy")]
+
+[node name="PopPlayer" type="AudioStreamPlayer" parent="." unique_id=202023806]
+process_mode = 3
+stream = ExtResource("3_xw4ue")
+volume_db = -4.0
+max_polyphony = 10
+
+[node name="HoverPlayer" type="AudioStreamPlayer" parent="." unique_id=705597056]
+process_mode = 3
+stream = ExtResource("4_l6u0c")
+volume_db = -16.0
+pitch_scale = 1.6
+max_polyphony = 10

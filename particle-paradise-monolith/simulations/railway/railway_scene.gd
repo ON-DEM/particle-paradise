@@ -151,7 +151,7 @@ func restoreMouse():
 func _unhandled_input(event: InputEvent) -> void:
 	if is_pinching():
 		return
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if (event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED) or event is InputEventScreenDrag:
 		if ignore_next_motion:
 			ignore_next_motion = false
 			return
@@ -179,24 +179,23 @@ func _input(event: InputEvent) -> void:
 			touches.erase(event.index)
 			last_pinch_distance = -1.0
 
-	elif event is InputEventScreenDrag:
+	elif (event is InputEventScreenDrag) and (touches.size() == 2):
 		touches[event.index] = event.position
 
-		if touches.size() == 2:
-			var positions = touches.values()
+		var positions = touches.values()
 
-			var distance = positions[0].distance_to(positions[1])
+		var distance = positions[0].distance_to(positions[1])
 
-			if last_pinch_distance > 0:
-				var delta = distance - last_pinch_distance
+		if last_pinch_distance > 0:
+			var delta = distance - last_pinch_distance
 
-				cameraSpring.spring_length = clamp(
-					cameraSpring.spring_length - delta * PINCH_SENSITIVITY,
-					0.05,
-					8.0
-				)
+			cameraSpring.spring_length = clamp(
+				cameraSpring.spring_length - delta * PINCH_SENSITIVITY,
+				0.05,
+				8.0
+			)
 
-			last_pinch_distance = distance
+		last_pinch_distance = distance
 
 # ----------------------------
 # READY
