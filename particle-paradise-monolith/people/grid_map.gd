@@ -285,6 +285,10 @@ func update_selector(selection: Vector3i):
 
 	var p = get_grid_pos(selection)
 	
+	if availableExhibits[stringForAvailable(selectedExhibit)] == 0:
+		$Selector.get_active_material(0).stencil_color = Color("555555")
+		$Selector.get_active_material(0).albedo_color = Color("33333340")
+		return
 
 	if is_valid_cell(p.x, p.y) and get_grid(p.x, p.y) != null:
 		$Selector.get_active_material(0).stencil_color = Color("1485ffff")
@@ -323,3 +327,16 @@ func exhibitToString(exhibit):
 		return "TRACK"
 	elif exhibit.has_method("avaID"):
 		return "AVALANCHE"
+
+func stringForAvailable(exhibit):
+	match exhibit:
+		hourglassExhibit:
+			return "HOURGLASS"
+		gameExhibit:
+			return "GAME"
+		liquefactionExhibit:
+			return "LIQUEFACTION"
+		trackExhibit:
+			return "TRACK"
+		avalancheExhibit:
+			return "AVALANCHE"
