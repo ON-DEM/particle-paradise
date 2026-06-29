@@ -73,7 +73,7 @@ var levels = [
 	}
 ]
 
-var tooltipList = ["+++Range ++Attraction", "+Range +++Attraction", "+++Attraction/3s", "+++Range=+Attraction, +Range=+++Attraction", "++Attraction/5s"]
+var tooltipList = ["Range+++\nAttraction++", "Range+\nAttraction+++", "Attraction+++/3s", "Range+++=Attraction+\nRange+=Attraction+++", "Attraction++/5s"]
 
 var current_level := 0
 
@@ -226,25 +226,56 @@ func check_level_complete():
 	if people_count >= target:
 		get_tree().paused = true
 		people_count = 0
+		var trans_time = Engine.time_scale * 0.8
 		match current_level:
 			0:
 				$Level1Complete.visible = true
+				var tween = get_tree().create_tween()
+				tween.set_parallel(true)
+				tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+				tween.tween_property($Level1Complete/TextureRect, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				tween.tween_property($Level1Complete/NextLevel, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 					call_deferred("restoreMouse")
 			1:
 				$Level2Complete.visible = true
+				var tween = get_tree().create_tween()
+				tween.set_parallel(true)
+				tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+				tween.tween_property($Level2Complete/TextureRect, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				tween.tween_property($Level2Complete/NextLevel, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 					call_deferred("restoreMouse")
 			2:
 				$Level3Complete.visible = true
+				var tween = get_tree().create_tween()
+				tween.set_parallel(true)
+				tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+				tween.tween_property($Level3Complete/TextureRect, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				tween.tween_property($Level3Complete/NextLevel, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 					call_deferred("restoreMouse")
 			3:
 				$Level4Complete.visible = true
+				var tween = get_tree().create_tween()
+				tween.set_parallel(true)
+				tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+				tween.tween_property($Level4Complete/TextureRect, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				tween.tween_property($Level4Complete/NextLevel, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 					call_deferred("restoreMouse")
 			4:
 				$Level5Complete.visible = true
+				var tween = get_tree().create_tween()
+				tween.set_parallel(true)
+				tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+				tween.tween_property($Level5Complete/TextureRect, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				tween.tween_property($Level5Complete/NextLevel, "modulate", Color("White"), trans_time).set_trans(Tween.TRANS_LINEAR)
+				await tween.finished
 				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 					call_deferred("restoreMouse")
 			5:
@@ -330,7 +361,6 @@ func _on_foldable_container_folding_changed(is_folded: bool) -> void:
 		$CanvasLayer/PCControls/FoldableContainer.title = "SHOW CONTROLS"
 	else:
 		$CanvasLayer/PCControls/FoldableContainer.title = "HIDE CONTROLS"
-
 
 func _on_okay_pressed() -> void:
 	$Welcome.visible = false
