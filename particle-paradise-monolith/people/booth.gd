@@ -218,15 +218,27 @@ func check_level_complete():
 		match current_level:
 			0:
 				$Level1Complete.visible = true
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 			1:
 				$Level2Complete.visible = true
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 			2:
 				$Level3Complete.visible = true
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 			3:
 				$Level4Complete.visible = true
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 			4:
 				$Level5Complete.visible = true
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 			5:
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+					call_deferred("restoreMouse")
 				get_parent().levelSelect()
 
 func advance_level():

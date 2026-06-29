@@ -259,7 +259,7 @@ var accumulator := 0.0
 @onready var cameraSpring = $CameraPivot/SpringArm3D
 @onready var camera = $CameraPivot/SpringArm3D/Camera3D
 var cameraInputDirection = Vector2.ZERO
-var mouseSensitivity = 0.4
+var mouseSensitivity = 0.2
 
 var touches := {}
 var last_pinch_distance := -1.0
