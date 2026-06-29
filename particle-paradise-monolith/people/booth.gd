@@ -25,14 +25,14 @@ var levels = [
 		"exhibits": {
 			"HOURGLASS": 4
 		},
-		"particles": 16
+		"particles": 12
 	},
 	{
 		"exhibits": {
 			"HOURGLASS": 2,
 			"GAME": 2
 		},
-		"particles": 24
+		"particles": 20
 	},
 	{
 		"exhibits": {
@@ -40,7 +40,7 @@ var levels = [
 			"GAME": 2,
 			"LIQUEFACTION": 2
 		},
-		"particles": 32
+		"particles": 28
 	},
 	{
 		"exhibits": {
@@ -49,7 +49,7 @@ var levels = [
 			"LIQUEFACTION": 2,
 			"TRACK": 2
 		},
-		"particles": 40
+		"particles": 32
 	},
 	{
 		"exhibits": {
@@ -59,7 +59,7 @@ var levels = [
 			"TRACK": 1,
 			"AVALANCHE": 1
 		},
-		"particles": 48
+		"particles": 36
 	},
 	{
 		"exhibits": {
@@ -73,7 +73,11 @@ var levels = [
 	}
 ]
 
+var tooltipList = ["+++Range ++Attraction", "+Range +++Attraction", "+++Attraction/3s", "+++Range=+Attraction, +Range=+++Attraction", "++Attraction/5s"]
+
 var current_level := 0
+
+var people_count := 0
 
 func apply_level(level_index: int):
 	current_level = level_index
@@ -111,6 +115,10 @@ func update_exhibit_ui():
 				i,
 				str($GridMap.availableExhibits[k]) + " x " + k
 			)
+			$CanvasLayer/VBoxContainer/ItemList.set_item_tooltip(i, tooltipList[i])
+			$CanvasLayer/VBoxContainer/ItemList.set_item_tooltip_enabled(i, true)
+
+
 
 
 var onMobile = false
@@ -213,8 +221,11 @@ func exitReached():
 func check_level_complete():
 	var target = levels[current_level]["particles"]
 
-	if $Particles.get_child_count() >= target:
+	
+	#if $Particles.get_child_count() >= target:
+	if people_count >= target:
 		get_tree().paused = true
+		people_count = 0
 		match current_level:
 			0:
 				$Level1Complete.visible = true
@@ -256,7 +267,8 @@ func advance_level():
 	apply_level(current_level + 1)
 
 func _process(delta: float) -> void:
-	$CanvasLayer/HBoxContainer/HSlider.value = $Particles.get_child_count()
+	#$CanvasLayer/HBoxContainer/HSlider.value = $Particles.get_child_count()
+	$CanvasLayer/HBoxContainer/HSlider.value = people_count
 	$SpawnTimer.wait_time = 0.5 - ($GridMap.get_children().size() * 0.01)
 	update_exhibit_ui()
 	check_level_complete()
@@ -360,4 +372,15 @@ func _on_level_5_go_pressed() -> void:
 
 
 func _on_main_menu_pressed() -> void:
+	get_tree().paused = false
 	get_parent().levelSelect()
+
+
+func _on_people_counter_body_entered(body: Node3D) -> void:
+	if body.has_method("particleID"):
+		people_count += 1
+
+
+func _on_people_counter_body_exited(body: Node3D) -> void:
+	if body.has_method("particleID"):
+		people_count = clamp(people_count - 1, 0, 1001)
