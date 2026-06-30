@@ -402,6 +402,7 @@ func _on_level_5_go_pressed() -> void:
 
 
 func _on_main_menu_pressed() -> void:
+	Engine.time_scale = 1
 	get_tree().paused = false
 	get_parent().levelSelect()
 
