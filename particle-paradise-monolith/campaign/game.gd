@@ -327,6 +327,7 @@ func load_level_five():
 	$CanvasLayer/GUI/Numbers/Force/LineEdit.text = str(force)
 	$CanvasLayer/GUI/Numbers/Force/Container/TextureProgressBar.value = force
 	$CanvasLayer/GUI/Numbers/Force/Container/HSlider.value = force
+	$CanvasLayer/GUI/Numbers/Force/Container/HSlider.editable = false
 	$CanvasLayer/GUI/SliderLabels/MassLabel.visible = true
 	$CanvasLayer/GUI/Sliders/MassSlider.visible = true
 	
